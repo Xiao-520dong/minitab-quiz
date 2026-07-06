@@ -2,38 +2,37 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Minitab 练习题 - 交互版</title>
+    <title>Minitab 练习题</title>
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+        body { font-family: 'PingFang SC', sans-serif; background: #f0f2f5; padding: 20px; }
         .container { max-width: 600px; margin: 0 auto; }
-        .quiz-card { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .options label { display: block; padding: 10px; border: 1px solid #ddd; margin: 5px 0; border-radius: 6px; cursor: pointer; }
-        .btn { width: 100%; padding: 12px; background: #4a90e2; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        .result { margin-top: 10px; display: none; padding: 10px; background: #eef; border-radius: 6px; }
+        .quiz-card { background: white; padding: 25px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        h3 { margin-bottom: 15px; color: #333; }
+        .option { display: block; padding: 12px; border: 1px solid #dcdcdc; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #f0f7ff; border-color: #4a90e2; }
+        .btn { width: 100%; padding: 14px; background: #4a90e2; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+        .result { margin-top: 15px; padding: 15px; background: #f6f8fa; border-radius: 8px; display: none; }
     </style>
 </head>
 <body>
-    <div class="container" id="quiz-app"></div>
+    <div class="container" id="app"></div>
     <script>
-        const quizData = [
-            { id: "Q001", q: "工作表的作用？", options: ["查看P值", "录入数据", "只看图表", "安装插件"], answer: 1, explanation: "工作表用于录入数据。" },
-            { id: "Q002", q: "Session窗口作用？", options: ["录入数据", "显示统计结果", "绘图", "管理文件"], answer: 1, explanation: "Session窗口显示统计分析结果。" }
+        const data = [
+            { id: "Q001", q: "工作表的作用？", options: ["A. 查看P值", "B. 录入数据", "C. 看图表", "D. 安装插件"], ans: 1, exp: "B. 录入和整理数据，类似Excel。" },
+            { id: "Q002", q: "Session窗口作用？", options: ["A. 录入数据", "B. 显示统计结果", "C. 绘图", "D. 管理文件"], ans: 1, exp: "B. 显示统计分析结果。" }
         ];
-        
-        const app = document.getElementById('quiz-app');
-        quizData.forEach((item, index) => {
-            const div = document.createElement('div');
-            div.className = 'quiz-card';
-            div.innerHTML = `<h3>${item.q}</h3>${item.options.map((opt, i) => `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`).join('')}
-            <button onclick="check(${index})">检查</button><div id="res${index}" class="result"></div>`;
-            app.appendChild(div);
+        const app = document.getElementById('app');
+        data.forEach((d, i) => {
+            const card = document.createElement('div');
+            card.className = 'quiz-card';
+            card.innerHTML = `<h3>${d.q}</h3>` + d.options.map((o, j) => `<label class="option"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join('') + `<button class="btn" onclick="check(${i})">提交</button><div id="res${i}" class="result"></div>`;
+            app.appendChild(card);
         });
-
-        function check(index) {
-            const selected = document.querySelector(`input[name="q${index}"]:checked`);
-            const res = document.getElementById(`res${index}`);
+        function check(i) {
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const res = document.getElementById(`res${i}`);
             res.style.display = 'block';
-            res.innerText = parseInt(selected.value) === quizData[index].answer ? "正确！" : "错误。解析：" + quizData[index].explanation;
+            res.innerHTML = parseInt(sel.value) === data[i].ans ? "✅ 正确！" : "❌ 错误。" + data[i].exp;
         }
     </script>
 </body>
