@@ -114,7 +114,7 @@
         </div>
       </div>
       <div class="callout warn">最容易犯的错：只拿 28 台失效样品去做分析，把 22 台全过样品删掉。V1 手册明确指出，这会让寿命判断失真。</div>
-      <p>在 Minitab 里，正确做法是：<strong>C1=失效次数</strong>，<strong>C2=删失标记(F/C)</strong>，然后在分布分析（右删失）里把 <strong>C</strong> 指定为删失值。</p>
+      <p>在 Minitab 里，正确做法是：<strong>C1=失效次数</strong>，<strong>C2=删失标记(F/C)</strong>，然后在分布分析（右删失）中将 <strong>C</strong> 指定为删失值。<strong>这样设置的作用</strong>是：让 Minitab 正确识别“测试结束时仍未失效”的样品，将其按删失数据处理，而不是误判为失效样品或直接排除。只有这样，后续得到的寿命分布、B10 寿命和形状参数 β 才更接近真实情况。</p>
     </section>
 
     <section class="panel" id="quiz">
