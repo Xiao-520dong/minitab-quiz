@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minitab应用实战手册｜第01卡 什么是可靠性</title>
+  <style>
+    :root {
+      --bg: #f6faff;
+      --paper: #ffffff;
+      --ink: #152033;
+      --muted: #637083;
+      --line: #dbe7f4;
+      --blue: #246bfe;
+      --cyan: #0f9fb6;
+      --green: #159a63;
+      --orange: #f08a24;
+      --red: #d94b5f;
+      --purple: #7657d8;
+      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
+      --radius: 10px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}
+    .brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}
+    .brand-title{font-size:15px;font-weight:750;line-height:1.2}
+    .brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}
+    .top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}
+    .top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}
+    .top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:56px 24px 32px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:28px;align-items:stretch}
+    .hero h1{margin:0;font-size:clamp(34px,5vw,60px);line-height:1.06}
+    .hero-lead{color:#405066;font-size:18px;margin:20px 0 0;max-width:700px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}
+    .button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center}
+    .score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:10px;padding:14px;min-height:112px}
+    .score-number{font-size:28px;font-weight:850;line-height:1}
+    .score-title{margin-top:8px;font-size:15px;font-weight:800}
+    .score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main{max-width:var(--max);margin:0 auto;padding:14px 24px 72px;display:grid;gap:22px}
+    .panel{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}
+    .section-kicker{color:var(--blue);font-size:13px;font-weight:850;margin-bottom:8px}
+    h2{margin:0 0 14px;font-size:clamp(24px,3vw,36px);line-height:1.14}
+    h3{margin:22px 0 8px;font-size:20px;line-height:1.25}
+    p{margin:10px 0;color:#304059}
+    .keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}
+    .keyword.green{background:#e7f7ef;color:var(--green)}
+    .callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+    .card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:10px;padding:18px}
+    .card h4{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;font-size:14px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+    .tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:5px 12px;border-radius:12px}
+    .example-box{background:#f8fafc;border:1px dashed #b7cdfa;border-radius:10px;padding:18px;margin-top:16px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-top:10px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}
+    .question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}
+    .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px;background:#e8f5e9;color:#2e7d32}
+    .option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}
+    .option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}
+    .submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}
+    .result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
+    .footer{text-align:center;padding:20px 16px 40px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    @media (max-width: 860px){.hero{grid-template-columns:1fr}.cards,.score-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main{padding-left:16px;padding-right:16px}.cards,.score-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark"></span>
+        <span>
+          <span class="brand-title">Minitab应用实战手册</span>
+          <span class="brand-subtitle">第01卡｜什么是可靠性？</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#learn">讲解</a>
+        <a href="#example">场景</a>
+        <a href="#quiz">练习</a>
+        <a href="#memory">记忆点</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>什么是可靠性？</h1>
+      <p class="hero-lead">可靠性 = 产品在<span class="keyword">规定条件</span>下、<span class="keyword">规定时间</span>内、完成<span class="keyword">规定功能</span>的能力。三个“规定”缺一不可。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#quiz">开始练习</a>
+        <a class="button" href="#learn">先看讲解</a>
+      </div>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">3</div><div class="score-title">三个规定</div><div class="score-text">条件、时间、功能，缺一不可</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">1</div><div class="score-title">核心定义</div><div class="score-text">不是只看“过不过”，而是看在规定边界内是否稳定完成任务</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">1</div><div class="score-title">实验室场景</div><div class="score-text">W-795 受控跌落就是典型例子</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">1</div><div class="score-title">今日目标</div><div class="score-text">先把“可靠性”的定义吃透，再开始做后面的统计分析</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <section class="panel" id="learn">
+      <div class="section-kicker">V1手册 · 每日知识卡片 01</div>
+      <h2>可靠性不是一句“能不能用”</h2>
+      <p>在实验室工作里，很多人会把可靠性简单理解成“这台机器过了没有”。但按照 V1 手册，可靠性不是这么看的。它必须同时回答三个问题：</p>
+      <div class="cards">
+        <div class="card"><h4>规定条件</h4><p>在什么环境、什么应力、什么测试方法下进行验证。</p></div>
+        <div class="card"><h4>规定时间</h4><p>要持续多久、做多少次、跑到哪个节点才算完成判断。</p></div>
+        <div class="card"><h4>规定功能</h4><p>产品需要保持哪些功能正常，外观与性能需满足什么要求。</p></div>
+      </div>
+      <div class="callout">只要少了其中任意一个“规定”，这个结论就不完整，就不能叫可靠性结论。</div>
+      <p>所以，可靠性分析不是空泛概念，而是后面所有 Minitab 分析的起点。你后面做 Weibull、Cpk、Kaplan-Meier，本质上都还是围绕这三个“规定”展开。</p>
+    </section>
+
+    <section class="panel" id="example">
+      <div class="section-kicker">V1手册 · 传音场景</div>
+      <h2>放到实验室里怎么理解</h2>
+      <div class="example-box">
+        <p><strong>传音场景：</strong>W-795 受控跌落 = <strong>规定条件</strong>（1m / 大理石） + <strong>规定时间</strong>（10次） + <strong>规定功能</strong>（屏幕不碎 / 功能正常）。</p>
+      </div>
+      <p>这也是为什么后面写问题报告、做数据分析时，不能只写“跌落失败”。你必须知道：</p>
+      <div class="tag-list">
+        <span class="tag">是在什么高度跌的</span>
+        <span class="tag">跌了第几次失效</span>
+        <span class="tag">失效后是什么问题</span>
+        <span class="tag">是否还满足规定功能</span>
+      </div>
+      <p>这样后续才有机会把测试结果从“定性判断”升级成“定量分析”。</p>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>3道小题，先检查你有没有吃透</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q0" data-answer="C" data-type="single">
+          <div class="question-header">第1题：可靠性的定义中，以下哪项不属于三个“规定”？<span class="badge">单选</span></div>
+          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 规定条件</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 规定时间</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 规定成本</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 规定功能</span></label>
+        </div>
+        <div class="question" data-id="q1" data-answer="A" data-type="single">
+          <div class="question-header">第2题：V1手册里，W-795 受控跌落中的“规定时间”对应什么？<span class="badge">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 10次跌落</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 1m高度</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 屏幕不碎</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 大理石台面</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="B" data-type="single">
+          <div class="question-header">第3题：为什么要先理解“可靠性”的定义，再学 Minitab？<span class="badge">单选</span></div>
+          <label class="option-label"><input type="radio" name="q2" value="A"><span>A. 因为Minitab只会做图，不做分析</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="B"><span>B. 因为后续所有统计分析，本质上都围绕三个“规定”展开</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="C"><span>C. 因为实验室不需要真实数据</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 因为只要会菜单路径就够了</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="memory">
+      <div class="section-kicker">提交前自检</div>
+      <h2>本页记忆点</h2>
+      <div class="tag-list">
+        <span class="tag">可靠性 = 条件 + 时间 + 功能</span>
+        <span class="tag">三个规定缺一不可</span>
+        <span class="tag">W-795 是标准例子</span>
+        <span class="tag">后续统计分析都从这里出发</span>
+      </div>
+      <div class="callout">一句话记住：可靠性不是“能不能用”，而是“能不能在规定条件、规定时间内，稳定完成规定功能”。</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© Minitab应用实战手册互动学习页</p>
+    <div class="sign">⚡ 与你同行 AI 浪潮，打造智能工作新范式</div>
+  </footer>
+
+<script>
+var explanations = {
+  q0: 'V1手册中，可靠性的三个“规定”是：规定条件、规定时间、规定功能。规定成本不属于定义本身。',
+  q1: '在 W-795 受控跌落示例里，1m / 大理石是规定条件，10次是规定时间，屏幕不碎/功能正常是规定功能。',
+  q2: '后面学 Weibull、Cpk、Kaplan-Meier，都不是脱离业务做统计，而是围绕“在什么条件下、到什么时间点、还能否完成功能”来分析。'
+};
+var questions = [
+  {id:'q0', text:'可靠性的定义中，以下哪项不属于三个“规定”？'},
+  {id:'q1', text:'V1手册里，W-795 受控跌落中的“规定时间”对应什么？'},
+  {id:'q2', text:'为什么要先理解“可靠性”的定义，再学 Minitab？'}
+];
+function submitQuiz(){
+  let score=0, html='';
+  questions.forEach((q, idx)=>{
+    const box=document.querySelector('.question[data-id="'+q.id+'"]');
+    const correct=box.getAttribute('data-answer');
+    const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+    const ok=checked===correct;
+    if(ok) score++;
+    html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+    html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+    if(!ok){
+      html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';
+    } else {
+      html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';
+    }
+    html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';
+  });
+  document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');
+  document.getElementById('resultDetails').innerHTML=html;
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  const btn=document.querySelector('.submit-btn');
+  btn.textContent='已提交'; btn.disabled=true; btn.style.opacity='0.6';
+  document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true);
+}
+</script>
+</body>
+</html>
