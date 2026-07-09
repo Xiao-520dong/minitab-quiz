@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 003：按工作流嵌入工具</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .workflow-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .workflow-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .workflow-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e1e4e8;
+            color: #555;
+        }
+        .workflow-table tr:last-child td {
+            border-bottom: none;
+        }
+        .workflow-table .arrow {
+            color: #667eea;
+            font-weight: bold;
+            text-align: center;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #555;
+            line-height: 1.5;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>📘 Day 003：按工作流嵌入工具</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <div class="knowledge">
+                <h2>💡 今日知识点</h2>
+                <p><strong>方法三：按工作流嵌入工具（而非另起炉灶）</strong></p>
+                <p>Minitab 不是要你改变现有工作方式，而是在每个环节"嵌入"一个分析动作：</p>
+                
+                <table class="workflow-table">
+                    <thead>
+                        <tr>
+                            <th>工作流环节</th>
+                            <th class="arrow">→</th>
+                            <th>嵌入的 Minitab 动作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>测试执行（边测边报）</td>
+                            <td class="arrow">→</td>
+                            <td>Pareto 失效方向排序</td>
+                        </tr>
+                        <tr>
+                            <td>问题积累到一定数量</td>
+                            <td class="arrow">→</td>
+                            <td>Weibull B10 寿命量化</td>
+                        </tr>
+                        <tr>
+                            <td>研发部门分析整改</td>
+                            <td class="arrow">→</td>
+                            <td>整改前后 Kaplan-Meier 对比</td>
+                        </tr>
+                        <tr>
+                            <td>量产放行判定</td>
+                            <td class="arrow">→</td>
+                            <td>Cpk 过程能力分析</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight">
+                    <strong>关键：</strong>不需要所有环节同步启动，选一个你当前最痛的点先切入。
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">"按工作流嵌入工具"的核心思路是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 先学完 Minitab 所有功能再应用到工作</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 改变现有工作方式，全面使用 Minitab</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 在现有工作环节的痛点处嵌入分析动作</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 等所有测试完成后再统一分析</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,D">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">以下哪些是正确的工作流嵌入方式？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 边测边报时用 Pareto 排序失效方向</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 问题积累后用 Weibull 量化 B10 寿命</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 等全部测试结束后统一跑所有分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 整改前后用 Kaplan-Meier 对比验证</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">"不需要所有环节同步启动，选一个你当前最痛的点先切入"说明什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. Minitab 功能太多，只能学一个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 从痛点切入，逐步扩展，降低学习门槛</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 其他环节不重要，只需要关注最痛的点</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 同步启动会出错，必须一个一个来</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">测试执行阶段"边测边报"时，最适合嵌入哪个 Minitab 工具？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. Pareto 图（失效方向排序）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. Weibull 分布分析（B10 寿命）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. Kaplan-Meier 生存曲线</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. Cpk 过程能力分析</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">研发部门完成整改后，想验证整改是否有效，应该嵌入哪个工具？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. Pareto 图</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. Weibull B10 分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. Kaplan-Meier 对比 + Log-Rank 检验</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. Cpk 能力分析</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "按工作流嵌入工具的核心是：不改变现有工作方式，而是在痛点处嵌入分析动作，让工具为业务服务。",
+            q2: "正确的工作流嵌入包括：边测边报用 Pareto、问题积累用 Weibull、整改验证用 Kaplan-Meier。不需要等全部完成再统一分析。",
+            q3: "从痛点切入、逐步扩展，降低学习门槛，让工程师不会因为"要学太多"而放弃。",
+            q4: "边测边报阶段，问题还在积累中，用 Pareto 图快速排序失效方向，找出优先整改点。",
+            q5: "整改验证需要对比整改前后的生存曲线，用 Kaplan-Meier + Log-Rank 检验判断差异是否显著。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',').map(s => s.trim());
+                const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                    q.classList.remove('wrong');
+                } else {
+                    q.classList.add('wrong');
+                    q.classList.remove('correct');
+                }
+
+                // 添加解析
+                const qNum = `q${index + 1}`;
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations[qNum]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
