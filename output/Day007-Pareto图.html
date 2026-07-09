@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 007：Pareto 80/20 法则</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .review-section {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #17a2b8;
+        }
+        .review-section h3 {
+            color: #17a2b8;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .review-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .review-item .q-num {
+            font-weight: bold;
+            color: #17a2b8;
+        }
+        .review-item .answer {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .case-study {
+            background: #f0f8ff;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #007bff;
+        }
+        .case-study h2 {
+            color: #007bff;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .case-study h3 {
+            color: #007bff;
+            font-size: 16px;
+            margin: 16px 0 8px 0;
+        }
+        .case-study p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .case-study .warning {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+            color: #856404;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .data-table th {
+            background: #007bff;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e1e4e8;
+            color: #555;
+        }
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #555;
+            line-height: 1.5;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>📘 Day 007：Pareto 80/20 法则</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <div class="review-section">
+                <h3>📖 昨日回顾（Day006 答案）</h3>
+                <div class="review-item">
+                    <span class="q-num">第1题：</span>
+                    <span class="answer">B</span>
+                    <span> — p<0.05 说明有显著差异，但还需看实际差异大小判断工程意义</span>
+                </div>
+                <div class="review-item">
+                    <span class="q-num">第2题：</span>
+                    <span class="answer">A, C</span>
+                    <span> — p 值只判断统计显著性，工程意义需要结合实际差异大小</span>
+                </div>
+                <div class="review-item">
+                    <span class="q-num">第3题：</span>
+                    <span class="answer">A</span>
+                    <span> — p=0.03 < 0.05，有显著差异</span>
+                </div>
+                <div class="review-item">
+                    <span class="q-num">第4题：</span>
+                    <span class="answer">B, C</span>
+                    <span> — 统计显著不等于工程显著，还需看实际差异大小</span>
+                </div>
+                <div class="review-item">
+                    <span class="q-num">第5题：</span>
+                    <span class="answer">C</span>
+                    <span> — p≥0.05 说明数据不足以证明有差异</span>
+                </div>
+            </div>
+
+            <div class="knowledge">
+                <h2>💡 今日知识点</h2>
+                <p><strong>80/20 法则：</strong>80% 的问题来自 20% 的原因。</p>
+                
+                <div class="highlight">
+                    <strong>传音场景：</strong>W-795 的 8 台失效手机中，按跌落方向统计：
+                    <ul style="margin-top: 8px; padding-left: 20px;">
+                        <li>左上角 3 台（37.5%）</li>
+                        <li>右侧 2 台（25%）</li>
+                        <li>右上角 2 台（25%）</li>
+                        <li>其他 1 台（12.5%）</li>
+                    </ul>
+                    <p style="margin-top: 8px;">→ 左上角 + 右侧 + 右上角 = 87.5%，优先改这三个方向。</p>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h2>🔬 今日案例：Pareto 完整实操</h2>
+                
+                <h3>案例背景</h3>
+                <p>W-795 受控跌落测试，12 台手机，8 台失效。需要找出优先整改的跌落方向。</p>
+                
+                <h3>数据准备</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>C1（方向）</th>
+                            <th>C2（次数）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>左上角</td><td>3</td></tr>
+                        <tr><td>右侧</td><td>2</td></tr>
+                        <tr><td>右上角</td><td>2</td></tr>
+                        <tr><td>其他</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                
+                <h3>Minitab 操作步骤</h3>
+                <p><strong>菜单路径：</strong>统计 → 质量工具 → Pareto 图</p>
+                <p><strong>设置：</strong></p>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                    <li>选"已整理成表格的缺陷数据(X)"</li>
+                    <li>标签 = C1</li>
+                    <li>频率 = C2</li>
+                    <li>勾选"包括累积百分比线"</li>
+                    <li>确定</li>
+                </ul>
+                
+                <div class="warning">
+                    <strong>⚠️ 注意：</strong>不要选第一个选项"原始缺陷数据(C)"，否则会出分组子图而非标准 Pareto 图。
+                </div>
+                
+                <h3>结果解读</h3>
+                <p><strong>本次只关注：</strong>累积百分比线 —— 找到第一个超过 80% 的柱，从它往左的都是"优先整改方向"。</p>
+                <p>本例中：左上角 + 右侧 + 右上角 = 87.5%，这三个方向是优先整改点。</p>
+            </div>
+
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Pareto 图的核心思想是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 所有问题都 equally 重要</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 80% 的问题来自 20% 的原因</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 问题越多越好解决</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 先解决最难的问题</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A, C">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">在 Minitab 中制作 Pareto 图时，正确的设置是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 选"已整理成表格的缺陷数据(X)"</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 选"原始缺陷数据(C)"</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 勾选"包括累积百分比线"</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 不勾选累积百分比线</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Pareto 图中，累积百分比线的作用是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 显示每个原因的绝对数量</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 显示每个原因的百分比</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 找到第一个超过 80% 的柱，确定优先整改方向</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 显示问题的时间趋势</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B, D">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">W-795 跌落测试中，哪些方向应该优先整改？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 其他（12.5%）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 左上角（37.5%）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 正下面（0%）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 右侧（25%）和右上角（25%）</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">在 Minitab 中制作 Pareto 图时，如果选错了"原始缺陷数据(C)"选项，会出现什么问题？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 出分组子图而非标准 Pareto 图</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 无法生成图表</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 图表显示错误数据</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 没有累积百分比线</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "Pareto 图的核心思想是 80/20 法则：80% 的问题来自 20% 的原因。",
+            q2: "正确设置：选'已整理成表格的缺陷数据(X)'，勾选'包括累积百分比线'。不要选'原始缺陷数据(C)'。",
+            q3: "累积百分比线的作用是找到第一个超过 80% 的柱，从它往左的都是优先整改方向。",
+            q4: "W-795 跌落测试中，左上角（37.5%）、右侧（25%）、右上角（25%）合计 87.5%，应该优先整改。",
+            q5: "选错'原始缺陷数据(C)'选项会出分组子图而非标准 Pareto 图。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',').map(s => s.trim());
+                const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                    q.classList.remove('wrong');
+                } else {
+                    q.classList.add('wrong');
+                    q.classList.remove('correct');
+                }
+
+                // 添加解析
+                const qNum = `q${index + 1}`;
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations[qNum]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
