@@ -52,18 +52,12 @@
         }
         .review-item {
             background: white;
-            padding: 12px;
+            padding: 14px 16px;
             border-radius: 8px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 14px;
-        }
-        .review-item .q-num {
-            font-weight: bold;
-            color: #17a2b8;
-        }
-        .review-item .answer {
-            color: #28a745;
-            font-weight: bold;
+            line-height: 1.7;
+            color: #444;
         }
         .knowledge {
             background: #f8f9fa;
@@ -278,31 +272,23 @@
             </div>
 
             <div class="review-section">
-                <h3>📖 昨日回顾（Day006 答案）</h3>
+                <h3>🧠 前置知识卡片 · p 值与统计显著性</h3>
                 <div class="review-item">
-                    <span class="q-num">第1题：</span>
-                    <span class="answer">B</span>
-                    <span> — p<0.05 说明有显著差异，但还需看实际差异大小判断工程意义</span>
+                    <strong>📌 p 值是什么？</strong><br>
+                    p 值衡量的是："假设两组其实没有差别，当前数据出现的概率有多大？"<br>
+                    p 越小 → 越有理由相信"确实有差别"。
                 </div>
                 <div class="review-item">
-                    <span class="q-num">第2题：</span>
-                    <span class="answer">A, C</span>
-                    <span> — p 值只判断统计显著性，工程意义需要结合实际差异大小</span>
+                    <strong>📌 怎么判断？</strong><br>
+                    通常以 <strong>p &lt; 0.05</strong> 为门槛：小于 0.05 认为"有统计学显著差异"，大于等于 0.05 则认为"证据不足"。
                 </div>
                 <div class="review-item">
-                    <span class="q-num">第3题：</span>
-                    <span class="answer">A</span>
-                    <span> — p=0.03 < 0.05，有显著差异</span>
+                    <strong>⚠️ 常见误区</strong><br>
+                    统计显著 ≠ 工程显著。p &lt; 0.05 只说明"差别大概率存在"，但差别到底大不大、值不值得改，还要看实际数据。
                 </div>
                 <div class="review-item">
-                    <span class="q-num">第4题：</span>
-                    <span class="answer">B, C</span>
-                    <span> — 统计显著不等于工程显著，还需看实际差异大小</span>
-                </div>
-                <div class="review-item">
-                    <span class="q-num">第5题：</span>
-                    <span class="answer">C</span>
-                    <span> — p≥0.05 说明数据不足以证明有差异</span>
+                    <strong>💡 与 Pareto 的关系</strong><br>
+                    Pareto 帮你找出"哪些原因最重要"，p 值帮你判断"整改前后是否真的有显著变化"。两者配合使用效果更好。
                 </div>
             </div>
 
