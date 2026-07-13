@@ -222,6 +222,28 @@
         }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+        .review-section {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #17a2b8;
+        }
+        .review-section h3 {
+            color: #17a2b8;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+        .review-item {
+            background: white;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+        }
     </style>
 </head>
 <body>
@@ -230,6 +252,26 @@
             <div class="header">
                 <h1>📘 Day 003：按工作流嵌入工具</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <div class="review-section">
+                <h3>🧠 前置知识卡片 · 定性到定量的三个层次</h3>
+                <div class="review-item">
+                    <strong>🟡 第一层 · 定性判断</strong><br>
+                    "这台样品通过了/没通过" —— 只看单个结果，无法量化整体表现。
+                </div>
+                <div class="review-item">
+                    <strong>🟢 第二层 · 统计分析</strong><br>
+                    "这批样品的通过率是多少？置信区间多大？" —— 用数据描述整批产品的质量水平。
+                </div>
+                <div class="review-item">
+                    <strong>🔵 第三层 · 预测推断</strong><br>
+                    "B10 寿命是多少？下一批次预计怎样？" —— 基于数据做预测，指导决策。
+                </div>
+                <div class="review-item">
+                    <strong>💡 核心要点</strong><br>
+                    传音实验室当前大多停在第一层，Minitab 的价值是帮你逐层穿越到更高的分析层次。
+                </div>
             </div>
 
             <div class="knowledge">
