@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 010：Cpk 过程能力分析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .header .breadcrumb {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .review-section {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #17a2b8;
+        }
+        .review-section h3 {
+            color: #17a2b8;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .review-item {
+            background: white;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .case-study {
+            background: #f0f8ff;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #007bff;
+        }
+        .case-study h2 {
+            color: #007bff;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .case-study h3 {
+            color: #007bff;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 16px 0 8px 0;
+        }
+        .case-study p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .case-study .warning {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+            color: #856404;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="breadcrumb">第四章：完整案例·力值测试 · Cpk 分析</div>
+                <h1>📘 Day 010：Cpk 过程能力分析</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <div class="review-section">
+                <h3>🧠 昨日知识卡片 · Kaplan-Meier 整改对比</h3>
+                <div class="review-item">
+                    <strong>📌 用途</strong><br>
+                    Kaplan-Meier 用于证明整改是否有效，而非凭感觉判断。
+                </div>
+                <div class="review-item">
+                    <strong>📌 数据准备</strong><br>
+                    C1 = 失效次数，C2 = 删失标记，C3 = 组别（整改前 / 整改后）。
+                </div>
+                <div class="review-item">
+                    <strong>📌 判断标准</strong><br>
+                    Log-Rank p &lt; 0.05 → 整改有统计显著改善，可放行。
+                </div>
+            </div>
+
+            <div class="knowledge">
+                <h2>💡 今日知识点</h2>
+                <p><strong>Cpk 过程能力分析</strong></p>
+                <p>Cpk = min((USL − μ) / 3σ, (μ − LSL) / 3σ)</p>
+                <p>Cpk 衡量的是：制程能力是否满足规格要求。Cpk 越大，说明制程"余量"越足。</p>
+
+                <div class="highlight">
+                    💡 <strong>理解：</strong>Cpk 本质上是"允许的波动"除以"实际的波动"。Cpk=1.33 意味着制程规格带宽是实际波动的 4 倍，所以即使有一点偏移，也不会超出规格限。
+                </div>
+
+                <p><strong>【操作】第一步：正态性检验</strong></p>
+                <p>菜单：统计 → 基本统计量 → 正态性检验</p>
+                <ul style="padding-left: 20px; margin: 8px 0; color: #555; line-height: 1.8;">
+                    <li>变量 = C1</li>
+                    <li>p ≥ 0.05 说明正态 → 可用能力分析</li>
+                </ul>
+
+                <p><strong>【操作】第二步：能力分析</strong></p>
+                <p>菜单：统计 → 质量工具 → 能力分析 → 正态</p>
+                <ul style="padding-left: 20px; margin: 8px 0; color: #555; line-height: 1.8;">
+                    <li>单列选 C1</li>
+                    <li>规格下限填 LSL 值</li>
+                    <li>规格上限填 USL 值</li>
+                </ul>
+
+                <p><strong>【结果解读】</strong></p>
+                <ul style="padding-left: 20px; margin: 8px 0; color: #555; line-height: 1.8;">
+                    <li>第一眼看 Cpk 值（≥1.33 合格）</li>
+                    <li>第二眼看直方图上的红线（规格限）有没有被碰到的趋势</li>
+                    <li>第三眼看"整体预期不合格品率"（应该 &lt; 63 PPM）</li>
+                    <li>注意：Cpk 和 Ppk 差距大说明批次间波动大，需追查原因</li>
+                </ul>
+
+                <div class="highlight">
+                    📱 <strong>传音场景：</strong>USB 插入力规格 0.5~2.0 Kgf，Cpk=2.14，制程能力充足，不合格品率 &lt; 30 PPM。
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Cpk 的合格标准是多少？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. ≥1.0</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. ≥1.33</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. ≥1.67</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. ≥2.0</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A, C">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">做 Cpk 分析前需要先做什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 正态性检验</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 直接做能力分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 检查数据是否正态分布</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 计算 B10 寿命</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Cpk=1.33 说明什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 制程能力不足</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 制程规格带宽是实际波动的 4 倍</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 不合格品率很高</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 需要整改</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A, B, C">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">Cpk 分析结果需要看哪些内容？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. Cpk 值</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 直方图上的规格限</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 整体预期不合格品率</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. β 值</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">如果 Cpk 和 Ppk 差距大，说明什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 制程能力充足</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 批次间波动大，需追查原因</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 数据不正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 样本量不足</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "Cpk ≥ 1.33 为合格标准。",
+            q2: "做 Cpk 前必须先做正态性检验，确认数据正态分布后才能用能力分析。",
+            q3: "Cpk=1.33 意味着制程规格带宽是实际波动的 4 倍，余量充足。",
+            q4: "Cpk 分析看 Cpk 值、直方图规格限、不合格品率。β 值是 Weibull 分析的。",
+            q5: "Cpk 和 Ppk 差距大说明批次间波动大，需要追查原因。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',').map(s => s.trim());
+                const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                const selected = [];
+
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                    q.classList.remove('wrong');
+                } else {
+                    q.classList.add('wrong');
+                    q.classList.remove('correct');
+                }
+
+                const qNum = 'q' + (index + 1);
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析 ${isCorrect ? '✅' : '❌'}</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations[qNum]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = '得分：' + score + ' / ' + questions.length;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
