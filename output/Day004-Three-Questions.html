@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 004：三层提问法</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .review-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border: 1px solid #ffc107;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .review-section h2 {
+            color: #856404;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .review-card {
+            background: white;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #555;
+            font-size: 14px;
+        }
+        .review-card:last-child {
+            margin-bottom: 0;
+        }
+        .review-card strong {
+            color: #856404;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .knowledge .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>📘 Day 004：三层提问法</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <!-- 昨日知识卡片 -->
+            <div class="review-section">
+                <h2>🧠 昨日知识卡片 · 按工作流嵌入工具</h2>
+                <div class="review-card">
+                    <strong>卡片 1：</strong>Minitab 不是要你改变现有工作方式，而是在每个环节"嵌入"一个分析动作。
+                </div>
+                <div class="review-card">
+                    <strong>卡片 2：</strong>四个嵌入点 → 边测边报用 Pareto、问题积累用 Weibull、整改验证用 Kaplan-Meier、量产放行用 Cpk。
+                </div>
+                <div class="review-card">
+                    <strong>卡片 3：</strong>关键：不需要所有环节同步启动，选一个当前最痛的点先切入。
+                </div>
+            </div>
+
+            <!-- 今日知识点 -->
+            <div class="knowledge">
+                <h2>💡 今日知识点</h2>
+                <p><strong>方法四：三层提问法（每个操作必答三问）</strong></p>
+                <p>每次打开 Minitab 前，先想清楚三个问题：</p>
+                
+                <div class="highlight">
+                    ① <strong>目的</strong>——为什么要做这个分析？要回答什么业务问题？
+                </div>
+                
+                <div class="highlight">
+                    ② <strong>作用</strong>——Minitab 在这里扮演什么角色？输入什么、输出什么？
+                </div>
+                
+                <div class="highlight">
+                    ③ <strong>价值产出</strong>——做完后谁能用？怎么用？对业务有什么影响？
+                </div>
+                
+                <p><strong>如果三问答不上来，说明你还没准备好做这个分析。</strong></p>
+            </div>
+
+            <!-- 练习题 -->
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">三层提问法的正确顺序是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 作用→目的→价值产出</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 目的→作用→价值产出</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 价值产出→目的→作用</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 没有固定顺序</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,C">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">以下哪些属于"目的"层面需要回答的问题？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 为什么要做这个分析？</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. Minitab 输入什么、输出什么？</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 要回答什么业务问题？</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 做完后谁能用？</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">如果三层提问法中"价值产出"答不上来，说明什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 分析太复杂，不适合做</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 还没准备好做这个分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 需要换一种工具</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 可以直接做，不需要价值产出</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">在做 Weibull B10 寿命分析前，三层提问法的正确应用是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 目的：量化回答"B10 寿命是多少次"</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 作用：把"通过了"变成"B10 寿命 X 次，置信区间 Y~Z"</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 价值产出：测试负责人有量化指标作为放行依据</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 不需要价值产出，直接跑数据就行</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">三层提问法的核心价值是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 让分析更快</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 确保每次分析都有明确的业务目标和价值</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 减少 Minitab 操作步骤</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 让报告更好看</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: ""目的→作用→价值产出"是三层提问法的固定顺序，每次打开 Minitab 前按顺序思考。",
+            q2: ""目的"层面要回答：为什么要做、要回答什么业务问题。B 是"作用"层面，D 是"价值产出"层面。",
+            q3: "手册原文：如果三问答不上来，说明你还没准备好做这个分析。",
+            q4: "A 是目的、B 是作用、C 是价值产出，三层都答对了。D 违反了三层提问法的原则。",
+            q5: "三层提问法的核心是确保每次分析都有明确的业务目标和价值产出，避免"为了分析而分析"。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',');
+                const inputs = q.querySelectorAll('input');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                } else {
+                    q.classList.add('wrong');
+                }
+
+                // 添加解析
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析 ${isCorrect ? '✅' : '❌'}</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations['q' + (index + 1)]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>

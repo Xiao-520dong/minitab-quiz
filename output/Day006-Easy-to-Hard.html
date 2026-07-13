@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 006：由易到难，持续积累</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .review-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border: 1px solid #ffc107;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .review-section h2 {
+            color: #856404;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .review-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .review-card {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            border-left: 4px solid #ffc107;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .review-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .knowledge .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge ul {
+            color: #555;
+            line-height: 1.8;
+            margin: 12px 0 12px 20px;
+        }
+        .knowledge ul li {
+            margin-bottom: 8px;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>📘 Day 006：由易到难，持续积累</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <!-- 昨日知识卡片 -->
+            <div class="review-section">
+                <h2>🧠 昨日知识卡片 · 数据为王，禁止编造</h2>
+                <div class="review-cards">
+                    <div class="review-card">
+                        <p>📌 所有分析数据必须来源于：作业指导书、验证标准、正式测试报告、真实的历史测试记录。</p>
+                    </div>
+                    <div class="review-card">
+                        <p>🚫 禁止行为：凭想象估算数字、编造不存在的规格限、推断未经证实的因果关系。</p>
+                    </div>
+                    <div class="review-card">
+                        <p>⚠️ 数据不足时，明确说"数据不足，建议增加样本量"，而不是凑数。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 今日知识点 -->
+            <div class="knowledge">
+                <h2>💡 今日知识点</h2>
+                <p><strong>方法六：由易到难，持续积累</strong></p>
+                <p>建议学习路径（按难度递增）：</p>
+                <ul>
+                    <li><strong>第1周：</strong>Pareto 图（5分钟出图，直观易懂）</li>
+                    <li><strong>第2周：</strong>Cpk 能力分析（有规格限就能做）</li>
+                    <li><strong>第3周：</strong>Weibull 分布分析（右删失数据处理）</li>
+                    <li><strong>第4周：</strong>Kaplan-Meier + Log-Rank（整改对比）</li>
+                    <li><strong>第5周+：</strong>ALT 加速寿命、MSA 量具 R&R 等高级功能</li>
+                </ul>
+
+                <div class="highlight">
+                    🎯 <strong>核心原则：</strong>不追求一上来就用全所有功能。每个工具用熟、用到能独立出报告，再学下一个。
+                </div>
+            </div>
+
+            <!-- 练习题 -->
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">手册建议的学习路径中，第一个应该掌握的工具是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. Cpk 能力分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. Pareto 图</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. Weibull 分布分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. Kaplan-Meier 生存曲线</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">以下哪些属于"第5周+"的高级功能？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. ALT 加速寿命</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. MSA 量具 R&R</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. Pareto 图</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. Cpk 能力分析</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">手册建议"每个工具用熟、用到能独立出报告"之后再做什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 同时学下一个工具</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 再学下一个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 回头复习前面的</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 停止学习</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">关于 Cpk 能力分析，以下哪些描述正确？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 建议在第2周学习</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 有规格限就能做</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 需要先学完 Weibull 才能学</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 属于高级功能</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">方法六的核心原则是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 一上来就用全所有功能</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 不追求一上来就用全所有功能，每个工具用熟再学下一个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 只学最常用的三个功能</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 等有时间了再集中学习</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "手册建议第1周先学 Pareto 图，因为"5分钟出图，直观易懂"。",
+            q2: "手册明确列出第5周+的高级功能包括 ALT 加速寿命和 MSA 量具 R&R。",
+            q3: "手册原文：每个工具用熟、用到能独立出报告，再学下一个。",
+            q4: "手册建议第2周学 Cpk，"有规格限就能做"。它不是高级功能，也不需要先学 Weibull。",
+            q5: "手册原文：不追求一上来就用全所有功能。每个工具用熟、用到能独立出报告，再学下一个。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',');
+                const inputs = q.querySelectorAll('input');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                } else {
+                    q.classList.add('wrong');
+                }
+
+                // 添加解析
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析 ${isCorrect ? '✅' : '❌'}</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations['q' + (index + 1)]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
