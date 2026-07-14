@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 014：置信区间</title>
+    <title>Day 014：删失标记 0 和 1</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -14,10 +14,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .container { max-width: 800px; margin: 0 auto; }
         .card {
             background: white;
             border-radius: 16px;
@@ -38,10 +35,7 @@
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
-        .header .subtitle {
-            color: #666;
-            font-size: 14px;
-        }
+        .header .subtitle { color: #666; font-size: 14px; }
         .header .breadcrumb {
             display: inline-block;
             background: #e8f0fe;
@@ -53,37 +47,25 @@
             margin-bottom: 12px;
         }
         .review-section {
-            background: linear-gradient(135deg, #f6f8fc 0%, #eef1f8 100%);
-            border: 1px solid #d5dbe8;
-            border-radius: 12px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             padding: 24px;
+            border-radius: 12px;
             margin-bottom: 24px;
         }
         .review-section h2 {
-            color: #5a67d8;
+            color: #e65100;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 16px;
         }
+        .review-cards { display: flex; flex-direction: column; gap: 12px; }
         .review-card {
-            background: white;
-            border-radius: 8px;
+            background: rgba(255,255,255,0.85);
             padding: 14px 16px;
-            margin-bottom: 10px;
-            border-left: 4px solid #667eea;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
         }
-        .review-card:last-child {
-            margin-bottom: 0;
-        }
-        .review-card p {
-            color: #444;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-        .review-card strong {
-            color: #333;
-        }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -96,11 +78,7 @@
             font-weight: 600;
             margin-bottom: 16px;
         }
-        .knowledge p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 12px;
-        }
+        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -108,14 +86,29 @@
             border-radius: 4px;
             margin: 16px 0;
         }
-        .quiz-section {
-            margin-top: 32px;
+        .knowledge .highlight-green {
+            background: #d4edda;
+            padding: 12px;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            margin: 16px 0;
         }
-        .quiz-section h2 {
-            color: #333;
-            font-size: 20px;
-            margin-bottom: 20px;
+        .knowledge .highlight-blue {
+            background: #e8f0fe;
+            padding: 12px;
+            border-left: 4px solid #1a73e8;
+            border-radius: 4px;
+            margin: 16px 0;
         }
+        .knowledge code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #d63384;
+        }
+        .quiz-section { margin-top: 32px; }
+        .quiz-section h2 { color: #333; font-size: 20px; margin-bottom: 20px; }
         .question {
             background: #fafbfc;
             border: 1px solid #e1e4e8;
@@ -141,9 +134,7 @@
             font-size: 12px;
             margin-left: 8px;
         }
-        .question-type.multi {
-            background: #fd7e14;
-        }
+        .question-type.multi { background: #fd7e14; }
         .question-text {
             color: #1a1a1a;
             font-size: 16px;
@@ -151,11 +142,7 @@
             line-height: 1.6;
             margin-bottom: 16px;
         }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .options { display: flex; flex-direction: column; gap: 10px; }
         .option {
             display: flex;
             align-items: center;
@@ -166,10 +153,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .option:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
+        .option:hover { border-color: #667eea; background: #f8f9ff; }
         .option input[type="radio"],
         .option input[type="checkbox"] {
             margin-right: 12px;
@@ -196,9 +180,7 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-        }
+        .submit-btn:hover { transform: translateY(-2px); }
         .result {
             display: none;
             background: #f8f9fa;
@@ -206,9 +188,7 @@
             border-radius: 12px;
             margin-top: 24px;
         }
-        .result.show {
-            display: block;
-        }
+        .result.show { display: block; }
         .score {
             text-align: center;
             font-size: 32px;
@@ -223,16 +203,8 @@
             margin-top: 12px;
             border-left: 4px solid #667eea;
         }
-        .explanation h4 {
-            color: #667eea;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        .explanation p {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+        .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -241,163 +213,170 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">第二章：基础知识 · 置信区间</div>
-                <h1>📘 Day 014：置信区间</h1>
+                <div class="breadcrumb">模块三：核心工具 · 删失标记 0 和 1</div>
+                <h1>📘 Day 014：删失标记 0 和 1</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
-            <!-- 昨日知识卡片 -->
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · 正态性检验</h2>
-                <div class="review-card">
-                    <p>跑 Cpk 前先检验数据是否正态。<strong>p≥0.05 → 正态</strong>，可做 Cpk；<strong>p&lt;0.05 → 非正态</strong>，改用非正态能力分析。</p>
-                </div>
-                <div class="review-card">
-                    <p>概率图判断：数据点<strong>贴合对角线 = 正态</strong>，明显弯曲偏离 = 非正态。</p>
-                </div>
-                <div class="review-card">
-                    <p>USB 插入力数据正态性检验 <strong>AD=0.573，P=0.125 → 正态</strong>，可做 Cpk。</p>
+                <h2>🧠 昨日知识卡片 · Pareto 80/20 法则</h2>
+                <div class="review-cards">
+                    <div class="review-card">
+                        <p><strong>卡片 1：</strong>80% 问题来自 20% 原因。</p>
+                    </div>
+                    <div class="review-card">
+                        <p><strong>卡片 2：</strong>累积百分比线帮助找到优先整改方向。</p>
+                    </div>
+                    <div class="review-card">
+                        <p><strong>卡片 3：</strong>Minitab 中选"已整理成表格的缺陷数据"。</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- 今日知识点 -->
             <div class="knowledge">
-                <h2>💡 今日知识点：置信区间</h2>
-                <p><strong>置信区间 = "真实值大概率落在哪个范围"。</strong>不要只看点估计（如 B10=2.72 次），因为单点只是一个猜测，真实值很可能上下浮动。</p>
+                <h2>💡 今日知识点：删失标记 0 和 1</h2>
+                <p>在可靠性分析中，不是所有产品都会失效。那些"还没失效"的数据叫删失数据（Censored），同样重要。</p>
 
                 <div class="highlight">
-                    📱 <strong>传音场景：</strong>统一案例 W-795 12 台数据（MLE 估计），B10=2.72 次。如果 Minitab 输出 95% 置信区间是 1.5~4.8 次，说明"真实 B10 有 95% 概率落在 1.5~4.8 之间"。
+                    <strong>⚠️ 删失标记含义</strong><br>
+                    <strong>0</strong> = 失效（Failure）<br>
+                    <strong>1</strong> = 全过 / 删失（Censored）<br>
+                    ⚠️ 不要把删失数据删掉！它们包含重要信息。
                 </div>
 
-                <p><strong>【理解】</strong></p>
-                <p>点估计只是"最可能的值"，置信区间告诉你"不确定性有多大"。区间越窄，估计越精确；区间越宽，说明数据越分散或样本量不足。</p>
+                <div class="highlight-blue">
+                    <strong>📱 传音场景：W-795 跌落数据</strong><br>
+                    12 台跌落数据：<br>
+                    • 前 8 台已失效 → 删失标记填 <strong>0</strong><br>
+                    • 后 4 台 10 次全过 → 删失标记填 <strong>1</strong><br>
+                    数据表：C1 = 失效次数，C2 = 删失标记
+                </div>
 
-                <p><strong>【结果解读】</strong></p>
-                <p>• <strong>B10 置信下限 ≥ 设计目标</strong> → 设计达标</p>
-                <p>• <strong>B10 置信区间太宽</strong>（如 0.43~7.05）→ 样本量不足，结论不可靠</p>
-                <p>• 建议攒到 <strong>≥15 个失效数据</strong>再正式分析</p>
+                <div class="highlight-green">
+                    <strong>📝 推荐做法</strong><br>
+                    推荐用数字 <strong>0/1</strong> 而非 F/C，Minitab 15 中数字标记更稳定，不会解析失败。
+                </div>
             </div>
 
-            <!-- 练习题 -->
             <div class="quiz-section">
                 <h2>📝 练习题（共 5 题）</h2>
 
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">置信区间的含义是？</div>
+                    <div class="question-text">删失标记 0 代表什么？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. 真实值一定在这个范围内</label>
+                            <label for="q1a">A. 删失</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 真实值大概率落在这个范围内</label>
+                            <label for="q1b">B. 失效</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 点估计的误差范围</label>
+                            <label for="q1c">C. 全过</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. 数据的波动范围</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="A,B">
-                    <span class="question-num">第 2 题</span>
-                    <span class="question-type multi">多选</span>
-                    <div class="question-text">置信区间太宽说明什么？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. 样本量不足</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. 数据分散</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. 结论可靠</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 估计精确</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="C">
-                    <span class="question-num">第 3 题</span>
-                    <span class="question-type">单选</span>
-                    <div class="question-text">B10=2.72 次，95% CI: 1.5~4.8 次，设计目标 B10≥3 次，结论是？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 设计达标</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 设计不达标</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 无法确定，需要更多数据</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. 设计刚好达标</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="A,B,D">
-                    <span class="question-num">第 4 题</span>
-                    <span class="question-type multi">多选</span>
-                    <div class="question-text">关于置信区间，以下哪些描述正确？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 区间越窄，估计越精确</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 区间越宽，样本量可能不足</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 点估计比置信区间更重要</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 95% 置信区间意味着 95% 概率包含真实值</label>
+                            <label for="q1d">D. 无效</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question" data-correct="B">
-                    <span class="question-num">第 5 题</span>
+                    <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">B10 置信下限 ≥ 设计目标，说明什么？</div>
+                    <div class="question-text">删失标记 1 代表什么？</div>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. 设计不达标</label>
+                            <input type="radio" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 失效</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. 设计达标</label>
+                            <input type="radio" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 删失 / 全过</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. 需要更多数据</label>
+                            <input type="radio" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 无效</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 无法判断</label>
+                            <input type="radio" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 异常</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">为什么推荐用 0/1 而非 F/C？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. Minitab 15 更稳定</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 不会解析失败</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 输入更方便</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 国际标准要求</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">删失数据应该怎么做？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 删除</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 标记为删失</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 忽略</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 替换为 0</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C,D">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">关于删失标记，正确的有？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 0 = 失效</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 1 = 删失</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 推荐用数字</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 已有数据后不能改列类型需新建列</label>
                         </div>
                     </div>
                 </div>
@@ -414,11 +393,11 @@
 
     <script>
         const explanations = {
-            q1: "置信区间表示真实值大概率落在这个范围内，不是"一定"。",
-            q2: "置信区间太宽说明样本量不足或数据分散，结论不可靠。",
-            q3: "CI 上限 4.8>3，下限 1.5<3，跨越了目标值，无法确定是否达标，需要更多数据。",
-            q4: "区间越窄越精确，越宽越不可靠。95% CI 意味着 95% 概率包含真实值。点估计不如 CI 可靠。",
-            q5: "B10 置信下限≥设计目标，说明即使最坏情况也达标，设计达标。"
+            q1: "删失标记 0 代表失效（Failure）。已失效的产品标记为 0。",
+            q2: "删失标记 1 代表删失/全过（Censored）。还没失效、通过全部测试的产品标记为 1。",
+            q3: "推荐用 0/1 而非 F/C，因为 Minitab 15 中数字标记更稳定，不会解析失败。",
+            q4: "删失数据不能删除、不能忽略、不能替换为 0，应该正确标记为删失（标记为 1）。删失数据包含重要信息。",
+            q5: "0=失效，1=删失，推荐用数字标记。如果已有数据列的类型不对，不能直接改列类型，需要新建列重新输入。"
         };
 
         function checkAnswers() {
@@ -428,29 +407,32 @@
             explanationsDiv.innerHTML = '';
 
             questions.forEach((q, index) => {
-                const correct = q.dataset.correct.split(',');
-                const inputs = q.querySelectorAll('input');
+                const correct = q.dataset.correct.split(',').map(s => s.trim());
+                const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
                 const selected = [];
-
+                
                 inputs.forEach(input => {
                     if (input.checked) selected.push(input.value);
                 });
 
                 const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
-
+                
                 if (isCorrect) {
                     score++;
                     q.classList.add('correct');
+                    q.classList.remove('wrong');
                 } else {
                     q.classList.add('wrong');
+                    q.classList.remove('correct');
                 }
 
+                const qNum = `q${index + 1}`;
                 const expDiv = document.createElement('div');
                 expDiv.className = 'explanation';
                 expDiv.innerHTML = `
-                    <h4>第 ${index + 1} 题解析 ${isCorrect ? '✅' : '❌'}</h4>
+                    <h4>第 ${index + 1} 题解析</h4>
                     <p><strong>正确答案：</strong>${correct.join(', ')}</p>
-                    <p>${explanations['q' + (index + 1)]}</p>
+                    <p>${explanations[qNum]}</p>
                 `;
                 explanationsDiv.appendChild(expDiv);
             });

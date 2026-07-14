@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 020：Cpk vs Ppk</title>
+    <title>Day 016：Log-Rank 检验</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -213,48 +213,47 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">模块四：进阶应用</div>
-                <h1>📘 Day 020：Cpk vs Ppk</h1>
+                <div class="breadcrumb">模块三：核心工具 · Log-Rank 检验</div>
+                <h1>📘 Day 016：Log-Rank 检验</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · Day019 标准化用词</h2>
+                <h2>🧠 昨日知识卡片 · Kaplan-Meier 生存曲线</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>统一用词保证 Pareto 分类一致，同一类问题归在一起。</p>
+                        <p><strong>卡片 1：</strong>KM 曲线显示随时间还有多少产品没失效。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>标准用词：屏幕碎裂 / 后盖开裂 / TP断触 / 功能失效 / 外观异常。</p>
+                        <p><strong>卡片 2：</strong>整改后曲线比整改前平缓 → 初步有效。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>遇到新类型先归入最接近的已有类别，积累后再考虑新增。</p>
+                        <p><strong>卡片 3：</strong>最终判定需要 Log-Rank 检验。</p>
                     </div>
                 </div>
             </div>
 
             <div class="knowledge">
-                <h2>💡 今日知识点：Cpk vs Ppk</h2>
-                <p>过程能力分析中，<strong>Cpk</strong> 和 <strong>Ppk</strong> 是两个关键指标：</p>
-
-                <div class="highlight-blue">
-                    <strong>📋 核心区别：</strong><br>
-                    • <code>Cpk</code> = 子组内能力指数（短期能力），只考虑组内变异<br>
-                    • <code>Ppk</code> = 总能力指数（长期能力），考虑全部变异（组内+组间）
-                </div>
+                <h2>💡 今日知识点：Log-Rank 检验</h2>
+                <p>Log-Rank 检验用于比较两条生存曲线是否有显著差异。</p>
 
                 <div class="highlight">
-                    <strong>⚠️ 关键关系：</strong><br>
-                    <code>Cpk ≥ Ppk</code> 始终成立。<br>
-                    两者差很多 → 说明批次间变异大（组间差异显著）。
+                    <strong>⚠️ 核心判断</strong><br>
+                    p &lt; 0.05 → 有差异 → 整改有效<br>
+                    p ≥ 0.05 → 数据不足以证明有差异
                 </div>
 
-                <p>实际场景举例：</p>
+                <div class="highlight-blue">
+                    <strong>📊 输出两个检验 p 值</strong><br>
+                    ① <strong>对数排秩（Log-Rank）</strong>：对整体差异敏感，可靠性场景优先看这个<br>
+                    ② <strong>Wilcoxon</strong>：对早期差异更敏感
+                </div>
+
                 <div class="highlight-green">
-                    <strong>🔍 案例分析：</strong><br>
-                    Cpk=1.5 但 Ppk=0.8 → 短期能力好，但长期表现差<br>
-                    <strong>排查方向：</strong><br>
-                    ① 来料批次差异 &nbsp; ② 设备状态变化 &nbsp; ③ 操作员差异
+                    <strong>📝 判断规则</strong><br>
+                    • 两个都 &lt; 0.05 → 结论一致，用 Log-Rank<br>
+                    • 不一致 → 看差异发生在哪个阶段<br>
+                    • p &lt; 0.05 则"整改有统计显著效果，可以放行"
                 </div>
             </div>
 
@@ -264,119 +263,119 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Cpk 和 Ppk 分别衡量什么？</div>
+                    <div class="question-text">Log-Rank 检验的用途是？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. Cpk 长期，Ppk 短期</label>
+                            <label for="q1a">A. 计算 Cpk</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. Cpk 短期（子组内），Ppk 长期（总体）</label>
+                            <label for="q1b">B. 比较两条生存曲线是否有显著差异</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 都是短期</label>
+                            <label for="q1c">C. 画 Pareto 图</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. 都是长期</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="C">
-                    <span class="question-num">第 2 题</span>
-                    <span class="question-type">单选</span>
-                    <div class="question-text">Cpk 和 Ppk 的大小关系通常是？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. Cpk &lt; Ppk</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. Cpk = Ppk</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. Cpk ≥ Ppk</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 没有关系</label>
+                            <label for="q1d">D. 检验正态性</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question" data-correct="B">
-                    <span class="question-num">第 3 题</span>
+                    <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Cpk 和 Ppk 差很多，说明什么？</div>
+                    <div class="question-text">Log-Rank p=0.003 的结论是？</div>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 过程能力很好</label>
+                            <input type="radio" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 整改无效</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 批次间变异大</label>
+                            <input type="radio" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 整改有统计显著改善</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 数据有误</label>
+                            <input type="radio" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 需要更多数据</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. 样本量不够</label>
+                            <input type="radio" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 无法判断</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question" data-correct="A,B,C">
-                    <span class="question-num">第 4 题</span>
+                    <span class="question-num">第 3 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">Cpk=1.5 但 Ppk=0.8，应该排查哪些方向？</div>
+                    <div class="question-text">Log-Rank 和 Wilcoxon 的区别包括？</div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 来料批次差异</label>
+                            <input type="checkbox" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. Log-Rank 对整体差异敏感</label>
                         </div>
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 设备状态变化</label>
+                            <input type="checkbox" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. Wilcoxon 对早期差异敏感</label>
                         </div>
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 操作员差异</label>
+                            <input type="checkbox" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 可靠性场景优先看 Log-Rank</label>
                         </div>
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 不需要排查</label>
+                            <input type="checkbox" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 两者完全一样</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="question" data-correct="A,B,C,D">
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">两个检验 p 值不一致时应该？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 随便选一个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 看差异主要发生在哪个阶段</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 放弃分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 重新做实验</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">关于 Cpk 和 Ppk，以下说法正确的有？</div>
+                    <div class="question-text">Log-Rank 检验的正确判断包括？</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. Cpk 衡量子组内短期能力</label>
+                            <label for="q5a">A. p &lt; 0.05 整改有效</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. Ppk 衡量总体长期能力</label>
+                            <label for="q5b">B. p ≥ 0.05 数据不足以证明改善</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. Cpk ≥ Ppk</label>
+                            <label for="q5c">C. p &lt; 0.05 可以放行</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 差很多说明批次间变异大</label>
+                            <label for="q5d">D. p=0.5 整改有效</label>
                         </div>
                     </div>
                 </div>
@@ -393,11 +392,11 @@
 
     <script>
         const explanations = {
-            q1: "Cpk 是子组内能力指数（短期），Ppk 是总能力指数（长期，包含组间变异）。",
-            q2: "Cpk ≥ Ppk 始终成立，因为 Cpk 只考虑组内变异，Ppk 还包含组间变异，总变异 ≥ 组内变异。",
-            q3: "Cpk 和 Ppk 差很多说明批次间变异大，即组间差异显著，过程不稳定。",
-            q4: "Cpk=1.5 但 Ppk=0.8 说明短期好但长期差，应排查来料批次差异、设备状态变化、操作员差异等组间因素。D 选项'不需要排查'是错误的。",
-            q5: "四个选项全部正确：Cpk 衡量子组内短期能力，Ppk 衡量总体长期能力，Cpk≥Ppk，差很多说明批次间变异大。"
+            q1: "Log-Rank 检验用于比较两条生存曲线是否有显著差异，是整改验证的关键统计工具。",
+            q2: "p=0.003 < 0.05，说明整改前后有统计显著差异，整改有统计显著改善。",
+            q3: "Log-Rank 对整体差异敏感，Wilcoxon 对早期差异更敏感，可靠性场景优先看 Log-Rank。两者不完全一样。",
+            q4: "两个检验 p 值不一致时，应看差异主要发生在哪个阶段：早期差异大参考 Wilcoxon，整体差异大参考 Log-Rank。",
+            q5: "p < 0.05 说明整改有效，可以放行；p ≥ 0.05 说明数据不足以证明改善。p=0.5 远大于 0.05，不能认为整改有效。"
         };
 
         function checkAnswers() {

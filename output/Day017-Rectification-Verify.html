@@ -213,22 +213,22 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">第三章：完整案例·受控跌落测试 · 整改验证</div>
+                <div class="breadcrumb">模块四：进阶应用</div>
                 <h1>📘 Day 017：整改验证逻辑</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · 概率图与 AD 检验</h2>
+                <h2>🧠 昨日知识卡片 · Day016 Log-Rank 检验</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>概率图：数据点越贴近对角线（拟合线），拟合越好。</p>
+                        <p><strong>卡片 1：</strong>Log-Rank 检验用于比较两条生存曲线是否有显著差异。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>AD 值越小拟合越好，但数据集中时 AD 会异常偏大，不代表拟合差。</p>
+                        <p><strong>卡片 2：</strong>p&lt;0.05 → 两条曲线有差异 → 说明整改有效。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>优先看概率图目视判断，AD 偏大但点贴合线时，认为拟合可接受。</p>
+                        <p><strong>卡片 3：</strong>可靠性场景中，优先看 Log-Rank 的 p 值来判断整改效果。</p>
                     </div>
                 </div>
             </div>
@@ -248,8 +248,9 @@
                 </div>
 
                 <div class="highlight-blue">
-                    <strong>📋 完整流程：</strong><br>
-                    整改前数据 + 整改后数据 → Kaplan-Meier（非参数分布分析，按变量分组） → Log-Rank 检验（结果选项选对数排秩） → 看 p 值
+                    <strong>📋 判断标准：</strong><br>
+                    p&lt;0.05 → 整改有效，可放行量产<br>
+                    p≥0.05 → 不足以证明改善，需继续整改或加大样本量
                 </div>
 
                 <div class="highlight-green">
@@ -268,15 +269,15 @@
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. 能</label>
+                            <label for="q1a">A. 能，全过就是有效</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 不能，需要和整改前做 Kaplan-Meier+Log-Rank 检验</label>
+                            <label for="q1b">B. 不能，需要做 KM+Log-Rank 检验</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 能，全过就是有效</label>
+                            <label for="q1c">C. 能，样本量够了</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
@@ -348,11 +349,11 @@
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 统计检验能证明整改有效</label>
+                            <label for="q4c">C. 统计检验能证明整改是否真的有效</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 公司规定必须做</label>
+                            <label for="q4d">D. 增加工作量不对</label>
                         </div>
                     </div>
                 </div>
@@ -368,7 +369,7 @@
                         </div>
                         <div class="option">
                             <input type="radio" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. "整改前后各测 N 台，Kaplan-Meier 分析：Log-Rank p=0.0xx&lt;0.05，整改有统计显著改善，可放行量产"</label>
+                            <label for="q5b">B. "整改前后各测 N 台，KM 分析：Log-Rank p=0.0xx&lt;0.05，整改有统计显著改善，可放行量产"</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q5" id="q5c" value="C">
@@ -393,11 +394,11 @@
 
     <script>
         const explanations = {
-            q1: "整改后 30 台全过不能直接判有效，可能只是样本量小或运气好，必须做统计检验。",
-            q2: "整改验证需要：收集整改前后数据 → Kaplan-Meier 画曲线 → Log-Rank 检验。",
-            q3: "p=0.003<0.05，说明整改有统计显著改善。",
-            q4: "全过可能只是运气好，凭感觉不可靠，统计检验能证明整改是否真的有效。",
-            q5: "报告应包含：样本量、分析方法、p 值、结论。"
+            q1: "整改后 30 台全过不能直接判有效，可能只是样本量小或运气好，必须做 KM+Log-Rank 检验。",
+            q2: "整改验证需要：收集整改前数据 → 收集整改后数据 → Kaplan-Meier 画曲线 → Log-Rank 检验，四步缺一不可。",
+            q3: "p=0.003<0.05，说明整改前后生存曲线有显著差异，整改有统计显著改善。",
+            q4: "全过可能只是运气好，凭感觉不可靠，统计检验能证明整改是否真的有效。D 选项'增加工作量'不是原因。",
+            q5: "标准报告应包含：样本量、分析方法（KM）、p 值、结论（是否放行）。"
         };
 
         function checkAnswers() {

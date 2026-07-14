@@ -213,53 +213,49 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">第三章：完整案例·受控跌落测试 · 边测边报</div>
+                <div class="breadcrumb">模块四：进阶应用</div>
                 <h1>📘 Day 018：边测边报的数据积累</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · 整改验证逻辑</h2>
+                <h2>🧠 昨日知识卡片 · Day017 整改验证逻辑</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>整改后不能凭感觉判"好了"，必须用统计方法证明。</p>
+                        <p><strong>卡片 1：</strong>整改后不能凭感觉判"好了"，必须用统计检验证明。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>正确流程：收集整改前后数据 → Kaplan-Meier 画生存曲线 → Log-Rank 检验 p&lt;0.05 才放行。</p>
+                        <p><strong>卡片 2：</strong>验证流程：收集整改前后数据 → KM 画曲线 → Log-Rank 检验。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>整改后 30 台全过可能只是"运气好"，必须和整改前做对比检验。</p>
+                        <p><strong>卡片 3：</strong>报告要包含样本量、分析方法、p 值和结论。</p>
                     </div>
                 </div>
             </div>
 
             <div class="knowledge">
                 <h2>💡 今日知识点：边测边报的数据积累</h2>
-                <p>每条问题报告（如 #01:跌正面TP破裂）天然是 Pareto/Weibull 的输入。</p>
-
-                <div class="highlight">
-                    <strong>🔍 理解</strong><br>
-                    传音实验室的工作流是"边测边报"——每发现一个问题就立刻以统一格式报出，而不是等全部测试结束后统一报告。<br><br>
-                    这意味着：<br>
-                    • 每条问题报告天然就是 Pareto 分析的输入数据<br>
-                    • 随着测试进行，数据不断积累，可以随时更新 Pareto 图<br>
-                    • 当失效数据积累到一定数量（≥15），就可以跑 Weibull B10 分析
-                </div>
+                <p>每条问题报告天然是 <strong>Pareto</strong> 和 <strong>Weibull</strong> 分析的输入数据。</p>
 
                 <div class="highlight-blue">
-                    <strong>📋 工作流</strong><br>
-                    1. 测试执行 → 每发现问题立即报告（格式：#序号:跌落方向+失效现象）<br>
-                    2. 数据积累 → 按方向汇总频次 → 生成 Pareto 图<br>
-                    3. 数据足够（≥15个失效）→ Weibull B10 寿命分析<br>
-                    4. 研发整改 → 整改前后 Kaplan-Meier 对比<br>
-                    5. 量产放行 → Cpk 过程能力分析
+                    <strong>📋 边测边报原则：</strong><br>
+                    每发现一个问题就立刻以统一格式报出，不需要等全部测完再汇总。
+                </div>
+
+                <p>积累到一定量后，可以直接做：</p>
+                <ul style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 1.8;">
+                    <li><strong>Pareto 分析</strong>：找出主要失效模式</li>
+                    <li><strong>Weibull 分析</strong>：评估失效率与寿命分布</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>⚠️ 关键点：</strong><br>
+                    数据是渐进式积累的，不需要等全部测完才开始分析。边测边报能让问题更早暴露、更快响应。
                 </div>
 
                 <div class="highlight-green">
-                    <strong>📝 关键要点</strong><br>
-                    • 不需要等测试全部完成才开始分析<br>
-                    • 数据积累是渐进式的，分析也是渐进式的<br>
-                    • 每个阶段都有对应的 Minitab 工具可以嵌入
+                    <strong>✅ 好处：</strong><br>
+                    ① 及时发现问题趋势 &nbsp; ② 数据持续积累可分析 &nbsp; ③ 不用等全部测完才行动
                 </div>
             </div>
 
@@ -269,119 +265,119 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">传音实验室的问题报告方式是什么？</div>
+                    <div class="question-text">边测边报的正确做法是？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. 等全部测试结束后统一报告</label>
+                            <label for="q1a">A. 等全部测完再统一报告</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 边测边报，每发现问题立即报告</label>
+                            <label for="q1b">B. 每发现一个问题就立刻以统一格式报出</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 每周汇总一次</label>
+                            <label for="q1c">C. 只报告严重问题</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. 只在测试失败时报告</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="A,B,D">
-                    <span class="question-num">第 2 题</span>
-                    <span class="question-type multi">多选</span>
-                    <div class="question-text">边测边报的数据可以用于哪些分析？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. Pareto 图（失效方向排序）</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. Weibull B10 寿命分析</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. 无法用于任何分析</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 随着数据积累可以更新分析结果</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="C">
-                    <span class="question-num">第 3 题</span>
-                    <span class="question-type">单选</span>
-                    <div class="question-text">Weibull B10 分析建议至少积累多少个失效数据？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 5 个</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 10 个</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 15 个</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. 30 个</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="A,B,C">
-                    <span class="question-num">第 4 题</span>
-                    <span class="question-type multi">多选</span>
-                    <div class="question-text">以下哪些是"边测边报"的优势？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 可以实时发现问题趋势</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 研发可以尽早开始整改</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 不需要等测试全部完成就能开始分析</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 数据报告格式不统一</label>
+                            <label for="q1d">D. 口头告诉组长就行</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question" data-correct="B">
-                    <span class="question-num">第 5 题</span>
+                    <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">问题报告 #03:跌左上角屏右下角有白斑，这条报告可以直接用于什么分析？</div>
+                    <div class="question-text">问题报告积累后可以做哪些分析？</div>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. Cpk 分析</label>
+                            <input type="radio" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 只能做均值分析</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. Pareto 图的失效方向统计</label>
+                            <input type="radio" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. Pareto 分析和 Weibull 分析</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. 正态性检验</label>
+                            <input type="radio" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 只能做图表</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 无法使用</label>
+                            <input type="radio" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 没有用</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">边测边报的好处有哪些？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 及时发现问题趋势</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 数据渐进式积累，可持续分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 不需要等全部测完才开始分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 可以减少测试工作量</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">关于数据积累的时机，以下说法正确的是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 必须等所有样品测完才能分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 至少测完一半才能开始</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 随时可以，边测边积累边分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 只有出问题才能分析</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">关于问题报告与数据分析的关系，以下说法正确的是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 每条问题报告是 Pareto 分析的输入</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 每条问题报告是 Weibull 分析的输入</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 统一格式报告有利于后续分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 问题报告和分析没有关系</label>
                         </div>
                     </div>
                 </div>
@@ -398,11 +394,11 @@
 
     <script>
         const explanations = {
-            q1: "手册明确说明传音实验室采用"边测边报"模式，每发现一个问题就立刻以统一格式报出。",
-            q2: "边测边报的数据天然可以用于 Pareto 分析，积累到一定数量后可以做 Weibull 分析，且可以随时更新。",
-            q3: "手册建议正式报告攒到 ≥15 个失效数据再算 B10，以保证置信区间足够窄。",
-            q4: "边测边报的优势包括实时发现趋势、研发尽早整改、不需要等测试完成。数据报告格式是统一的，不是不统一。",
-            q5: "问题报告中包含跌落方向信息，可以直接用于 Pareto 图的失效方向统计。"
+            q1: "边测边报的核心是每发现一个问题就立刻以统一格式报出，不等全部测完。",
+            q2: "问题报告积累后可以做 Pareto 分析（找主要失效模式）和 Weibull 分析（评估失效率与寿命分布）。",
+            q3: "边测边报的好处：及时发现问题趋势、数据渐进式积累可持续分析、不用等全部测完。D 选项'减少工作量'不是边测边报的目的。",
+            q4: "数据是渐进式积累的，随时可以边测边积累边分析，不需要等全部测完。",
+            q5: "每条问题报告天然是 Pareto 和 Weibull 分析的输入，统一格式报告有利于后续分类和分析。D 说'没有关系'是错误的。"
         };
 
         function checkAnswers() {

@@ -107,30 +107,6 @@
             font-size: 13px;
             color: #d63384;
         }
-        .knowledge table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0;
-            font-size: 14px;
-        }
-        .knowledge table th {
-            background: #667eea;
-            color: white;
-            padding: 10px 14px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .knowledge table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e1e4e8;
-            color: #444;
-        }
-        .knowledge table tr:nth-child(even) {
-            background: #f1f3f5;
-        }
-        .knowledge table tr:hover {
-            background: #e8f0fe;
-        }
         .quiz-section { margin-top: 32px; }
         .quiz-section h2 { color: #333; font-size: 20px; margin-bottom: 20px; }
         .question {
@@ -237,85 +213,50 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">第三章：完整案例·受控跌落测试 · 数据规范</div>
+                <div class="breadcrumb">模块四：进阶应用</div>
                 <h1>📘 Day 019：失效模式标准化用词</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · 边测边报的数据积累</h2>
+                <h2>🧠 昨日知识卡片 · Day018 边测边报</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>每条问题报告（如 #01:跌正面TP破裂）天然是 Pareto/Weibull 的输入。</p>
+                        <p><strong>卡片 1：</strong>每条问题报告天然是 Pareto/Weibull 分析的输入数据。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>边测边报 = 每发现问题立即报告，不等测试全部完成。</p>
+                        <p><strong>卡片 2：</strong>边测边报 = 每发现一个问题就立刻以统一格式报出。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>数据积累是渐进式的，分析也是渐进式的——每个阶段都有对应的 Minitab 工具。</p>
+                        <p><strong>卡片 3：</strong>数据是渐进式积累的，不需要等全部测完才开始分析。</p>
                     </div>
                 </div>
             </div>
 
             <div class="knowledge">
                 <h2>💡 今日知识点：失效模式标准化用词</h2>
-                <p>统一用词：<strong>屏幕碎裂 / 后盖开裂 / TP断触 / 功能失效 / 外观异常</strong>。保证 Pareto 分类一致。</p>
-
-                <div class="highlight">
-                    <strong>【理解】</strong><br>
-                    如果同一个问题，有人写"屏碎了"，有人写"屏幕破裂"，有人写"TP碎了"，Pareto 图会把它们当成三个不同的类别，导致数据分散、分析失真。
-                </div>
-
-                <div class="highlight-green">
-                    <strong>✅ 统一用词的好处：</strong>
-                    <ul style="padding-left: 20px; margin-top: 8px; color: #555; line-height: 1.8;">
-                        <li>Pareto 分类准确，不会因为用词不同导致同一问题被拆分</li>
-                        <li>数据可对比、可积累</li>
-                        <li>研发部门能快速理解问题类型</li>
-                    </ul>
-                </div>
+                <p>统一用词是数据质量的基础。标准失效模式用词：</p>
 
                 <div class="highlight-blue">
-                    <strong>📋 推荐标准用词表</strong>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>失效类型</th>
-                                <th>标准用词</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>屏幕破损</td>
-                                <td>屏幕碎裂</td>
-                            </tr>
-                            <tr>
-                                <td>后盖破损</td>
-                                <td>后盖开裂</td>
-                            </tr>
-                            <tr>
-                                <td>触摸屏失灵</td>
-                                <td>TP断触</td>
-                            </tr>
-                            <tr>
-                                <td>功能异常</td>
-                                <td>功能失效</td>
-                            </tr>
-                            <tr>
-                                <td>外观问题</td>
-                                <td>外观异常</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <strong>📋 标准用词表：</strong><br>
+                    • <code>屏幕碎裂</code> &nbsp; • <code>后盖开裂</code> &nbsp; • <code>TP断触</code> &nbsp; • <code>功能失效</code> &nbsp; • <code>外观异常</code>
                 </div>
 
                 <div class="highlight">
-                    <strong>🔑 关键要点：</strong>
-                    <ul style="padding-left: 20px; margin-top: 8px; color: #555; line-height: 1.8;">
-                        <li>在问题报告中就使用标准用词</li>
-                        <li>团队内部统一培训，确保所有人都用同一套词</li>
-                        <li>如果发现新的失效类型，先讨论确定标准用词再记录</li>
-                    </ul>
+                    <strong>⚠️ 不同用词的后果：</strong><br>
+                    同一个问题如果用了不同的词（比如"屏幕碎裂"和"屏碎了"），Pareto 分类会把它们分散到不同类别，导致每类数量偏少，无法准确识别主要失效模式。
+                </div>
+
+                <p>统一用词的三大好处：</p>
+                <ul style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 1.8;">
+                    <li><strong>① 分类准确</strong> — 同一类问题归在一起</li>
+                    <li><strong>② 数据可对比</strong> — 不同批次、不同项目之间可横向比较</li>
+                    <li><strong>③ 趋势可靠</strong> — Pareto 排序和 Weibull 分析结果可信</li>
+                </ul>
+
+                <div class="highlight-green">
+                    <strong>✅ 遇到新类型怎么办？</strong><br>
+                    先归入最接近的已有类别，等积累到一定量后再考虑新增类别。不要随意造新词。
                 </div>
             </div>
 
@@ -325,7 +266,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">为什么要统一失效模式的用词？</div>
+                    <div class="question-text">为什么要统一失效模式用词？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
@@ -333,11 +274,11 @@
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 保证 Pareto 分类一致，避免数据分散</label>
+                            <label for="q1b">B. 保证 Pareto 分类一致，数据准确</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 减少报告字数</label>
+                            <label for="q1c">C. 减少打字工作量</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
@@ -346,26 +287,26 @@
                     </div>
                 </div>
 
-                <div class="question" data-correct="A,B,C,D">
+                <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 2 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">以下哪些是推荐的标准化用词？</div>
+                    <div class="question-text">统一用词的好处有哪些？</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. 屏幕碎裂</label>
+                            <label for="q2a">A. 分类准确</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. TP断触</label>
+                            <label for="q2b">B. 数据可对比</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. 功能失效</label>
+                            <label for="q2c">C. 趋势可靠</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 外观异常</label>
+                            <label for="q2d">D. 增加工作量</label>
                         </div>
                     </div>
                 </div>
@@ -373,19 +314,19 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 3 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">如果有人写"屏碎了"，有人写"屏幕破裂"，会导致什么问题？</div>
+                    <div class="question-text">同一个失效用了不同词（如"屏幕碎裂"和"屏碎了"），会导致什么？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 没有问题</label>
+                            <label for="q3a">A. 没有影响</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. Pareto 图把它们当成不同类别，数据分散</label>
+                            <label for="q3b">B. Pareto 分类分散，无法准确识别主要失效模式</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 报告更详细</label>
+                            <label for="q3c">C. 数据更丰富</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q3" id="q3d" value="D">
@@ -394,50 +335,50 @@
                     </div>
                 </div>
 
-                <div class="question" data-correct="B,C">
+                <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 4 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">发现新的失效类型时应该怎么做？</div>
+                    <div class="question-text">以下哪些是标准失效模式用词？</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 直接用自己习惯的词记录</label>
+                            <label for="q4a">A. 屏幕碎裂</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 先团队讨论确定标准用词</label>
+                            <label for="q4b">B. TP断触</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 确定后再记录到报告中</label>
+                            <label for="q4c">C. 功能失效</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 不用管，随便写</label>
+                            <label for="q4d">D. 增加工作量不对</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="question" data-correct="C">
+                <div class="question" data-correct="B">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">标准化用词的主要受益者是谁？</div>
+                    <div class="question-text">遇到一种新的失效类型，标准做法是？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. 只有测试工程师</label>
+                            <label for="q5a">A. 立刻创建一个新类别</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. 只有研发部门</label>
+                            <label for="q5b">B. 先归入最接近的已有类别，积累后再考虑新增</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. 整个团队（测试、研发、管理）</label>
+                            <label for="q5c">C. 不报告这个失效</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 没有受益者</label>
+                            <label for="q5d">D. 随便取个名字</label>
                         </div>
                     </div>
                 </div>
@@ -454,11 +395,11 @@
 
     <script>
         const explanations = {
-            q1: "统一用词的核心目的是保证 Pareto 分类一致，避免同一问题因用词不同被拆分，导致数据分散、分析失真。",
-            q2: "手册推荐的标准用词包括：屏幕碎裂、后盖开裂、TP断触、功能失效、外观异常。四个选项全部正确。",
-            q3: "不同用词会导致 Pareto 图把同一问题拆分成多个类别，数据分散，分析失真。",
-            q4: "发现新失效类型时，应先团队讨论确定标准用词，确定后再记录到报告中，确保分类一致性。",
-            q5: "标准化用词让整个团队（测试、研发、管理）都能准确理解问题类型，提高协作效率，所有人都受益。"
+            q1: "统一用词的核心目的是保证 Pareto 分类一致，同一类问题归在一起，数据才准确。",
+            q2: "统一用词的三大好处：分类准确、数据可对比、趋势可靠。D 选项'增加工作量'不是好处。",
+            q3: "同一个失效用了不同词，Pareto 会把它们分到不同类别，导致每类数量偏少，无法准确识别主要失效模式。",
+            q4: "标准用词包括：屏幕碎裂、后盖开裂、TP断触、功能失效、外观异常。D 选项不是失效模式用词。",
+            q5: "遇到新类型，先归入最接近的已有类别，等积累到一定量后再考虑新增类别，不要随意造新词。"
         };
 
         function checkAnswers() {

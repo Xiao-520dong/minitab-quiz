@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 020：Cpk vs Ppk</title>
+    <title>Day 009：右删失——最容易犯的错误</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -213,48 +213,53 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">模块四：进阶应用</div>
-                <h1>📘 Day 020：Cpk vs Ppk</h1>
+                <div class="breadcrumb">模块二：基础概念</div>
+                <h1>📘 Day 009：右删失——最容易犯的错误</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · Day019 标准化用词</h2>
+                <h2>🧠 昨日知识卡片 · Day 008 回顾（B10 寿命）</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>统一用词保证 Pareto 分类一致，同一类问题归在一起。</p>
+                        <p><strong>卡片 1：</strong>B10 = 10% 产品失效对应的次数，可靠度 R = 90%</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>标准用词：屏幕碎裂 / 后盖开裂 / TP断触 / 功能失效 / 外观异常。</p>
+                        <p><strong>卡片 2：</strong>B10 比 MTTF 更适合做质量决策</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>遇到新类型先归入最接近的已有类别，积累后再考虑新增。</p>
+                        <p><strong>卡片 3：</strong>Weibull 分布下 B10 = η × [-ln(0.9)]^(1/β)</p>
                     </div>
                 </div>
             </div>
 
             <div class="knowledge">
-                <h2>💡 今日知识点：Cpk vs Ppk</h2>
-                <p>过程能力分析中，<strong>Cpk</strong> 和 <strong>Ppk</strong> 是两个关键指标：</p>
-
-                <div class="highlight-blue">
-                    <strong>📋 核心区别：</strong><br>
-                    • <code>Cpk</code> = 子组内能力指数（短期能力），只考虑组内变异<br>
-                    • <code>Ppk</code> = 总能力指数（长期能力），考虑全部变异（组内+组间）
-                </div>
+                <h2>💡 今日知识点：右删失——最容易犯的错误</h2>
+                <p>测试停止时，部分样品还没失效。如果只算失效的、忽略没失效的，会<strong>严重高估寿命</strong>。</p>
 
                 <div class="highlight">
-                    <strong>⚠️ 关键关系：</strong><br>
-                    <code>Cpk ≥ Ppk</code> 始终成立。<br>
-                    两者差很多 → 说明批次间变异大（组间差异显著）。
+                    <strong>⚠️ 核心概念</strong><br>
+                    没失效的样品不是"没用"，它们携带了重要信息：至少撑到了测试结束的次数。<br>
+                    必须标记为<strong>删失（Censored）</strong>，而非<strong>删除（Deleted）</strong>！
                 </div>
 
-                <p>实际场景举例：</p>
+                <div class="highlight-blue">
+                    <strong>📱 传音场景：W-795 跌落测试</strong><br>
+                    12 台手机跌落 10 次停止测试：<br>
+                    • 8 台已失效（3 台在第 4 次，5 台在第 5 次）<br>
+                    • 4 台仍存活（第 10 次时还在）→ 这 4 台就是<strong>右删失</strong><br><br>
+                    <strong>数据表：</strong><br>
+                    C1 = 失效次数：<code>4, 4, 4, 5, 5, 5, 5, 5, 10, 10, 10, 10</code><br>
+                    C2 = 删失标记：<code>0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1</code><br>
+                    （0 = 失效，1 = 删失）
+                </div>
+
                 <div class="highlight-green">
-                    <strong>🔍 案例分析：</strong><br>
-                    Cpk=1.5 但 Ppk=0.8 → 短期能力好，但长期表现差<br>
-                    <strong>排查方向：</strong><br>
-                    ① 来料批次差异 &nbsp; ② 设备状态变化 &nbsp; ③ 操作员差异
+                    <strong>🔧 Minitab 实操路径</strong><br>
+                    1. 将 12 台数据复制到 C1 / C2<br>
+                    2. 菜单：<code>统计 > 可靠性/生存 > 分布分析（右删失） > 参数分布分析</code><br>
+                    3. 选择 Weibull 分布，估计方法选 <strong>MLE（最大似然估计）</strong><br>
+                    4. 在"删失"栏填入 C2，删失值填 <code>1</code>
                 </div>
             </div>
 
@@ -264,119 +269,119 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Cpk 和 Ppk 分别衡量什么？</div>
+                    <div class="question-text">什么是右删失？</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. Cpk 长期，Ppk 短期</label>
+                            <label for="q1a">A. 数据错误需要删除</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. Cpk 短期（子组内），Ppk 长期（总体）</label>
+                            <label for="q1b">B. 测试停止时部分样品还没失效</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 都是短期</label>
+                            <label for="q1c">C. 样品丢失</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. 都是长期</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question" data-correct="C">
-                    <span class="question-num">第 2 题</span>
-                    <span class="question-type">单选</span>
-                    <div class="question-text">Cpk 和 Ppk 的大小关系通常是？</div>
-                    <div class="options">
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. Cpk &lt; Ppk</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. Cpk = Ppk</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. Cpk ≥ Ppk</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 没有关系</label>
+                            <label for="q1d">D. 数据超出范围</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question" data-correct="B">
-                    <span class="question-num">第 3 题</span>
+                    <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Cpk 和 Ppk 差很多，说明什么？</div>
+                    <div class="question-text">忽略删失数据会导致什么？</div>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 过程能力很好</label>
+                            <input type="radio" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 结果更准确</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 批次间变异大</label>
+                            <input type="radio" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 高估寿命</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 数据有误</label>
+                            <input type="radio" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 低估寿命</label>
                         </div>
                         <div class="option">
-                            <input type="radio" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. 样本量不够</label>
+                            <input type="radio" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 没有影响</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="question" data-correct="A,B,C">
-                    <span class="question-num">第 4 题</span>
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 3 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">Cpk=1.5 但 Ppk=0.8，应该排查哪些方向？</div>
+                    <div class="question-text">W-795 跌落 12 台中，哪些是右删失？</div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 来料批次差异</label>
+                            <input type="checkbox" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 第 4 次失效的 3 台</label>
                         </div>
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 设备状态变化</label>
+                            <input type="checkbox" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 第 5 次失效的 5 台</label>
                         </div>
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 操作员差异</label>
+                            <input type="checkbox" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 第 10 次全过的 4 台</label>
                         </div>
                         <div class="option">
-                            <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 不需要排查</label>
+                            <input type="checkbox" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 以上都不是</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="question" data-correct="A,B,C,D">
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">删失数据在 Minitab 中应该标记为什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 删除</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 空值</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 1（删失列）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 0</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,C">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">关于 Cpk 和 Ppk，以下说法正确的有？</div>
+                    <div class="question-text">关于 MLE 估计方法，正确的有？</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. Cpk 衡量子组内短期能力</label>
+                            <label for="q5a">A. 数据集中在 2~3 个值时应使用 MLE</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. Ppk 衡量总体长期能力</label>
+                            <label for="q5b">B. MLE 比 LSXY 更准确</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. Cpk ≥ Ppk</label>
+                            <label for="q5c">C. LSXY 在数据集中时可能失真</label>
                         </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 差很多说明批次间变异大</label>
+                            <label for="q5d">D. MLE 是 Minitab 默认方法</label>
                         </div>
                     </div>
                 </div>
@@ -393,11 +398,11 @@
 
     <script>
         const explanations = {
-            q1: "Cpk 是子组内能力指数（短期），Ppk 是总能力指数（长期，包含组间变异）。",
-            q2: "Cpk ≥ Ppk 始终成立，因为 Cpk 只考虑组内变异，Ppk 还包含组间变异，总变异 ≥ 组内变异。",
-            q3: "Cpk 和 Ppk 差很多说明批次间变异大，即组间差异显著，过程不稳定。",
-            q4: "Cpk=1.5 但 Ppk=0.8 说明短期好但长期差，应排查来料批次差异、设备状态变化、操作员差异等组间因素。D 选项'不需要排查'是错误的。",
-            q5: "四个选项全部正确：Cpk 衡量子组内短期能力，Ppk 衡量总体长期能力，Cpk≥Ppk，差很多说明批次间变异大。"
+            q1: "右删失是指测试停止时部分样品还没失效，它们的信息是"至少撑到了测试结束次数"，不是数据错误。",
+            q2: "忽略删失数据（把没失效的当不存在）会丢掉"至少撑到 X 次"的信息，导致高估失效率、高估寿命。",
+            q3: "W-795 跌落 12 台中，第 10 次仍存活的 4 台是右删失——测试在 10 次停止，它们还没失效。第 4 次和第 5 次失效的 8 台是正常失效数据。",
+            q4: "在 Minitab 中，删失数据需要在删失列中标记为 1（表示该行为删失数据），0 表示失效数据。不能删除或留空。",
+            q5: "数据集中在 2~3 个值时，LSXY（最小二乘）可能失真，应使用 MLE（最大似然估计）。MLE 在这种场景下更稳健，但 Minitab 默认方法不一定是 MLE。"
         };
 
         function checkAnswers() {
