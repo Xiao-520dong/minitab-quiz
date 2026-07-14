@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 018：边测边报的数据积累</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle { color: #666; font-size: 14px; }
+        .header .breadcrumb {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .review-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .review-section h2 {
+            color: #e65100;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .review-cards { display: flex; flex-direction: column; gap: 12px; }
+        .review-card {
+            background: rgba(255,255,255,0.85);
+            padding: 14px 16px;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge .highlight-green {
+            background: #d4edda;
+            padding: 12px;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge .highlight-blue {
+            background: #e8f0fe;
+            padding: 12px;
+            border-left: 4px solid #1a73e8;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #d63384;
+        }
+        .quiz-section { margin-top: 32px; }
+        .quiz-section h2 { color: #333; font-size: 20px; margin-bottom: 20px; }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi { background: #fd7e14; }
+        .question-text {
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover { border-color: #667eea; background: #f8f9ff; }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show { display: block; }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="breadcrumb">第三章：完整案例·受控跌落测试 · 边测边报</div>
+                <h1>📘 Day 018：边测边报的数据积累</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <div class="review-section">
+                <h2>🧠 昨日知识卡片 · 整改验证逻辑</h2>
+                <div class="review-cards">
+                    <div class="review-card">
+                        <p><strong>卡片 1：</strong>整改后不能凭感觉判"好了"，必须用统计方法证明。</p>
+                    </div>
+                    <div class="review-card">
+                        <p><strong>卡片 2：</strong>正确流程：收集整改前后数据 → Kaplan-Meier 画生存曲线 → Log-Rank 检验 p&lt;0.05 才放行。</p>
+                    </div>
+                    <div class="review-card">
+                        <p><strong>卡片 3：</strong>整改后 30 台全过可能只是"运气好"，必须和整改前做对比检验。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge">
+                <h2>💡 今日知识点：边测边报的数据积累</h2>
+                <p>每条问题报告（如 #01:跌正面TP破裂）天然是 Pareto/Weibull 的输入。</p>
+
+                <div class="highlight">
+                    <strong>🔍 理解</strong><br>
+                    传音实验室的工作流是"边测边报"——每发现一个问题就立刻以统一格式报出，而不是等全部测试结束后统一报告。<br><br>
+                    这意味着：<br>
+                    • 每条问题报告天然就是 Pareto 分析的输入数据<br>
+                    • 随着测试进行，数据不断积累，可以随时更新 Pareto 图<br>
+                    • 当失效数据积累到一定数量（≥15），就可以跑 Weibull B10 分析
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📋 工作流</strong><br>
+                    1. 测试执行 → 每发现问题立即报告（格式：#序号:跌落方向+失效现象）<br>
+                    2. 数据积累 → 按方向汇总频次 → 生成 Pareto 图<br>
+                    3. 数据足够（≥15个失效）→ Weibull B10 寿命分析<br>
+                    4. 研发整改 → 整改前后 Kaplan-Meier 对比<br>
+                    5. 量产放行 → Cpk 过程能力分析
+                </div>
+
+                <div class="highlight-green">
+                    <strong>📝 关键要点</strong><br>
+                    • 不需要等测试全部完成才开始分析<br>
+                    • 数据积累是渐进式的，分析也是渐进式的<br>
+                    • 每个阶段都有对应的 Minitab 工具可以嵌入
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">传音实验室的问题报告方式是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 等全部测试结束后统一报告</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 边测边报，每发现问题立即报告</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 每周汇总一次</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 只在测试失败时报告</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,D">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">边测边报的数据可以用于哪些分析？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. Pareto 图（失效方向排序）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. Weibull B10 寿命分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 无法用于任何分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 随着数据积累可以更新分析结果</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="C">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Weibull B10 分析建议至少积累多少个失效数据？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 5 个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 10 个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 15 个</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 30 个</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">以下哪些是"边测边报"的优势？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 可以实时发现问题趋势</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 研发可以尽早开始整改</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 不需要等测试全部完成就能开始分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 数据报告格式不统一</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">问题报告 #03:跌左上角屏右下角有白斑，这条报告可以直接用于什么分析？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. Cpk 分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. Pareto 图的失效方向统计</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 正态性检验</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 无法使用</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "手册明确说明传音实验室采用"边测边报"模式，每发现一个问题就立刻以统一格式报出。",
+            q2: "边测边报的数据天然可以用于 Pareto 分析，积累到一定数量后可以做 Weibull 分析，且可以随时更新。",
+            q3: "手册建议正式报告攒到 ≥15 个失效数据再算 B10，以保证置信区间足够窄。",
+            q4: "边测边报的优势包括实时发现趋势、研发尽早整改、不需要等测试完成。数据报告格式是统一的，不是不统一。",
+            q5: "问题报告中包含跌落方向信息，可以直接用于 Pareto 图的失效方向统计。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',').map(s => s.trim());
+                const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                    q.classList.remove('wrong');
+                } else {
+                    q.classList.add('wrong');
+                    q.classList.remove('correct');
+                }
+
+                const qNum = `q${index + 1}`;
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations[qNum]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
