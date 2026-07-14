@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 015：Minitab 工作表录入</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .header .breadcrumb {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .review-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border: 1px solid #ffc107;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .review-section h2 {
+            color: #856404;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .review-card {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .review-card:last-child {
+            margin-bottom: 0;
+        }
+        .review-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .knowledge .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge .sub-section {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid #e1e4e8;
+        }
+        .knowledge .sub-section h3 {
+            color: #333;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .knowledge .sub-section ul {
+            padding-left: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+        .knowledge .sub-section li {
+            margin-bottom: 4px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .data-table td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #e1e4e8;
+            color: #444;
+        }
+        .data-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .data-table tr:hover {
+            background: #e8f0fe;
+        }
+        .data-table .note-col {
+            text-align: left;
+            font-size: 12px;
+            color: #666;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="breadcrumb">第二章：基础知识 · 工作表录入</div>
+                <h1>📘 Day 015：Minitab 工作表录入</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <!-- 昨日知识卡片 -->
+            <div class="review-section">
+                <h2>🧠 昨日知识卡片 · 置信区间</h2>
+                <div class="review-card">
+                    <p>置信区间 = "真实值大概率落在哪个范围"。不要只看点估计。</p>
+                </div>
+                <div class="review-card">
+                    <p>区间越窄越精确，越宽说明样本量不足或数据分散。</p>
+                </div>
+                <div class="review-card">
+                    <p>B10 置信下限 ≥ 设计目标 → 设计达标；区间太宽 → 样本量不足，结论不可靠。</p>
+                </div>
+            </div>
+
+            <!-- 今日知识点 -->
+            <div class="knowledge">
+                <h2>💡 今日知识点</h2>
+                <p><strong>Minitab 工作表录入</strong></p>
+                <p>一列=一个变量。Weibull 需要两列（C1=次数，C2=0/1），Cpk 只需一列（C1=测量值）。推荐用数字 0/1 而非 F/C 标记删失——更稳定。</p>
+
+                <div class="sub-section">
+                    <h3>📋 录入规范</h3>
+                    <ul>
+                        <li><strong>样品编号：</strong>文本（如 S001）</li>
+                        <li><strong>机型：</strong>文本（如 KO3-PR1）</li>
+                        <li><strong>跌落高度(m)：</strong>数值（1.0 或 1.5）</li>
+                        <li><strong>首次失效次数：</strong>数值（全过填 10 或 8）</li>
+                        <li><strong>失效模式：</strong>文本（屏幕碎/后盖开裂/功能失效）</li>
+                        <li><strong>删失标记：</strong>数值（0=失效，1=全过）</li>
+                    </ul>
+                </div>
+
+                <div class="sub-section">
+                    <h3>🔧 录入技巧</h3>
+                    <ul>
+                        <li>列名用纯英文/数字（Minitab 15 中文列名可能导致报错）</li>
+                        <li>删失标记推荐用 0/1 数字，比 F/C 文本更稳定</li>
+                        <li>已有数据后不能改列类型，直接新建列</li>
+                    </ul>
+                </div>
+
+                <div class="sub-section">
+                    <h3>📊 W-795 工作表录入数据（10台）</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>行号</th>
+                                <th>C1（失效次数）</th>
+                                <th>C2（样品编号）</th>
+                                <th>C3（删失标记）</th>
+                                <th class="note-col">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>S001</td>
+                                <td>0</td>
+                                <td class="note-col">第1次失效：跌左上角TP破裂</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>5</td>
+                                <td>S002</td>
+                                <td>0</td>
+                                <td class="note-col">第3次失效：跌底面有白斑</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>7</td>
+                                <td>S003</td>
+                                <td>0</td>
+                                <td class="note-col">第5次失效：跌正面屏碎</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>S004</td>
+                                <td>0</td>
+                                <td class="note-col">第1次失效：跌右下角外壳裂</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>S005</td>
+                                <td>0</td>
+                                <td class="note-col">第3次失效：跌顶部听筒脱落</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>10</td>
+                                <td>S006</td>
+                                <td>1</td>
+                                <td class="note-col">10次全过</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>10</td>
+                                <td>S007</td>
+                                <td>1</td>
+                                <td class="note-col">10次全过</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>10</td>
+                                <td>S008</td>
+                                <td>1</td>
+                                <td class="note-col">10次全过</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>10</td>
+                                <td>S009</td>
+                                <td>1</td>
+                                <td class="note-col">10次全过</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>S010</td>
+                                <td>1</td>
+                                <td class="note-col">10次全过</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 练习题 -->
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Minitab 工作表的基本原则是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 一行=一个变量</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 一列=一个变量</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 一列=一个样品</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 一行=一个测试</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">Weibull 分析需要哪些列？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. C1=失效次数</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. C2=删失标记</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. C3=失效方向</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. C4=样品编号</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">删失标记推荐用什么格式？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. F/C 文本</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 0/1 数字</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 是/否文本</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 任意格式</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B,C">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">Minitab 15 录入数据时需要注意什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 列名用纯英文/数字</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 中文列名可能导致报错</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 已有数据后不能改列类型</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 可以随意修改列类型</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">全过样品的失效次数应该填什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 0</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 测试次数上限（如 10）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 留空</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 填"全过"</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "Minitab 工作表的基本原则是一列=一个变量。",
+            q2: "Weibull 分析最少需要两列：C1=失效次数，C2=删失标记。",
+            q3: "推荐用 0/1 数字标记删失，比 F/C 文本更稳定。",
+            q4: "Minitab 15 列名用纯英文/数字，中文可能报错；已有数据后不能改列类型。",
+            q5: "全过样品填测试次数上限（如 10），不能填 0。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',');
+                const inputs = q.querySelectorAll('input');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                } else {
+                    q.classList.add('wrong');
+                }
+
+                // 添加解析
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析 ${isCorrect ? '✅' : '❌'}</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations['q' + (index + 1)]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>

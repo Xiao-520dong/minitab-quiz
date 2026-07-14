@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 013：正态性检验</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        .header .breadcrumb {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .review-section {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .review-section h2 {
+            color: #f57c00;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .review-card {
+            background: white;
+            border: 1px solid #ffe082;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #555;
+            font-size: 14px;
+        }
+        .review-card:last-child {
+            margin-bottom: 0;
+        }
+        .review-card strong {
+            color: #e65100;
+        }
+        .knowledge {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .knowledge h2 {
+            color: #667eea;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .knowledge p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .knowledge .highlight {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge .highlight-green {
+            background: #d4edda;
+            padding: 12px;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge .highlight-red {
+            background: #f8d7da;
+            padding: 12px;
+            border-left: 4px solid #dc3545;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .knowledge h3 {
+            color: #444;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 18px 0 10px 0;
+        }
+        .knowledge .menu-path {
+            background: #eef;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            margin: 10px 0;
+            border: 1px solid #dde;
+        }
+        .knowledge table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+        .knowledge table th {
+            background: #667eea;
+            color: white;
+            padding: 8px 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .knowledge table td {
+            padding: 6px 10px;
+            border: 1px solid #e1e4e8;
+            text-align: center;
+            color: #444;
+        }
+        .knowledge table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .knowledge .scene-box {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 16px 0;
+        }
+        .knowledge .scene-box strong {
+            color: #2e7d32;
+        }
+        .quiz-section {
+            margin-top: 32px;
+        }
+        .quiz-section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .question-type {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .question-type.multi {
+            background: #fd7e14;
+        }
+        .question-text {
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            color: #444;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            display: none;
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .result.show {
+            display: block;
+        }
+        .score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .explanation {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .explanation h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .explanation p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .correct { border-color: #28a745 !important; background: #d4edda !important; }
+        .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="breadcrumb">第四章：完整案例·力值测试 · 正态性检验</div>
+                <h1>📘 Day 013：正态性检验</h1>
+                <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
+            </div>
+
+            <!-- 昨日知识卡片 -->
+            <div class="review-section">
+                <h2>🧠 昨日知识卡片 · Weibull 形状参数 β</h2>
+                <div class="review-card">
+                    <strong>卡片 1：</strong>β&lt;1 = 早期失效（查来料），β≈1 = 随机失效，β&gt;1 = 磨损失效（查设计），β&gt;&gt;1 = 悬崖式失效。
+                </div>
+                <div class="review-card">
+                    <strong>卡片 2：</strong>β 是 Weibull 分析里最有价值的一个数——它直接告诉你失效是"天生缺陷"还是"用坏的"。
+                </div>
+                <div class="review-card">
+                    <strong>卡片 3：</strong>数据集中在 2~3 个值时，务必改用 MLE 估计，否则 LSXY 会把 β 算崩到 9+。
+                </div>
+            </div>
+
+            <!-- 今日知识点 -->
+            <div class="knowledge">
+                <h2>💡 今日知识点：正态性检验</h2>
+                <p><strong>跑 Cpk 前先检验数据是否正态。p&lt;0.05 → 非正态 → 改用非正态能力分析。</strong></p>
+
+                <h3>【理解】</h3>
+                <p>Cpk 分析的前提是数据服从正态分布。如果数据不正态，算出来的 Cpk 值可能完全失真。</p>
+
+                <div class="highlight">
+                    ⚠️ <strong>核心原则：</strong>先验证正态性，再计算 Cpk。跳过正态性检验直接算 Cpk 是实验室最常见的错误之一。
+                </div>
+
+                <h3>【操作】</h3>
+                <div class="menu-path">
+                    菜单：<strong>统计 → 基本统计量 → 正态性检验</strong><br>
+                    &nbsp;&nbsp;- 变量 = C1<br>
+                    &nbsp;&nbsp;- 确定
+                </div>
+
+                <h3>【结果解读】</h3>
+                <div class="highlight-green">
+                    ✅ <strong>p ≥ 0.05 → 正态</strong>，可接着跑 Cpk
+                </div>
+                <div class="highlight-red">
+                    ❌ <strong>p &lt; 0.05 → 非正态</strong>，改跑「统计 → 质量工具 → 非正态能力分析」
+                </div>
+                <div class="highlight">
+                    📊 <strong>概率图判断：</strong>数据点贴合对角线 = 正态；数据点明显弯曲偏离 = 非正态
+                </div>
+
+                <h3>【传音场景】</h3>
+                <div class="scene-box">
+                    <strong>USB 插入力数据（30 点）</strong><br>
+                    正态性检验结果：AD = 0.573，P = 0.125 ≥ 0.05 → <strong>正态，可做 Cpk</strong>
+                </div>
+
+                <h3>【数据表】USB 插入力 30 点（复制到 C1，单位 Kgf）</h3>
+                <table>
+                    <tr><th>行号</th><th>C1 (Kgf)</th><th>行号</th><th>C1 (Kgf)</th><th>行号</th><th>C1 (Kgf)</th></tr>
+                    <tr><td>1</td><td>1.18</td><td>11</td><td>1.22</td><td>21</td><td>1.21</td></tr>
+                    <tr><td>2</td><td>1.17</td><td>12</td><td>1.23</td><td>22</td><td>1.18</td></tr>
+                    <tr><td>3</td><td>1.18</td><td>13</td><td>1.37</td><td>23</td><td>1.28</td></tr>
+                    <tr><td>4</td><td>1.31</td><td>14</td><td>1.30</td><td>24</td><td>0.98</td></tr>
+                    <tr><td>5</td><td>1.18</td><td>15</td><td>1.22</td><td>25</td><td>1.15</td></tr>
+                    <tr><td>6</td><td>0.98</td><td>16</td><td>1.09</td><td>26</td><td>1.27</td></tr>
+                    <tr><td>7</td><td>1.25</td><td>17</td><td>1.05</td><td>27</td><td>1.33</td></tr>
+                    <tr><td>8</td><td>1.16</td><td>18</td><td>1.24</td><td>28</td><td>1.16</td></tr>
+                    <tr><td>9</td><td>1.17</td><td>19</td><td>1.40</td><td>29</td><td>1.26</td></tr>
+                    <tr><td>10</td><td>1.22</td><td>20</td><td>1.18</td><td>30</td><td>1.24</td></tr>
+                </table>
+            </div>
+
+            <!-- 练习题 -->
+            <div class="quiz-section">
+                <h2>📝 练习题（共 5 题）</h2>
+
+                <div class="question" data-correct="A">
+                    <span class="question-num">第 1 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">正态性检验的 p 值判断标准是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. p≥0.05 → 正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. p&lt;0.05 → 正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. p≥0.10 → 非正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. p&lt;0.10 → 正态</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B,C">
+                    <span class="question-num">第 2 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">正态性检验 p&lt;0.05 时，应该怎么做？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 直接跑 Cpk</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 改用非正态能力分析</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 排查异常值</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 忽略结果继续分析</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A">
+                    <span class="question-num">第 3 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">Cpk 分析的前提条件是什么？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 数据正态分布</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 数据量大于 100</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 数据没有删失</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 数据是整数</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="A,B">
+                    <span class="question-num">第 4 题</span>
+                    <span class="question-type multi">多选</span>
+                    <div class="question-text">关于正态概率图，以下哪些描述正确？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 数据点贴合对角线 = 正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 数据点明显弯曲偏离 = 非正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 数据点散乱分布 = 正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 所有数据都在一条直线上 = 正态</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question" data-correct="B">
+                    <span class="question-num">第 5 题</span>
+                    <span class="question-type">单选</span>
+                    <div class="question-text">USB 插入力正态性检验 AD=0.573，P=0.125，结论是？</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 非正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 正态</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 无法判断</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 需要更多数据</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">提交答案</button>
+
+                <div class="result" id="result">
+                    <div class="score" id="score"></div>
+                    <div id="explanations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const explanations = {
+            q1: "p≥0.05 说明不能拒绝正态假设，认为数据正态。这是正态性检验的标准判断准则。",
+            q2: "p<0.05 说明数据非正态，应改用非正态能力分析（B），同时也应排查异常值（C）看是否由异常数据导致非正态。不能直接跑 Cpk（A），更不能忽略结果（D）。",
+            q3: "Cpk 分析要求数据服从正态分布（A），否则计算结果可能完全失真。数据量、删失、整数都不是 Cpk 的前提条件。",
+            q4: "正态概率图中，数据点贴合对角线说明正态（A），明显弯曲偏离说明非正态（B）。散乱分布不是正态的特征（C 错误）。D 选项描述过于绝对，实际数据不可能完美在一条直线上。",
+            q5: "P=0.125 ≥ 0.05，说明不能拒绝正态假设，数据服从正态分布，可以接着跑 Cpk。"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct.split(',');
+                const inputs = q.querySelectorAll('input');
+                const selected = [];
+                
+                inputs.forEach(input => {
+                    if (input.checked) selected.push(input.value);
+                });
+
+                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                
+                if (isCorrect) {
+                    score++;
+                    q.classList.add('correct');
+                } else {
+                    q.classList.add('wrong');
+                }
+
+                const expDiv = document.createElement('div');
+                expDiv.className = 'explanation';
+                expDiv.innerHTML = `
+                    <h4>第 ${index + 1} 题解析 ${isCorrect ? '✅' : '❌'}</h4>
+                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p>${explanations['q' + (index + 1)]}</p>
+                `;
+                explanationsDiv.appendChild(expDiv);
+            });
+
+            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>
