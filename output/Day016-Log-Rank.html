@@ -210,6 +210,17 @@
         .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+        /* 数据表格样式 */
+        .data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .data-table th { background: #667eea; color: white; padding: 10px 12px; text-align: left; font-weight: 500; }
+        .data-table td { padding: 8px 12px; border-bottom: 1px solid #e1e4e8; font-family: "Courier New", monospace; font-size: 13px; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover { background: #f8f9ff; }
+        .copy-btn { display: inline-block; margin-left: 8px; padding: 4px 12px; background: #667eea; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+        .copy-btn:hover { background: #5568d3; transform: translateY(-1px); }
+        .copy-btn.copied { background: #28a745; }
+        .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .table-title { font-weight: 600; color: #333; font-size: 15px; }
     </style>
 </head>
 <body>
@@ -487,6 +498,29 @@
             document.getElementById('score').textContent = `得分:${score} / ${questions.length}`;
             document.getElementById('result').classList.add('show');
         }
+    </script>
+    <script>
+    function copyTable(tableId) {
+        const table = document.getElementById(tableId);
+        if (!table) return;
+        let text = "";
+        const rows = table.querySelectorAll("tr");
+        rows.forEach((row, i) => {
+            const cells = row.querySelectorAll("th, td");
+            const rowData = [];
+            cells.forEach(cell => rowData.push(cell.textContent.trim()));
+            text += rowData.join("\t") + "\n";
+        });
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            btn.textContent = "✅ 已复制";
+            btn.classList.add("copied");
+            setTimeout(() => {
+                btn.textContent = "📋 复制数据";
+                btn.classList.remove("copied");
+            }, 2000);
+        });
+    }
     </script>
 </body>
 </html>
