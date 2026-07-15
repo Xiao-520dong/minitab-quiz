@@ -210,6 +210,10 @@
         .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+        /* 操作截图样式 */
+        .screenshot { margin: 16px 0; text-align: center; }
+        .screenshot img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); border: 1px solid #e1e4e8; }
+        .screenshot .caption { font-size: 12px; color: #666; margin-top: 8px; text-align: center; }
         /* 数据表格样式 */
         .data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .data-table th { background: #667eea; color: white; padding: 10px 12px; text-align: left; font-weight: 500; }
@@ -297,6 +301,11 @@
                 </table>
                 <div style="font-size: 12px; color: #666; margin-top: 4px;">
                     说明：0 = 失效，1 = 删失/全过
+                </div>
+
+                <div class="screenshot">
+                    <img src="../assets/image4.png" alt="Weibull 概率图 - W-795 跌落数据">
+                    <div class="caption">图：W-795 跌落数据 Weibull 概率图（MLE 估计，β=1.88，η=8.50）</div>
                 </div>
 
                 <div class="highlight-green">

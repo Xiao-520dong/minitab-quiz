@@ -210,6 +210,10 @@
         .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
+        /* 操作截图样式 */
+        .screenshot { margin: 16px 0; text-align: center; }
+        .screenshot img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); border: 1px solid #e1e4e8; }
+        .screenshot .caption { font-size: 12px; color: #666; margin-top: 8px; text-align: center; }
         /* 数据表格样式 */
         .data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .data-table th { background: #667eea; color: white; padding: 10px 12px; text-align: left; font-weight: 500; }
@@ -283,6 +287,16 @@
                     <strong>📱 传音场景示例</strong><br>
                     模拟数据:整改前 30 台(18 台失效),整改后 30 台(5 台失效,25 台全过)<br>
                     Log-Rank 检验输出 p=0.003 &lt; 0.05 → 整改前后有显著差异 → 整改有效,可放行量产
+                </div>
+
+                <div class="screenshot">
+                    <img src="../assets/image8.jpeg" alt="Kaplan-Meier + Log-Rank 检验结果">
+                    <div class="caption">图：Kaplan-Meier 分析结果（Log-Rank p=0.019 &lt; 0.05，整改有效）</div>
+                </div>
+
+                <div class="screenshot">
+                    <img src="../assets/image6.png" alt="Weibull 概率图 - 含统计表">
+                    <div class="caption">图：Weibull 概率图输出示例（含形状参数 β、尺度参数 η、AD 统计量）</div>
                 </div>
 
                 <div class="highlight">
