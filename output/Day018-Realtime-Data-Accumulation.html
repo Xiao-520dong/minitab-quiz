@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -243,7 +243,7 @@
                 </div>
 
                 <p>积累到一定量后，可以直接做：</p>
-                <ul style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 1.8;">
+                <ul style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 2.0;">
                     <li><strong>Pareto 分析</strong>：找出主要失效模式</li>
                     <li><strong>Weibull 分析</strong>：评估失效率与寿命分布</li>
                 </ul>
@@ -256,6 +256,29 @@
                 <div class="highlight-green">
                     <strong>✅ 好处：</strong><br>
                     ① 及时发现问题趋势 &nbsp; ② 数据持续积累可分析 &nbsp; ③ 不用等全部测完才行动
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📱 传音场景示例</strong><br>
+                    每条问题报告天然是分析输入：<br>
+                    • #01: 跌正面TP破裂 → 计入 Pareto 的"TP损坏"类 + Weibull 的失效时间点<br>
+                    • #02: 跌右侧中框变形 → 计入 Pareto 的"中框变形"类 + Weibull 的失效时间点<br>
+                    • #03: 跌左上角屏幕碎裂 → 计入 Pareto 的"屏幕碎裂"类 + Weibull 的失效时间点<br>
+                    <strong>每报一条，数据就多一条，Pareto 和 Weibull 的输入就更充分。</strong>
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 关键要求</strong><br>
+                    • 报告格式必须统一（包含：失效时间/次数、失效模式、测试条件）<br>
+                    • 失效模式用词必须标准化（参见 Day019）——否则 Pareto 分类会分散<br>
+                    • 删失数据也要记录（"这台还在测，还没坏"也是数据）
+                </div>
+
+                <p><strong>🗣️ 人话版总结：</strong></p>
+                <div class="highlight-green">
+                    边测边报就是"发现一个问题就立刻记下来"，不等全部测完。<br>
+                    每报一条数据，Pareto 图和 Weibull 曲线就更准确一点。<br>
+                    好处：问题早暴露、趋势早看到、决策不用等。
                 </div>
             </div>
 

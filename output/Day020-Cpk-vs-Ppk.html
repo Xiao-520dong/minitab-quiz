@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -255,6 +255,37 @@
                     Cpk=1.5 但 Ppk=0.8 → 短期能力好，但长期表现差<br>
                     <strong>排查方向：</strong><br>
                     ① 来料批次差异 &nbsp; ② 设备状态变化 &nbsp; ③ 操作员差异
+                </div>
+
+                <p><strong>🔧 Minitab 操作路径：</strong></p>
+                <div class="highlight-blue">
+                    <code>统计 → 质量工具 → 能力分析 → 正态</code><br>
+                    • 单列=C1，规格下限=LSL，规格上限=USL<br>
+                    • 子组大小：根据实际情况填写（如每批 5 个则填 5）<br>
+                    • 输出结果中同时包含 Cpk 和 Ppk<br>
+                    • 注意：Minitab 输出中 Cpk 标记为"Cpk"，Ppk 标记为"Ppk"
+                </div>
+
+                <p><strong>📱 传音场景：USB 插入力多批次分析</strong></p>
+                <div class="highlight-green">
+                    <strong>场景：</strong>同一供应商 USB 连接器，跨 3 个批次采集 100 个数据点<br>
+                    <strong>结果：</strong>Cpk=1.8（子组内波动小），Ppk=1.2（批次间有偏移）<br>
+                    <strong>解读：</strong>Cpk &gt; Ppk 差距较大 → 批次间变异显著<br>
+                    <strong>行动：</strong>检查不同批次的来料尺寸差异，反馈供应商控制批次一致性
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 样本量要求</strong><br>
+                    • Cpk/Ppk 分析建议至少 <strong>25~30 个数据点</strong><br>
+                    • 多批次分析时，每批至少 5 个数据，至少 3~5 个批次<br>
+                    • 样本太少 → 标准误大 → Cpk/Ppk 估计不可靠
+                </div>
+
+                <p><strong>🗣️ 人话版总结：</strong></p>
+                <div class="highlight-green">
+                    Cpk 是"过程最好能做多好"（短期、组内），Ppk 是"过程实际表现多好"（长期、总体）。<br>
+                    Cpk ≥ Ppk 永远成立。两者差很多 = 批次之间不一致 = 要查来料/设备/操作员的变化。<br>
+                    简单说：Cpk 是"潜力"，Ppk 是"现实"。差距大说明潜力没发挥出来。
                 </div>
             </div>
 

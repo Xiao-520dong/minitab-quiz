@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -238,15 +238,26 @@
                 <p>可靠性 = 产品在<strong>规定条件</strong>、<strong>规定时间</strong>内完成<strong>规定功能</strong>的能力。</p>
 
                 <div class="highlight">
+                    <strong>🗣️ 人话版</strong><br>
+                    可靠性就是：在<strong>特定的使用环境</strong>下、<strong>特定的使用时间</strong>内，产品还能<strong>正常干活</strong>的能力。<br>
+                    三个"规定"任何一个没说清楚，测试结果就是废纸——别人没法复现，也没法对比。
+                </div>
+
+                <div class="highlight">
                     <strong>📱 传音场景：W-795 受控跌落测试</strong><br>
                     • 规定条件：1m 高度 / 大理石地面<br>
                     • 规定时间：10 次跌落<br>
-                    • 规定功能：屏幕不碎（功能正常）
+                    • 规定功能：屏幕不碎（功能正常）<br><br>
+                    如果只说"跌落测试通过了"，不说高度、次数、判定标准——这个结论毫无意义。
                 </div>
 
                 <div class="highlight-blue">
                     <strong>🔑 三个"规定"缺一不可</strong><br>
-                    任何可靠性测试都必须明确这三个要素，否则测试结果无法标准化、无法复现、无法对比。
+                    任何可靠性测试都必须明确这三个要素，否则测试结果无法标准化、无法复现、无法对比。<br><br>
+                    <strong>自检清单：</strong><br>
+                    ① 规定条件写了吗？（高度/温度/湿度/振动频率…）<br>
+                    ② 规定时间写了吗？（次数/小时数/循环数…）<br>
+                    ③ 规定功能写了吗？（外观正常？功能正常？手感正常？）
                 </div>
 
                 <div class="highlight-green">
@@ -254,7 +265,8 @@
                     恒温恒湿测试（5.1.5）的三个"规定"是什么？<br>
                     → 规定条件：恒温恒湿环境（如 60°C / 90%RH）<br>
                     → 规定时间：测试持续时间（如 48h / 96h）<br>
-                    → 规定功能：测试后产品功能正常
+                    → 规定功能：测试后产品功能正常<br><br>
+                    <strong>⚠️ 注意事项：</strong>不同测试标准的三个"规定"不同，写报告时必须引用具体标准条款号，不能笼统写"通过了可靠性测试"。
                 </div>
             </div>
 

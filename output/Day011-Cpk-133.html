@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -235,24 +235,83 @@
 
             <div class="knowledge">
                 <h2>💡 今日知识点：Cpk=1.33 的由来</h2>
-                <p>Cpk 衡量过程能力——过程均值偏离规格中心多远、波动有多大。</p>
+                
+                <p><strong> 核心概念：Cpk 是什么？</strong></p>
+                <p>Cpk = <strong>"允许的波动" ÷ "实际的波动"</strong></p>
+                <p>它衡量两个东西：① 过程均值偏离规格中心多远 ② 过程波动有多大</p>
+
+                <div class="highlight-blue">
+                    <strong>📐 为什么是 1.33？</strong><br>
+                    • Cpk=1.33 意味着：<strong>规格带宽 = 4 倍实际波动（4σ）</strong><br>
+                    • 即使过程均值偏移 ±1.5σ，仍有足够余量不超规格<br>
+                    • 此时不合格品率 ≈ 63 PPM（百万分之 63）<br>
+                    • 这是制造业通用的"最低合格门槛"
+                </div>
 
                 <div class="highlight">
-                    <strong>⚠️ Cpk=1.33 是制造业通用门槛</strong><br>
-                    对应过程均值偏移 ±1.5σ 时，不合格品率 ≈ 63 PPM。
+                    <strong>️ 使用前提：必须先做正态性检验</strong><br>
+                    • 菜单：统计 → 基本统计量 → 正态性检验 → 变量=C1 → 确定<br>
+                    • <strong>p ≥ 0.05</strong> → 数据服从正态分布 → 可以用 Cpk<br>
+                    • p &lt; 0.05 → 数据非正态 → 不能直接用 Cpk（需转换或换方法）
+                </div>
+
+                <p><strong>🔧 Minitab 操作步骤：</strong></p>
+                <div class="highlight-green">
+                    <strong>能力分析路径：</strong><br>
+                    统计 → 质量工具 → 能力分析 → 正态 → 单列选 C1 → 规格下限填 LSL、规格上限填 USL → 确定
+                </div>
+
+                <p><strong> 结果判读（三层检查）：</strong></p>
+                <div class="highlight-blue">
+                    <strong>第一层：</strong>Cpk 值 ≥ 1.33 → 合格<br>
+                    <strong>第二层：</strong>直方图上红线（规格限）有没有被碰到的趋势<br>
+                    <strong>第三层：</strong>"整体预期不合格品率"应该 &lt; 63 PPM<br>
+                    <strong>额外检查：</strong>Cpk 和 Ppk 差距大 → 说明批次间波动大，需追查原因
+                </div>
+
+                <div class="highlight">
+                    <strong>📊 Cpk 与不合格率对应关系：</strong><br>
+                    • Cpk=1.0 → 3σ 范围 → 不合格率约 0.27%（2700 PPM）<br>
+                    • <strong>Cpk=1.33 → 4σ 范围 → 约 0.006%（63 PPM）✓ 合格线</strong><br>
+                    • Cpk=1.67 → 5σ 范围 → 约 0.6 PPM（优秀）<br>
+                    • Cpk=2.0 → 6σ 范围 → 约 0.002 PPM（六西格玛水平）
+                </div>
+
+                <p><strong>📱 传音场景：USB 插入力</strong></p>
+                <div class="highlight-green">
+                    <strong>案例数据：</strong><br>
+                    • 规格：0.5~2.0 Kgf（LSL=0.5, USL=2.0）<br>
+                    • 实测：均值 1.2，标准差 0.15<br>
+                    • 计算：Cpk = min((2.0-1.2)/(3×0.15), (1.2-0.5)/(3×0.15)) = min(1.78, 1.56) = <strong>1.56</strong><br>
+                    • 结论：1.56 &gt; 1.33 → 过程能力足够 ✓
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 样本量要求：</strong><br>
+                    • Cpk 分析建议 <strong>25~30 个数据点</strong><br>
+                    • 样本太少 → 标准误大 → 结论不可靠<br>
+                    • 不够时的补救：跨批次合并（同项目/同结构/同供应商）
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 避坑：注意偏移方向</strong><br>
+                    如果均值明显偏向规格下限（如 μ=0.6，LSL=0.5），即使 Cpk≥1.33，也要警惕——<strong>制程中心偏了</strong>。<br>
+                    Cpk 只反映"最近的那一侧"够不够远，均值偏移可能让另一侧处于危险边缘。
                 </div>
 
                 <div class="highlight-blue">
-                    <strong>📊 Cpk 与不合格率的对应关系：</strong><br>
-                    • Cpk=1.0 → 3σ 范围 → 不合格率约 0.27%<br>
-                    • Cpk=1.33 → 4σ 范围 → 约 0.006%（63 PPM）<br>
-                    • Cpk=1.67 → 5σ 范围 → 约 0.6 PPM
+                    <strong>📐 单边规格怎么处理？</strong><br>
+                    有些测试只有单侧规格限：<br>
+                    • BTB 拉拔力：只有下限（≥5N）→ 只填 LSL=5<br>
+                    • 三杆弯曲：只有上限（≤1mm）→ 只填 USL=1<br>
+                    在 Minitab 能力分析对话框中，<strong>只填一个规格限</strong>即可，另一个留空。
                 </div>
 
+                <p><strong>🗣️ 人话版总结：</strong></p>
                 <div class="highlight-green">
-                    <strong>📱 传音场景：USB 插入力</strong><br>
-                    规格：0.5~2.0 Kgf，均值 1.2，标准差 0.15<br>
-                    Cpk = min(1.56, 1.78) = 1.56 &gt; 1.33 → 过程能力足够
+                    Cpk 就是看"你的过程稳不稳、偏不偏"。<br>
+                    ≥1.33 = 稳且偏得少 = 合格；<1.0 = 波动太大或偏了 = 要改。<br>
+                    同时看 Cpk 和 Ppk：差太多说明批次之间不一致，要查来料或设备变化。
                 </div>
             </div>
 

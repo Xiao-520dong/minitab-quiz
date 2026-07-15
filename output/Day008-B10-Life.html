@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 008：B10 寿命</title>
+    <title>Day 008:B10 寿命</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -213,22 +213,22 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">模块二：基础概念</div>
-                <h1>📘 Day 008：B10 寿命</h1>
+                <div class="breadcrumb">模块二:基础概念</div>
+                <h1>📘 Day 008:B10 寿命</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · Day 007 回顾（什么是可靠性）</h2>
+                <h2>🧠 昨日知识卡片 · Day 007 回顾(什么是可靠性)</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>可靠性 = 规定条件 + 规定时间 + 规定功能</p>
+                        <p><strong>卡片 1:</strong>可靠性 = 规定条件 + 规定时间 + 规定功能</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>W-795 的三个"规定"：1m 大理石、10 次、屏幕不碎</p>
+                        <p><strong>卡片 2:</strong>W-795 的三个"规定":1m 大理石、10 次、屏幕不碎</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>所有可靠性分析都围绕这三个"规定"展开</p>
+                        <p><strong>卡片 3:</strong>所有可靠性分析都围绕这三个"规定"展开</p>
                     </div>
                 </div>
             </div>
@@ -236,6 +236,13 @@
             <div class="knowledge">
                 <h2>💡 今日知识点：B10 寿命</h2>
                 <p><strong>B10</strong> = 总体中 10% 产品失效对应的次数，即该时间点可靠度 R = 90%。</p>
+
+                <div class="highlight">
+                    <strong>🗣️ 人话版</strong><br>
+                    B10 就是：“100 台手机里，最差的那 10 台会在多少次之前坏掉”。<br>
+                    它回答的是<strong>最坏情况下的保底寿命</strong>，而不是“平均能用多久”。<br>
+                    源于轴承行业的“BX 寿命”概念，后来广泛用于可靠性工程。
+                </div>
 
                 <div class="highlight">
                     <strong>📱 传音场景：W-795 跌落数据 Weibull 分析</strong><br>
@@ -248,24 +255,46 @@
                     <strong>📊 三种寿命指标对比</strong><br>
                     • <strong>B10 = 2.72 次</strong>：10% 失效点（保守，适合保修期）<br>
                     • <strong>B50 = 7.06 次</strong>：中位寿命（50% 失效点）<br>
-                    • <strong>MTTF ≈ 7.55 次</strong>：平均寿命（容易被极端值拉高）
+                    • <strong>MTTF ≈ 7.55 次</strong>：平均寿命（容易被极端值拉高）<br><br>
+                    <strong>⚠️ 关键陷阱：</strong>Weibull 分布下，<strong>同样 MTTF 的两批产品失效模式可能完全不同</strong>。<br>
+                    比如：A 批全部在第 7 次坏（集中失效），B 批一半第 1 次坏、一半第 14 次坏（分散失效），MTTF 都是 7 左右，但 B10 差距巨大。<br>
+                    所以 <strong>B10 比 MTTF 更适合做质量决策和保修期设定</strong>。
                 </div>
 
                 <div class="highlight-green">
                     <strong>✅ 为什么 B10 更适合做质量决策？</strong><br>
                     • B10 反映大多数用户的真实体验（90% 能撑过这个次数）<br>
-                    • 比 MTTF 更保守，不会被少数"超长寿命"样本拉高<br>
-                    • 适合设定保修期和判定质量标准
+                    • 比 MTTF 更保守，不会被少数“超长寿命”样本拉高<br>
+                    • 适合设定保修期和判定质量标准<br><br>
+                    <strong>传音决策场景：</strong><br>
+                    • 保修期设定 → 用 B10（保守、可靠）<br>
+                    • 客户谈判/可靠性目标 → 用 B10<br>
+                    • 粗略估算/学术研究 → 可用 MTTF
+                </div>
+
+                <div class="highlight">
+                    <strong>📝 样本量要求</strong><br>
+                    • Weibull 分析建议至少 <strong>10~15 个样品</strong>（含删失）<br>
+                    • 样品太少 → 置信区间极宽 → B10 估计不可靠<br>
+                    • 传音内部建议：跌落测试至少 12 台，关键机型建议 30+ 台
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 避坑指南</strong><br>
+                    • B10 不是直接从 Minitab 菜单得到的，而是 Weibull 分析输出中的“百分位数”行<br>
+                    • 在“结果”选项卡中勾选“百分位数”并填入 <code>10</code>，输出才会显示 B10<br>
+                    • 同样 MTTF 的两批产品，B10 可能差距巨大 → 不要只用 MTTF 做决策<br>
+                    • B10 的置信区间比点估计更重要 → 区间太宽说明样本量不够
                 </div>
             </div>
 
             <div class="quiz-section">
-                <h2>📝 练习题（共 5 题）</h2>
+                <h2>📝 练习题(共 5 题)</h2>
 
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">B10 = 2.72 次意味着什么？</div>
+                    <div class="question-text">B10 = 2.72 次意味着什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
@@ -289,7 +318,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">B10 和 MTTF 哪个更适合做保修期设定？</div>
+                    <div class="question-text">B10 和 MTTF 哪个更适合做保修期设定?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q2" id="q2a" value="A">
@@ -313,7 +342,7 @@
                 <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 3 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">B10 的优势包括？</div>
+                    <div class="question-text">B10 的优势包括?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3a" value="A">
@@ -337,7 +366,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 4 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">B50 = 7.06 和 B10 = 2.72 哪个更大？</div>
+                    <div class="question-text">B50 = 7.06 和 B10 = 2.72 哪个更大?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q4" id="q4a" value="A">
@@ -361,7 +390,7 @@
                 <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">Weibull 分布下为什么 B10 比 MTTF 更可靠？</div>
+                    <div class="question-text">Weibull 分布下为什么 B10 比 MTTF 更可靠?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
@@ -394,11 +423,11 @@
 
     <script>
         const explanations = {
-            q1: "B10 = 2.72 次表示总体中有 10% 的产品在 2.72 次跌落前失效，即 90% 的产品能撑过 2.72 次。",
-            q2: "B10 比 MTTF 更适合做保修期设定，因为 B10 更保守，反映大多数用户体验，不会被少数超长寿命样本拉高。",
-            q3: "B10 的优势：反映大多数用户体验、比 MTTF 更保守、适合质量决策。B10 的计算并不比 MTTF 更简单。",
-            q4: "B50（中位寿命，50% 失效点）= 7.06 > B10（10% 失效点）= 2.72。失效比例越高，对应次数越大。",
-            q5: "MTTF 容易被极端值拉高，B10 更直观反映大多数情况且适合保修期设定。MTTF 可以计算，只是不如 B10 稳健。"
+            q1: "B10 = 2.72 次表示总体中有 10% 的产品在 2.72 次跌落前失效,即 90% 的产品能撑过 2.72 次。",
+            q2: "B10 比 MTTF 更适合做保修期设定,因为 B10 更保守,反映大多数用户体验,不会被少数超长寿命样本拉高。",
+            q3: "B10 的优势:反映大多数用户体验、比 MTTF 更保守、适合质量决策。B10 的计算并不比 MTTF 更简单。",
+            q4: "B50(中位寿命,50% 失效点)= 7.06 > B10(10% 失效点)= 2.72。失效比例越高,对应次数越大。",
+            q5: "MTTF 容易被极端值拉高,B10 更直观反映大多数情况且适合保修期设定。MTTF 可以计算,只是不如 B10 稳健。"
         };
 
         function checkAnswers() {
@@ -411,13 +440,13 @@
                 const correct = q.dataset.correct.split(',').map(s => s.trim());
                 const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
                 const selected = [];
-                
+
                 inputs.forEach(input => {
                     if (input.checked) selected.push(input.value);
                 });
 
                 const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
-                
+
                 if (isCorrect) {
                     score++;
                     q.classList.add('correct');
@@ -432,13 +461,13 @@
                 expDiv.className = 'explanation';
                 expDiv.innerHTML = `
                     <h4>第 ${index + 1} 题解析</h4>
-                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p><strong>正确答案:</strong>${correct.join(', ')}</p>
                     <p>${explanations[qNum]}</p>
                 `;
                 explanationsDiv.appendChild(expDiv);
             });
 
-            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('score').textContent = `得分:${score} / ${questions.length}`;
             document.getElementById('result').classList.add('show');
         }
     </script>

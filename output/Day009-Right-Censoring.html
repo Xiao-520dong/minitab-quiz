@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 009：右删失——最容易犯的错误</title>
+    <title>Day 009:右删失--最容易犯的错误</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -213,34 +213,42 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">模块二：基础概念</div>
-                <h1>📘 Day 009：右删失——最容易犯的错误</h1>
+                <div class="breadcrumb">模块二:基础概念</div>
+                <h1>📘 Day 009:右删失--最容易犯的错误</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · Day 008 回顾（B10 寿命）</h2>
+                <h2>🧠 昨日知识卡片 · Day 008 回顾(B10 寿命)</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>B10 = 10% 产品失效对应的次数，可靠度 R = 90%</p>
+                        <p><strong>卡片 1:</strong>B10 = 10% 产品失效对应的次数,可靠度 R = 90%</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>B10 比 MTTF 更适合做质量决策</p>
+                        <p><strong>卡片 2:</strong>B10 比 MTTF 更适合做质量决策</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>Weibull 分布下 B10 = η × [-ln(0.9)]^(1/β)</p>
+                        <p><strong>卡片 3:</strong>Weibull 分布下 B10 = η × [-ln(0.9)]^(1/β)</p>
                     </div>
                 </div>
             </div>
 
             <div class="knowledge">
                 <h2>💡 今日知识点：右删失——最容易犯的错误</h2>
-                <p>测试停止时，部分样品还没失效。如果只算失效的、忽略没失效的，会<strong>严重高估寿命</strong>。</p>
+                <p>测试停止时，部分样品还没失效。如果只算失效的、忽略没失效的，会<strong>严重高估失效率、高估寿命</strong>。</p>
+
+                <div class="highlight">
+                    <strong>🗣️ 人话版</strong><br>
+                    右删失就是：“测试结束了，但东西还没坏”。<br>
+                    这些“没坏”的数据不是废物——它们告诉你“至少撑到了 X 次”。<br>
+                    如果你把它们删掉，就等于假装这些样品不存在，结果会严重失真。
+                </div>
 
                 <div class="highlight">
                     <strong>⚠️ 核心概念</strong><br>
-                    没失效的样品不是"没用"，它们携带了重要信息：至少撑到了测试结束的次数。<br>
-                    必须标记为<strong>删失（Censored）</strong>，而非<strong>删除（Deleted）</strong>！
+                    没失效的样品不是“没用”，它们携带了重要信息：至少撑到了测试结束的次数。<br>
+                    必须标记为<strong>删失（Censored）</strong>，而非<strong>删除（Deleted）</strong>！<br><br>
+                    <strong>❗ 常见错误：</strong>把没失效的数据直接删掉 → 只剩失效数据 → 失效率被严重高估 → B10 寿命被严重低估。
                 </div>
 
                 <div class="highlight-blue">
@@ -257,19 +265,43 @@
                 <div class="highlight-green">
                     <strong>🔧 Minitab 实操路径</strong><br>
                     1. 将 12 台数据复制到 C1 / C2<br>
-                    2. 菜单：<code>统计 > 可靠性/生存 > 分布分析（右删失） > 参数分布分析</code><br>
-                    3. 选择 Weibull 分布，估计方法选 <strong>MLE（最大似然估计）</strong><br>
-                    4. 在"删失"栏填入 C2，删失值填 <code>1</code>
+                    2. 菜单：<code>统计 → 可靠性/生存 → 分布分析（右删失） → 参数分布分析(P)...</code><br>
+                    3. 变量=C1，删失列=C2，删失值=<code>1</code><br>
+                    4. 假定分布下拉选 <strong>Weibull</strong><br>
+                    5. 点“估计”选项卡 → 将方法改为 <strong>“极大似然(MLE)”</strong><br>
+                    6. 确定
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 避坑指南：MLE vs LSXY</strong><br>
+                    • 若数据高度集中在 2~3 个值（如本例只有 4 和 5），<strong>必须用 MLE</strong><br>
+                    • 默认的 LSXY（最小二乘法）可能失真 → β 算崩到 9+<br>
+                    • 判断信号：数据只有 2~3 个不同值时，切换 MLE
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>✅ 结果验证（第一道关卡）</strong><br>
+                    输出窗口检查：<br>
+                    • “失效数”应显示 <strong>8</strong><br>
+                    • “删失数”应显示 <strong>4</strong><br>
+                    • 如果不一致 → 数据输入有误，回头检查 C2 列
+                </div>
+
+                <div class="highlight-green">
+                    <strong>📝 样本量要求</strong><br>
+                    • 建议至少 <strong>10~15 个样品</strong>（含删失）<br>
+                    • 删失比例不宜过高（建议删失不超过 50%）<br>
+                    • 传音内部建议：跌落测试至少 12 台，关键机型 30+ 台
                 </div>
             </div>
 
             <div class="quiz-section">
-                <h2>📝 练习题（共 5 题）</h2>
+                <h2>📝 练习题(共 5 题)</h2>
 
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">什么是右删失？</div>
+                    <div class="question-text">什么是右删失?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
@@ -293,7 +325,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">忽略删失数据会导致什么？</div>
+                    <div class="question-text">忽略删失数据会导致什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q2" id="q2a" value="A">
@@ -317,7 +349,7 @@
                 <div class="question" data-correct="C">
                     <span class="question-num">第 3 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">W-795 跌落 12 台中，哪些是右删失？</div>
+                    <div class="question-text">W-795 跌落 12 台中,哪些是右删失?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3a" value="A">
@@ -341,7 +373,7 @@
                 <div class="question" data-correct="C">
                     <span class="question-num">第 4 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">删失数据在 Minitab 中应该标记为什么？</div>
+                    <div class="question-text">删失数据在 Minitab 中应该标记为什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q4" id="q4a" value="A">
@@ -353,7 +385,7 @@
                         </div>
                         <div class="option">
                             <input type="radio" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 1（删失列）</label>
+                            <label for="q4c">C. 1(删失列)</label>
                         </div>
                         <div class="option">
                             <input type="radio" name="q4" id="q4d" value="D">
@@ -365,7 +397,7 @@
                 <div class="question" data-correct="A,C">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">关于 MLE 估计方法，正确的有？</div>
+                    <div class="question-text">关于 MLE 估计方法,正确的有?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
@@ -398,11 +430,11 @@
 
     <script>
         const explanations = {
-            q1: "右删失是指测试停止时部分样品还没失效，它们的信息是"至少撑到了测试结束次数"，不是数据错误。",
-            q2: "忽略删失数据（把没失效的当不存在）会丢掉"至少撑到 X 次"的信息，导致高估失效率、高估寿命。",
-            q3: "W-795 跌落 12 台中，第 10 次仍存活的 4 台是右删失——测试在 10 次停止，它们还没失效。第 4 次和第 5 次失效的 8 台是正常失效数据。",
-            q4: "在 Minitab 中，删失数据需要在删失列中标记为 1（表示该行为删失数据），0 表示失效数据。不能删除或留空。",
-            q5: "数据集中在 2~3 个值时，LSXY（最小二乘）可能失真，应使用 MLE（最大似然估计）。MLE 在这种场景下更稳健，但 Minitab 默认方法不一定是 MLE。"
+            q1: "右删失是指测试停止时部分样品还没失效,它们的信息是"至少撑到了测试结束次数",不是数据错误。",
+            q2: "忽略删失数据(把没失效的当不存在)会丢掉"至少撑到 X 次"的信息,导致高估失效率、高估寿命。",
+            q3: "W-795 跌落 12 台中,第 10 次仍存活的 4 台是右删失--测试在 10 次停止,它们还没失效。第 4 次和第 5 次失效的 8 台是正常失效数据。",
+            q4: "在 Minitab 中,删失数据需要在删失列中标记为 1(表示该行为删失数据),0 表示失效数据。不能删除或留空。",
+            q5: "数据集中在 2~3 个值时,LSXY(最小二乘)可能失真,应使用 MLE(最大似然估计)。MLE 在这种场景下更稳健,但 Minitab 默认方法不一定是 MLE。"
         };
 
         function checkAnswers() {
@@ -415,13 +447,13 @@
                 const correct = q.dataset.correct.split(',').map(s => s.trim());
                 const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
                 const selected = [];
-                
+
                 inputs.forEach(input => {
                     if (input.checked) selected.push(input.value);
                 });
 
                 const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
-                
+
                 if (isCorrect) {
                     score++;
                     q.classList.add('correct');
@@ -436,13 +468,13 @@
                 expDiv.className = 'explanation';
                 expDiv.innerHTML = `
                     <h4>第 ${index + 1} 题解析</h4>
-                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p><strong>正确答案:</strong>${correct.join(', ')}</p>
                     <p>${explanations[qNum]}</p>
                 `;
                 explanationsDiv.appendChild(expDiv);
             });
 
-            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('score').textContent = `得分:${score} / ${questions.length}`;
             document.getElementById('result').classList.add('show');
         }
     </script>

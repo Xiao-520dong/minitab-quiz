@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 015：Kaplan-Meier 生存曲线</title>
+    <title>Day 015:Kaplan-Meier 生存曲线</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -213,8 +213,8 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">模块三：核心工具 · Kaplan-Meier 生存曲线</div>
-                <h1>📘 Day 015：Kaplan-Meier 生存曲线</h1>
+                <div class="breadcrumb">模块三:核心工具 · Kaplan-Meier 生存曲线</div>
+                <h1>📘 Day 015:Kaplan-Meier 生存曲线</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
@@ -222,52 +222,89 @@
                 <h2>🧠 昨日知识卡片 · 删失标记 0 和 1</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>0 = 失效，1 = 删失 / 全过。</p>
+                        <p><strong>卡片 1:</strong>0 = 失效,1 = 删失 / 全过。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>推荐用数字 0/1 而非 F/C 标记。</p>
+                        <p><strong>卡片 2:</strong>推荐用数字 0/1 而非 F/C 标记。</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>不要把删失数据删掉！</p>
+                        <p><strong>卡片 3:</strong>不要把删失数据删掉!</p>
                     </div>
                 </div>
             </div>
 
             <div class="knowledge">
-                <h2>💡 今日知识点：Kaplan-Meier 生存曲线</h2>
-                <p>Kaplan-Meier 曲线显示：随着次数增加，还有多少产品没失效。</p>
+                <h2>💡 今日知识点:Kaplan-Meier 生存曲线</h2>
+                <p>Kaplan-Meier 曲线显示:随着次数增加,还有多少产品没失效。</p>
 
                 <div class="highlight">
-                    <strong>📱 传音场景：W-795 整改前后对比</strong><br>
-                    • 整改前：12 台中 8 台失效 → 曲线下降快<br>
-                    • 整改后：12 台中仅 2 台失效 → 曲线平缓<br>
+                    <strong>📱 传音场景:W-795 整改前后对比</strong><br>
+                    • 整改前:12 台中 8 台失效 → 曲线下降快<br>
+                    • 整改后:12 台中仅 2 台失效 → 曲线平缓<br>
                     → 整改方向初步有效
                 </div>
 
                 <div class="highlight-blue">
                     <strong>📋 Minitab 实操路径</strong><br>
-                    菜单：<code>统计 → 可靠性/生存 → 非参数分布分析（右删失）</code><br>
-                    • 时间列：选失效次数列<br>
-                    • 删失列：选删失标记列<br>
-                    • 按变量分组：选分组变量（如"整改前/整改后"）<br>
-                    • 图形选项卡：勾选"生存图"<br>
-                    • 结果选项：选"对数排秩和 Wilcoxon 统计量"
+                    菜单:<code>统计 → 可靠性/生存 → 非参数分布分析(右删失)</code><br>
+                    • 时间列:选失效次数列<br>
+                    • 删失列:选删失标记列<br>
+                    • 按变量分组:选分组变量(如"整改前/整改后")<br>
+                    • 图形选项卡:勾选"生存图"<br>
+                    • 结果选项:选"对数排秩和 Wilcoxon 统计量"
                 </div>
 
                 <div class="highlight-green">
                     <strong>📊 看图要点</strong><br>
-                    看两条曲线走向：整改后如果明显比整改前平缓且位置更高 → 初步有效。<br>
+                    看两条曲线走向:整改后如果明显比整改前平缓且位置更高 → 初步有效。<br>
                     但最终判定还需要 Log-Rank 检验的 p 值。
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📋 数据设置详情</strong><br>
+                    • C1 = 失效次数(数值)<br>
+                    • C2 = 删失标记(0=失效,1=全过)<br>
+                    • C3 = 组别(整改前 / 整改后)<br>
+                    • 删失值 = <strong>1</strong>(标记为 1 的是删失数据)
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 注意事项</strong><br>
+                    • 整改前和整改后数据放在同一列(C1),用 C3 列区分组别<br>
+                    • 图形选项卡必须勾选"生存图"才能看到曲线<br>
+                    • 结果(R)选项选"对数排秩和 Wilcoxon 统计量"--为第 10 卡 Log-Rank 检验做准备<br>
+                    • 曲线只是目视判断,最终判定等第 10 卡的 Log-Rank 检验
+                </div>
+
+                <div class="highlight">
+                    <strong>📝 样本量要求</strong><br>
+                    • 每组建议至少 <strong>10~12 台</strong>（含删失）<br>
+                    • 传音内部建议：整改前后各 <strong>30 台</strong>（统计检验力更充足）<br>
+                    • 样本太少 → 曲线台阶少 → 两组差异难以判断
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📊 生存图中位数</strong><br>
+                    曲线降到 <strong>50%</strong> 对应的 X 值 = 中位寿命（一半产品失效时的次数）<br>
+                    整改后中位数应该明显大于整改前 → 说明整改延长了寿命。
+                </div>
+
+                <p><strong>🗣️ 人话版总结：</strong></p>
+                <div class="highlight-green">
+                    KM 曲线就是“随着时间推移，还有多少产品活着”的走势图。<br>
+                    曲线越高 = 存活越多 = 越好；曲线越平缓 = 失效越慢 = 越好。<br>
+                    整改后的曲线应该比整改前更高、更平缓。<br><br>
+                    ⚠️ 但“肉眼看妠"不算数！必须用 Log-Rank 检验（第 10 卡）确认差异是否统计显著。
                 </div>
             </div>
 
             <div class="quiz-section">
-                <h2>📝 练习题（共 5 题）</h2>
+                <h2>📝 练习题(共 5 题)</h2>
 
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Kaplan-Meier 曲线显示什么？</div>
+                    <div class="question-text">Kaplan-Meier 曲线显示什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
@@ -291,7 +328,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">整改后曲线比整改前平缓说明什么？</div>
+                    <div class="question-text">整改后曲线比整改前平缓说明什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q2" id="q2a" value="A">
@@ -315,7 +352,7 @@
                 <div class="question" data-correct="A,B,C,D">
                     <span class="question-num">第 3 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">KM 分析的菜单设置包括？</div>
+                    <div class="question-text">KM 分析的菜单设置包括?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3a" value="A">
@@ -339,7 +376,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 4 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">最终判定整改是否有效需要看什么？</div>
+                    <div class="question-text">最终判定整改是否有效需要看什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q4" id="q4a" value="A">
@@ -363,7 +400,7 @@
                 <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">关于 KM 曲线，正确的有？</div>
+                    <div class="question-text">关于 KM 曲线,正确的有?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
@@ -396,11 +433,11 @@
 
     <script>
         const explanations = {
-            q1: "Kaplan-Meier 曲线显示随着时间（或次数）增加，还有多少产品没失效（生存率）。",
-            q2: "整改后曲线比整改前平缓，说明失效速度变慢，整改方向初步有效。但最终判定还需统计检验。",
-            q3: "KM 分析需要设置：时间列、删失列、按变量分组，并在图形选项卡中勾选生存图。",
-            q4: "曲线只是目视判断，最终判定整改是否有效需要看 Log-Rank 检验的 p 值。",
-            q5: "KM 曲线越高越好（更多产品没失效），越平缓越好（失效速度慢），整改后应比整改前高。两条曲线重合说明没有差异。"
+            q1: "Kaplan-Meier 曲线显示随着时间(或次数)增加,还有多少产品没失效(生存率)。",
+            q2: "整改后曲线比整改前平缓,说明失效速度变慢,整改方向初步有效。但最终判定还需统计检验。",
+            q3: "KM 分析需要设置:时间列、删失列、按变量分组,并在图形选项卡中勾选生存图。",
+            q4: "曲线只是目视判断,最终判定整改是否有效需要看 Log-Rank 检验的 p 值。",
+            q5: "KM 曲线越高越好(更多产品没失效),越平缓越好(失效速度慢),整改后应比整改前高。两条曲线重合说明没有差异。"
         };
 
         function checkAnswers() {
@@ -413,13 +450,13 @@
                 const correct = q.dataset.correct.split(',').map(s => s.trim());
                 const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
                 const selected = [];
-                
+
                 inputs.forEach(input => {
                     if (input.checked) selected.push(input.value);
                 });
 
                 const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
-                
+
                 if (isCorrect) {
                     score++;
                     q.classList.add('correct');
@@ -434,13 +471,13 @@
                 expDiv.className = 'explanation';
                 expDiv.innerHTML = `
                     <h4>第 ${index + 1} 题解析</h4>
-                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p><strong>正确答案:</strong>${correct.join(', ')}</p>
                     <p>${explanations[qNum]}</p>
                 `;
                 explanationsDiv.appendChild(expDiv);
             });
 
-            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('score').textContent = `得分:${score} / ${questions.length}`;
             document.getElementById('result').classList.add('show');
         }
     </script>

@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -34,7 +34,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -61,12 +61,12 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .knowledge p {
             color: #555;
-            line-height: 1.8;
+            line-height: 2.0;
             margin-bottom: 12px;
         }
         .level-box {
@@ -133,7 +133,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options {
@@ -166,7 +166,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -177,7 +177,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -197,7 +197,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -216,7 +216,7 @@
         .explanation p {
             color: #555;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.8;
         }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
@@ -239,7 +239,7 @@
             border-radius: 8px;
             margin-bottom: 10px;
             font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.9;
             color: #444;
         }
     </style>
@@ -292,6 +292,14 @@
                 
                 <div class="highlight">
                     💡 <strong>现状：</strong>传音实验室当前大多停在第一层。Minitab 的价值，就是帮你从第一层穿越到第二层、第三层。
+                </div>
+
+                <div class="highlight-green">
+                    <strong>📱 传音场景：跌落测试报告</strong><br>
+                    <strong>第一层（定性）：</strong>"W-795 跌落测试通过"<br>
+                    <strong>第二层（统计）：</strong>"12 台测试，8 台失效，B10=2.72 次（95% CI: 1.8~4.5）"<br>
+                    <strong>第三层（预测）：</strong>"基于当前数据，预计量产失效率约 8%，建议加强左上角结构"<br><br>
+                    从"通过/不通过"升级到"量化预测"，这就是 Minitab 的价值。
                 </div>
             </div>
 

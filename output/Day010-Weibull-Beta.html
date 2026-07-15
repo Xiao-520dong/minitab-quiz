@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 010：Weibull 的 β 参数</title>
+    <title>Day 010:Weibull 的 β 参数</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -213,22 +213,22 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <div class="breadcrumb">模块二：基础概念</div>
-                <h1>📘 Day 010：Weibull 的 β 参数</h1>
+                <div class="breadcrumb">模块二:基础概念</div>
+                <h1>📘 Day 010:Weibull 的 β 参数</h1>
                 <div class="subtitle">Minitab 在传音可靠性实验室的应用实战手册 · V1.5</div>
             </div>
 
             <div class="review-section">
-                <h2>🧠 昨日知识卡片 · Day 009 回顾（右删失）</h2>
+                <h2>🧠 昨日知识卡片 · Day 009 回顾(右删失)</h2>
                 <div class="review-cards">
                     <div class="review-card">
-                        <p><strong>卡片 1：</strong>右删失 = 测试停止时部分样品还没失效</p>
+                        <p><strong>卡片 1:</strong>右删失 = 测试停止时部分样品还没失效</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 2：</strong>忽略删失数据会高估寿命</p>
+                        <p><strong>卡片 2:</strong>忽略删失数据会高估寿命</p>
                     </div>
                     <div class="review-card">
-                        <p><strong>卡片 3：</strong>删失标记 0 = 失效，1 = 删失，推荐用数字而非 F/C</p>
+                        <p><strong>卡片 3:</strong>删失标记 0 = 失效,1 = 删失,推荐用数字而非 F/C</p>
                     </div>
                 </div>
             </div>
@@ -238,10 +238,24 @@
                 <p>Weibull 分布的<strong>形状参数 β（Beta）</strong>决定了失效模式的类型：</p>
 
                 <div class="highlight">
+                    <strong>🗣️ 人话版</strong><br>
+                    β 就是告诉你“失效是越来越快还是越来越慢”：<br>
+                    • β &lt; 1：越用越不容易坏（早期不良品已经坏了，剩下的越来越安全）<br>
+                    • β = 1：随机器，跟用多久没关系（像抽彩票）<br>
+                    • β &gt; 1：<strong>越用越容易坏</strong>（磨损、疲劳、老化，用得越久坏得越快）<br><br>
+                    传音场景里，跌落测试基本都是 β &gt; 1——因为手机越摔越脆弱，这是物理规律。
+                </div>
+
+                <div class="highlight">
                     <strong>📊 β 值判断规则</strong><br>
                     • <strong>β &lt; 1</strong> → 早期失效（递减失效率）→ 查来料质量 / 制造缺陷<br>
                     • <strong>β = 1</strong> → 随机失效（恒定失效率）→ 指数分布，外部随机因素<br>
-                    • <strong>β &gt; 1</strong> → 磨损失效（递增失效率）→ 查设计 / 工艺问题
+                    • <strong>β &gt; 1</strong> → 磨损失效（递增失效率）→ 查设计 / 工艺问题<br><br>
+                    <strong>四种典型形态（η=10 时）：</strong><br>
+                    • β=0.5：最早下降后趋缓（典型早期失效）<br>
+                    • β=1：指数下降（随机失效，分界线）<br>
+                    • β=2：平滑下降（典型磨损失效）<br>
+                    • β=5：悬崖式下坠（快速磨损，寿命很集中）
                 </div>
 
                 <div class="highlight-blue">
@@ -249,27 +263,44 @@
                     • MLE 结果：<strong>β = 1.98</strong><br>
                     • β &gt; 1 → <strong>磨损失效型</strong><br>
                     • 失效根因在于<strong>设计 / 工艺</strong>（随跌落次数增加，失效率递增）<br>
-                    • 改善方向：优化结构设计、改进工艺
+                    • 改善方向：优化结构设计、改进工艺<br>
+                    • 数据未显示混合失效模式 → 不需要拆分子群体
                 </div>
 
                 <div class="highlight-green">
                     <strong>🔧 Minitab 实操</strong><br>
-                    接第 03 卡数据，在输出窗口找<strong>"形状参数"</strong>行：<br>
+                    接第 03 卡的数据和菜单，在输出窗口找<strong>“形状参数”</strong>行：<br>
                     • β（形状）= 1.98<br>
                     • η（尺度）= 8.50<br>
                     • B10 = 2.72<br>
                     • B50 = 7.06<br><br>
-                    <strong>实操路径：</strong><code>统计 > 可靠性/生存 > 分布分析（右删失） > 参数分布分析</code> → Weibull → MLE
+                    <strong>实操路径：</strong><code>统计 → 可靠性/生存 → 分布分析（右删失） → 参数分布分析(P)...</code><br>
+                    → 变量=C1，删失列=C2，删失值=1 → Weibull → 估计方法选 MLE → 确定
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 避坑指南</strong><br>
+                    • 数据集中在 2~3 个值时，<strong>务必确认使用 MLE</strong> 而非 LSXY<br>
+                    • LSXY 可能使 β 算崩到 9+（完全失真）<br>
+                    • 如果 β 结果异常大（如 >5）且数据值很集中 → 先检查估计方法<br>
+                    • β 的点估计值要看，同时也要看置信区间——区间太宽说明样本量不够
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📝 样本量要求</strong><br>
+                    • β 的估计对样本量敏感，建议至少 <strong>15~20 个样品</strong><br>
+                    • 样品太少 → β 的置信区间极宽 → 无法可靠判断失效模式<br>
+                    • 传音内部建议：关键机型 30+ 台
                 </div>
             </div>
 
             <div class="quiz-section">
-                <h2>📝 练习题（共 5 题）</h2>
+                <h2>📝 练习题(共 5 题)</h2>
 
                 <div class="question" data-correct="C">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">β = 1.98 说明什么类型的失效？</div>
+                    <div class="question-text">β = 1.98 说明什么类型的失效?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
@@ -293,7 +324,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">β &lt; 1 应该查什么？</div>
+                    <div class="question-text">β &lt; 1 应该查什么?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q2" id="q2a" value="A">
@@ -317,7 +348,7 @@
                 <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 3 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">β 参数的判断规则包括？</div>
+                    <div class="question-text">β 参数的判断规则包括?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3a" value="A">
@@ -341,7 +372,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 4 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">W-795 跌落 β = 1.98，失效根因在于？</div>
+                    <div class="question-text">W-795 跌落 β = 1.98,失效根因在于?</div>
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q4" id="q4a" value="A">
@@ -365,7 +396,7 @@
                 <div class="question" data-correct="A,B,C">
                     <span class="question-num">第 5 题</span>
                     <span class="question-type multi">多选</span>
-                    <div class="question-text">关于 MLE 估计，正确的有？</div>
+                    <div class="question-text">关于 MLE 估计,正确的有?</div>
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
@@ -398,11 +429,11 @@
 
     <script>
         const explanations = {
-            q1: "β = 1.98 > 1，属于磨损失效型（递增失效率），说明随着跌落次数增加，失效概率逐渐升高。",
-            q2: "β < 1 表示早期失效（递减失效率），通常由来料质量问题或制造缺陷引起，需要检查供应链和生产环节。",
-            q3: "β 的判断规则：β < 1 早期失效、β = 1 随机失效、β > 1 磨损失效。β = 0 没有意义，不存在"无失效"的说法。",
-            q4: "W-795 跌落 β = 1.98 > 1，属于磨损失效型，失效根因在于设计或工艺问题，改善方向应聚焦于结构优化和工艺改进。",
-            q5: "数据集中在 2~3 个值时，LSXY（最小二乘法）可能使 β 算崩到 9+（失真），此时应使用 MLE，结果更可靠。MLE 不一定是 Minitab 默认方法。"
+            q1: "β = 1.98 > 1,属于磨损失效型(递增失效率),说明随着跌落次数增加,失效概率逐渐升高。",
+            q2: "β < 1 表示早期失效(递减失效率),通常由来料质量问题或制造缺陷引起,需要检查供应链和生产环节。",
+            q3: "β 的判断规则:β < 1 早期失效、β = 1 随机失效、β > 1 磨损失效。β = 0 没有意义,不存在"无失效"的说法。",
+            q4: "W-795 跌落 β = 1.98 > 1,属于磨损失效型,失效根因在于设计或工艺问题,改善方向应聚焦于结构优化和工艺改进。",
+            q5: "数据集中在 2~3 个值时,LSXY(最小二乘法)可能使 β 算崩到 9+(失真),此时应使用 MLE,结果更可靠。MLE 不一定是 Minitab 默认方法。"
         };
 
         function checkAnswers() {
@@ -415,13 +446,13 @@
                 const correct = q.dataset.correct.split(',').map(s => s.trim());
                 const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
                 const selected = [];
-                
+
                 inputs.forEach(input => {
                     if (input.checked) selected.push(input.value);
                 });
 
                 const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
-                
+
                 if (isCorrect) {
                     score++;
                     q.classList.add('correct');
@@ -436,13 +467,13 @@
                 expDiv.className = 'explanation';
                 expDiv.innerHTML = `
                     <h4>第 ${index + 1} 题解析</h4>
-                    <p><strong>正确答案：</strong>${correct.join(', ')}</p>
+                    <p><strong>正确答案:</strong>${correct.join(', ')}</p>
                     <p>${explanations[qNum]}</p>
                 `;
                 explanationsDiv.appendChild(expDiv);
             });
 
-            document.getElementById('score').textContent = `得分：${score} / ${questions.length}`;
+            document.getElementById('score').textContent = `得分:${score} / ${questions.length}`;
             document.getElementById('result').classList.add('show');
         }
     </script>

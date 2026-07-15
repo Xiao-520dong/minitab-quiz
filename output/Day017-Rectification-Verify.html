@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -236,7 +236,7 @@
             <div class="knowledge">
                 <h2>💡 今日知识点：整改验证逻辑</h2>
                 <p>整改后不能凭感觉判"好了"。正确流程：</p>
-                <ol style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 1.8;">
+                <ol style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 2.0;">
                     <li>收集整改前数据 + 整改后数据</li>
                     <li>Kaplan-Meier 画两条生存曲线</li>
                     <li>Log-Rank 检验 p&lt;0.05 才放行</li>
@@ -256,6 +256,27 @@
                 <div class="highlight-green">
                     <strong>📝 报告写法：</strong><br>
                     "整改前后各测 N 台，Kaplan-Meier 分析：Log-Rank p=0.0xx&lt;0.05，整改有统计显著改善，可放行量产。"
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📱 传音场景示例</strong><br>
+                    <strong>模拟数据：</strong>整改前 30 台（18 台失效），整改后 30 台（5 台失效，25 台全过）<br>
+                    <strong>报告写法：</strong>"整改前后各测 30 台，Kaplan-Meier 分析：Log-Rank p=0.003&lt;0.05，整改有统计显著改善，可放行量产。"
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 避坑指南</strong><br>
+                    • 整改后 30 台全过 ≠ 整改有效——可能只是"这次运气好"或样本量太小<br>
+                    • 必须同时收集整改前数据作为对照，没有对照就无法证明改善<br>
+                    • 样本量建议：每组至少 15~30 台，太少则检验力不足<br>
+                    • p≥0.05 不代表"整改无效"，可能样本量不够，建议加大样本后重新检验
+                </div>
+
+                <p><strong>🗣️ 人话版总结：</strong></p>
+                <div class="highlight-green">
+                    整改验证就是"用数据证明整改真的有用"，而不是凭感觉说"好像好一些"。<br>
+                    流程：收集前后数据 → 画 KM 曲线 → Log-Rank 检验 p&lt;0.05 才能放行。<br>
+                    记住：全过不代表有效，统计检验才能给你底气。
                 </div>
             </div>
 

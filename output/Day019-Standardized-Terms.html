@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -31,7 +31,7 @@
         .header h1 {
             color: #1a1a1a;
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -55,7 +55,7 @@
         .review-section h2 {
             color: #e65100;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
         .review-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -65,7 +65,7 @@
             border-radius: 8px;
             border-left: 4px solid #ff9800;
         }
-        .review-card p { color: #444; font-size: 14px; line-height: 1.7; }
+        .review-card p { color: #444; font-size: 14px; line-height: 1.9; }
         .knowledge {
             background: #f8f9fa;
             padding: 24px;
@@ -75,10 +75,10 @@
         .knowledge h2 {
             color: #667eea;
             font-size: 19px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 16px;
         }
-        .knowledge p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .knowledge p { color: #555; line-height: 2.0; margin-bottom: 12px; }
         .knowledge .highlight {
             background: #fff3cd;
             padding: 12px;
@@ -139,7 +139,7 @@
             color: #1a1a1a;
             font-size: 16px;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 16px;
         }
         .options { display: flex; flex-direction: column; gap: 10px; }
@@ -165,7 +165,7 @@
             flex: 1;
             cursor: pointer;
             color: #444;
-            line-height: 1.5;
+            line-height: 1.7;
             font-size: 15px;
         }
         .submit-btn {
@@ -176,7 +176,7 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -192,7 +192,7 @@
         .score {
             text-align: center;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
             margin-bottom: 16px;
         }
@@ -204,7 +204,7 @@
             border-left: 4px solid #667eea;
         }
         .explanation h4 { color: #667eea; font-size: 14px; margin-bottom: 8px; }
-        .explanation p { color: #555; font-size: 14px; line-height: 1.6; }
+        .explanation p { color: #555; font-size: 14px; line-height: 1.8; }
         .correct { border-color: #28a745 !important; background: #d4edda !important; }
         .wrong { border-color: #dc3545 !important; background: #f8d7da !important; }
     </style>
@@ -248,7 +248,7 @@
                 </div>
 
                 <p>统一用词的三大好处：</p>
-                <ul style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 1.8;">
+                <ul style="padding-left: 20px; margin: 12px 0; color: #555; line-height: 2.0;">
                     <li><strong>① 分类准确</strong> — 同一类问题归在一起</li>
                     <li><strong>② 数据可对比</strong> — 不同批次、不同项目之间可横向比较</li>
                     <li><strong>③ 趋势可靠</strong> — Pareto 排序和 Weibull 分析结果可信</li>
@@ -257,6 +257,26 @@
                 <div class="highlight-green">
                     <strong>✅ 遇到新类型怎么办？</strong><br>
                     先归入最接近的已有类别，等积累到一定量后再考虑新增类别。不要随意造新词。
+                </div>
+
+                <div class="highlight-blue">
+                    <strong>📱 传音场景示例</strong><br>
+                    <strong>反面案例：</strong>同一台手机屏幕碎了，A 工程师报"屏幕碎裂"，B 工程师报"屏碎了"，C 工程师报"display broken" → Pareto 分析时这 3 台被分到 3 个不同类别，每个只単 1 台，无法识别为主要失效模式。<br>
+                    <strong>正确做法：</strong>统一用"屏幕碎裂"，这样 3 台合并后成为最大类别，能准确识别为优先整改方向。
+                </div>
+
+                <div class="highlight">
+                    <strong>⚠️ 与前后卡片的联系</strong><br>
+                    • Day018 边测边报 → 每条报告必须用标准用词<br>
+                    • Day013 Pareto 分析 → 分类准确性取决于用词一致性<br>
+                    • 数据质量的基础不是统计方法，而是记录规范
+                </div>
+
+                <p><strong>🗣️ 人话版总结：</strong></p>
+                <div class="highlight-green">
+                    标准化用词就是"同一个东西只能叫同一个名字"。<br>
+                    目的：让 Pareto 图能准确分类，不被同义词分散。<br>
+                    记住：数据质量的基础不是统计方法，而是记录规范。
                 </div>
             </div>
 
