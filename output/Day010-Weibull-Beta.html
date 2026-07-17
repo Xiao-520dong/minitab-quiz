@@ -332,6 +332,53 @@
                     <div class="caption">图:不同 β 值下的可靠度曲线对比(β&lt;1 早期失效,β=1 随机失效,β&gt;1 磨损失效)</div>
                 </div>
 
+                <h3>📊 理论数据表（用于复现上图）</h3>
+                <p>下表展示不同 β 值下的可靠度 R(t)，统一复制到 Minitab C1~C5 列，可复现上方四条曲线图：</p>
+                <div class="data-section">
+                    <span class="table-title"> 理论数据表（n=10，复制到 Minitab C1~C5）</span>
+                    <button class="copy-btn" onclick="copyTable('table010-theory')"> 复制数据</button>
+                </div>
+                <table class="data-table" id="table010-theory">
+                    <thead>
+                        <tr><th>t(次数)</th><th>C1 β=0.5</th><th>C2 β=1</th><th>C3 β=2</th><th>C4 β=5</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr>
+                        <tr><td>1</td><td>0.7289</td><td>0.9048</td><td>0.9900</td><td>1.0000</td></tr>
+                        <tr><td>2</td><td>0.6394</td><td>0.8187</td><td>0.9608</td><td>0.9997</td></tr>
+                        <tr><td>3</td><td>0.5783</td><td>0.7408</td><td>0.9139</td><td>0.9976</td></tr>
+                        <tr><td>4</td><td>0.5313</td><td>0.6703</td><td>0.8521</td><td>0.9898</td></tr>
+                        <tr><td>5</td><td>0.4931</td><td>0.6065</td><td>0.7788</td><td>0.9692</td></tr>
+                        <tr><td>6</td><td>0.4609</td><td>0.5488</td><td>0.6977</td><td>0.9252</td></tr>
+                        <tr><td>7</td><td>0.4332</td><td>0.4966</td><td>0.6126</td><td>0.8453</td></tr>
+                        <tr><td>8</td><td>0.4088</td><td>0.4493</td><td>0.5273</td><td>0.7206</td></tr>
+                        <tr><td>9</td><td>0.3873</td><td>0.4066</td><td>0.4449</td><td>0.5541</td></tr>
+                        <tr><td>10</td><td>0.3679</td><td>0.3679</td><td>0.3679</td><td>0.3679</td></tr>
+                        <tr><td>11</td><td>0.3504</td><td>0.3329</td><td>0.2982</td><td>0.1998</td></tr>
+                        <tr><td>12</td><td>0.3344</td><td>0.3012</td><td>0.2369</td><td>0.0830</td></tr>
+                        <tr><td>13</td><td>0.3196</td><td>0.2725</td><td>0.1845</td><td>0.0244</td></tr>
+                        <tr><td>14</td><td>0.3063</td><td>0.2466</td><td>0.1409</td><td>0.0046</td></tr>
+                        <tr><td>15</td><td>0.2938</td><td>0.2231</td><td>0.1054</td><td>0.0005</td></tr>
+                        <tr><td>16</td><td>0.2823</td><td>0.2019</td><td>0.0773</td><td>0.0000</td></tr>
+                        <tr><td>17</td><td>0.2715</td><td>0.1827</td><td>0.0556</td><td>0.0000</td></tr>
+                        <tr><td>18</td><td>0.2614</td><td>0.1653</td><td>0.0392</td><td>0.0000</td></tr>
+                        <tr><td>19</td><td>0.2520</td><td>0.1496</td><td>0.0271</td><td>0.0000</td></tr>
+                        <tr><td>20</td><td>0.2431</td><td>0.1353</td><td>0.0183</td><td>0.0000</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                    说明：η=10 时，R(t)=exp[-(t/10)^β]；四条线在 t=10 / R=0.37 处交汇
+                </div>
+
+                <div class="highlight-blue">
+                    <strong> 画图步骤（Minitab 15 中文版）</strong><br>
+                    1. 将上方理论数据表复制到 C1~C4（列名用 b05/b1/b2/b5）<br>
+                    2. 菜单：<code>图形 → 时间序列图 → 选"多个"</code><br>
+                    3. 序列框：只放 C2~C4（不放 C1）<br>
+                    4. 点"时间/尺度(T)..." → 选"标记(S)" → 左侧列表选 C1 → 选择 → 确定<br>
+                    5. 确定 → 出图
+                </div>
+
                 <div class="highlight">
                     <strong>⚠️ 避坑指南</strong><br>
                     • 数据集中在 2~3 个值时,<strong>务必确认使用 MLE</strong> 而非 LSXY<br>
