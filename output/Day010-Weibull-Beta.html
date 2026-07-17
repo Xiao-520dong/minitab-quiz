@@ -252,68 +252,99 @@
             </div>
 
             <div class="knowledge">
-                <h2>💡 今日知识点：Weibull 的 β 参数</h2>
-                <p>Weibull 分布的<strong>形状参数 β（Beta）</strong>决定了失效模式的类型：</p>
+                <h2>💡 今日知识点:Weibull 的 β 参数</h2>
+                <p>Weibull 分布的<strong>形状参数 β(Beta)</strong>决定了失效模式的类型:</p>
 
                 <div class="highlight">
                     <strong>🗣️ 人话版</strong><br>
-                    β 就是告诉你“失效是越来越快还是越来越慢”：<br>
-                    • β &lt; 1：越用越不容易坏（早期不良品已经坏了，剩下的越来越安全）<br>
-                    • β = 1：随机器，跟用多久没关系（像抽彩票）<br>
-                    • β &gt; 1：<strong>越用越容易坏</strong>（磨损、疲劳、老化，用得越久坏得越快）<br><br>
-                    传音场景里，跌落测试基本都是 β &gt; 1——因为手机越摔越脆弱，这是物理规律。
+                    β 就是告诉你"失效是越来越快还是越来越慢":<br>
+                    • β &lt; 1:越用越不容易坏(早期不良品已经坏了,剩下的越来越安全)<br>
+                    • β = 1:随机器,跟用多久没关系(像抽彩票)<br>
+                    • β &gt; 1:<strong>越用越容易坏</strong>(磨损、疲劳、老化,用得越久坏得越快)<br><br>
+                    传音场景里,跌落测试基本都是 β &gt; 1--因为手机越摔越脆弱,这是物理规律。
                 </div>
 
                 <div class="highlight">
                     <strong>📊 β 值判断规则</strong><br>
-                    • <strong>β &lt; 1</strong> → 早期失效（递减失效率）→ 查来料质量 / 制造缺陷<br>
-                    • <strong>β = 1</strong> → 随机失效（恒定失效率）→ 指数分布，外部随机因素<br>
-                    • <strong>β &gt; 1</strong> → 磨损失效（递增失效率）→ 查设计 / 工艺问题<br><br>
-                    <strong>四种典型形态（η=10 时）：</strong><br>
-                    • β=0.5：最早下降后趋缓（典型早期失效）<br>
-                    • β=1：指数下降（随机失效，分界线）<br>
-                    • β=2：平滑下降（典型磨损失效）<br>
-                    • β=5：悬崖式下坠（快速磨损，寿命很集中）
+                    • <strong>β &lt; 1</strong> → 早期失效(递减失效率)→ 查来料质量 / 制造缺陷<br>
+                    • <strong>β = 1</strong> → 随机失效(恒定失效率)→ 指数分布,外部随机因素<br>
+                    • <strong>β &gt; 1</strong> → 磨损失效(递增失效率)→ 查设计 / 工艺问题<br><br>
+                    <strong>四种典型形态(η=10 时):</strong><br>
+                    • β=0.5:最早下降后趋缓(典型早期失效)<br>
+                    • β=1:指数下降(随机失效,分界线)<br>
+                    • β=2:平滑下降(典型磨损失效)<br>
+                    • β=5:悬崖式下坠(快速磨损,寿命很集中)
                 </div>
 
                 <div class="highlight-blue">
-                    <strong>📱 传音场景：W-795 跌落测试</strong><br>
-                    • MLE 结果：<strong>β = 1.98</strong><br>
+                    <strong>📱 传音场景:W-795 跌落测试</strong><br>
+                    • MLE 结果:<strong>β = 1.98</strong><br>
                     • β &gt; 1 → <strong>磨损失效型</strong><br>
-                    • 失效根因在于<strong>设计 / 工艺</strong>（随跌落次数增加，失效率递增）<br>
-                    • 改善方向：优化结构设计、改进工艺<br>
+                    • 失效根因在于<strong>设计 / 工艺</strong>(随跌落次数增加,失效率递增)<br>
+                    • 改善方向:优化结构设计、改进工艺<br>
                     • 数据未显示混合失效模式 → 不需要拆分子群体
+                </div>
+
+                <div class="data-section">
+                    <span class="table-title">📊 数据表（复制到 Minitab C1/C2 列）</span>
+                    <button class="copy-btn" onclick="copyTable('table010')">📋 复制数据</button>
+                </div>
+                <table class="data-table" id="table010">
+                    <thead>
+                        <tr><th>样品编号</th><th>C1 失效次数</th><th>C2 删失标记</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>4</td><td>0</td></tr>
+                        <tr><td>2</td><td>4</td><td>0</td></tr>
+                        <tr><td>3</td><td>4</td><td>0</td></tr>
+                        <tr><td>4</td><td>5</td><td>0</td></tr>
+                        <tr><td>5</td><td>5</td><td>0</td></tr>
+                        <tr><td>6</td><td>5</td><td>0</td></tr>
+                        <tr><td>7</td><td>5</td><td>0</td></tr>
+                        <tr><td>8</td><td>5</td><td>0</td></tr>
+                        <tr><td>9</td><td>10</td><td>1</td></tr>
+                        <tr><td>10</td><td>10</td><td>1</td></tr>
+                        <tr><td>11</td><td>10</td><td>1</td></tr>
+                        <tr><td>12</td><td>10</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                    说明：0 = 失效，1 = 删失/全过
                 </div>
 
                 <div class="highlight-green">
                     <strong>🔧 Minitab 实操</strong><br>
-                    接第 03 卡的数据和菜单，在输出窗口找<strong>“形状参数”</strong>行：<br>
+                    1. 将上方 12 台数据复制到 C1 / C2<br>
+                    2. 菜单：<code>统计 → 可靠性/生存 → 分布分析（右删失） → 参数分布分析(P)...</code><br>
+                    3. 变量=C1，删失列=C2，删失值=<code>1</code><br>
+                    4. 假定分布下拉选 <strong>Weibull</strong><br>
+                    5. 点"估计"选项卡 → 将方法改为 <strong>"极大似然(MLE)"</strong><br>
+                    6. 确定<br><br>
+                    在输出窗口找<strong>"形状参数"</strong>行：<br>
                     • β（形状）= 1.98<br>
                     • η（尺度）= 8.50<br>
                     • B10 = 2.72<br>
-                    • B50 = 7.06<br><br>
-                    <strong>实操路径：</strong><code>统计 → 可靠性/生存 → 分布分析（右删失） → 参数分布分析(P)...</code><br>
-                    → 变量=C1，删失列=C2，删失值=1 → Weibull → 估计方法选 MLE → 确定
+                    • B50 = 7.06
                 </div>
 
                 <div class="screenshot">
                     <img src="../assets/image3.png" alt="Weibull β 参数对比图">
-                    <div class="caption">图：不同 β 值下的可靠度曲线对比（β&lt;1 早期失效，β=1 随机失效，β&gt;1 磨损失效）</div>
+                    <div class="caption">图:不同 β 值下的可靠度曲线对比(β&lt;1 早期失效,β=1 随机失效,β&gt;1 磨损失效)</div>
                 </div>
 
                 <div class="highlight">
                     <strong>⚠️ 避坑指南</strong><br>
-                    • 数据集中在 2~3 个值时，<strong>务必确认使用 MLE</strong> 而非 LSXY<br>
-                    • LSXY 可能使 β 算崩到 9+（完全失真）<br>
-                    • 如果 β 结果异常大（如 >5）且数据值很集中 → 先检查估计方法<br>
-                    • β 的点估计值要看，同时也要看置信区间——区间太宽说明样本量不够
+                    • 数据集中在 2~3 个值时,<strong>务必确认使用 MLE</strong> 而非 LSXY<br>
+                    • LSXY 可能使 β 算崩到 9+(完全失真)<br>
+                    • 如果 β 结果异常大(如 >5)且数据值很集中 → 先检查估计方法<br>
+                    • β 的点估计值要看,同时也要看置信区间--区间太宽说明样本量不够
                 </div>
 
                 <div class="highlight-blue">
                     <strong>📝 样本量要求</strong><br>
-                    • β 的估计对样本量敏感，建议至少 <strong>15~20 个样品</strong><br>
+                    • β 的估计对样本量敏感,建议至少 <strong>15~20 个样品</strong><br>
                     • 样品太少 → β 的置信区间极宽 → 无法可靠判断失效模式<br>
-                    • 传音内部建议：关键机型 30+ 台
+                    • 传音内部建议:关键机型 30+ 台
                 </div>
             </div>
 
