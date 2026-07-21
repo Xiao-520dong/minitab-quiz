@@ -225,6 +225,53 @@
         .copy-btn.copied { background: #28a745; }
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
+    
+        /* === 选项级反馈样式 === */
+        .option { position: relative; transition: all 0.3s; }
+        .option.correct-answer { border-color: #28a745 !important; background: #d4edda !important; }
+        .option.wrong-answer { border-color: #dc3545 !important; background: #f8d7da !important; }
+        .option.user-wrong { border-color: #e67e22 !important; background: #fff3cd !important; }
+        .option .option-badge {
+            display: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        .option.correct-answer .option-badge { display: inline; color: #28a745; }
+        .option.wrong-answer .option-badge { display: inline; color: #dc3545; }
+        .option.user-wrong .option-badge { display: inline; color: #e67e22; }
+        .option-feedback {
+            display: none;
+            margin-top: 6px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .option-feedback.show { display: block; }
+        .option-feedback.correct-fb { background: #d4edda; color: #155724; border-left: 3px solid #28a745; }
+        .option-feedback.wrong-fb { background: #f8d7da; color: #721c24; border-left: 3px solid #dc3545; }
+        .option-feedback.user-wrong-fb { background: #fff3cd; color: #856404; border-left: 3px solid #e67e22; }
+        .question-explanation {
+            display: none;
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #e8f0fe;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+        .question-explanation.show { display: block; }
+        .question-explanation strong { color: #667eea; }
+        .result { text-align: center; }
+        .result .score { margin-bottom: 8px; }
+        .result .score-msg { font-size: 14px; color: #666; }
+        input:disabled + label { cursor: default; }
+        .option.no-click { pointer-events: none; }
+
     </style>
 </head>
 <body>
@@ -326,20 +373,24 @@
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. 失效率</label>
-                        </div>
+                            <label for="q1a">A. 失效率</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 随时间还有多少产品没失效</label>
-                        </div>
+                            <label for="q1b">B. 随时间还有多少产品没失效</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 平均寿命</label>
-                        </div>
+                            <label for="q1c">C. 平均寿命</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. Cpk</label>
-                        </div>
+                            <label for="q1d">D. Cpk</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                     </div>
                 </div>
 
@@ -350,20 +401,24 @@
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. 整改无效</label>
-                        </div>
+                            <label for="q2a">A. 整改无效</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. 整改方向初步有效</label>
-                        </div>
+                            <label for="q2b">B. 整改方向初步有效</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. 数据错误</label>
-                        </div>
+                            <label for="q2c">C. 数据错误</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 无法判断</label>
-                        </div>
+                            <label for="q2d">D. 无法判断</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                     </div>
                 </div>
 
@@ -374,20 +429,24 @@
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 时间列</label>
-                        </div>
+                            <label for="q3a">A. 时间列</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 删失列</label>
-                        </div>
+                            <label for="q3b">B. 删失列</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 按变量分组</label>
-                        </div>
+                            <label for="q3c">C. 按变量分组</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="checkbox" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. 勾选生存图</label>
-                        </div>
+                            <label for="q3d">D. 勾选生存图</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                     </div>
                 </div>
 
@@ -398,20 +457,24 @@
                     <div class="options">
                         <div class="option">
                             <input type="radio" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 只看曲线</label>
-                        </div>
+                            <label for="q4a">A. 只看曲线</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. Log-Rank 检验 p 值</label>
-                        </div>
+                            <label for="q4b">B. Log-Rank 检验 p 值</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 样本量</label>
-                        </div>
+                            <label for="q4c">C. 样本量</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="radio" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 均值</label>
-                        </div>
+                            <label for="q4d">D. 均值</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                     </div>
                 </div>
 
@@ -422,20 +485,24 @@
                     <div class="options">
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. 曲线越高越好</label>
-                        </div>
+                            <label for="q5a">A. 曲线越高越好</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. 曲线越平缓越好</label>
-                        </div>
+                            <label for="q5b">B. 曲线越平缓越好</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. 整改后应比整改前高</label>
-                        </div>
+                            <label for="q5c">C. 整改后应比整改前高</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                         <div class="option">
                             <input type="checkbox" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 两条曲线重合说明有差异</label>
-                        </div>
+                            <label for="q5d">D. 两条曲线重合说明有差异</label><span class="option-badge"></span>
+                        <div class="option-feedback"></div>
+                    </div>
                     </div>
                 </div>
 
@@ -443,7 +510,8 @@
 
                 <div class="result" id="result">
                     <div class="score" id="score"></div>
-                    <div id="explanations"></div>
+                    <div class="score-msg">答案解析已显示在每道题的选项旁边 ↑</div>
+                    <button class="submit-btn" style="margin-top:16px;background:#667eea;" onclick="resetQuiz()">🔄 重新答题</button>
                 </div>
             </div>
         </div>
@@ -451,32 +519,36 @@
 
     <script>
         const explanations = {
-            q1: "Kaplan-Meier 曲线显示随着时间(或次数)增加,还有多少产品没失效(生存率)。",
-            q2: "整改后曲线比整改前平缓,说明失效速度变慢,整改方向初步有效。但最终判定还需统计检验。",
-            q3: "KM 分析需要设置:时间列、删失列、按变量分组,并在图形选项卡中勾选生存图。",
-            q4: "曲线只是目视判断,最终判定整改是否有效需要看 Log-Rank 检验的 p 值。",
-            q5: "KM 曲线越高越好(更多产品没失效),越平缓越好(失效速度慢),整改后应比整改前高。两条曲线重合说明没有差异。"
+            'q1': 'Kaplan-Meier 曲线显示随着时间(或次数)增加,还有多少产品没失效(生存率)。',
+            'q2': '整改后曲线比整改前平缓,说明失效速度变慢,整改方向初步有效。但最终判定还需统计检验。',
+            'q3': 'KM 分析需要设置:时间列、删失列、按变量分组,并在图形选项卡中勾选生存图。',
+            'q4': '曲线只是目视判断,最终判定整改是否有效需要看 Log-Rank 检验的 p 值。',
+            'q5': 'KM 曲线越高越好(更多产品没失效),越平缓越好(失效速度慢),整改后应比整改前高。两条曲线重合说明没有差异。'
         };
 
         function checkAnswers() {
             let score = 0;
             const questions = document.querySelectorAll('.question');
-            const explanationsDiv = document.getElementById('explanations');
-            explanationsDiv.innerHTML = '';
+            const resultDiv = document.getElementById('result');
+            const scoreDiv = document.getElementById('score');
 
             questions.forEach((q, index) => {
+                const qKey = 'q' + (index + 1);
                 const correct = q.dataset.correct.split(',').map(s => s.trim());
                 const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                const options = q.querySelectorAll('.option');
                 const selected = [];
 
+                // 收集用户选择
                 inputs.forEach(input => {
                     if (input.checked) selected.push(input.value);
                 });
 
-                const isCorrect = JSON.stringify(correct.sort()) === JSON.stringify(selected.sort());
+                const isCorrect = JSON.stringify([...correct].sort()) === JSON.stringify([...selected].sort());
+                if (isCorrect) score++;
 
+                // 题目整体标记
                 if (isCorrect) {
-                    score++;
                     q.classList.add('correct');
                     q.classList.remove('wrong');
                 } else {
@@ -484,19 +556,98 @@
                     q.classList.remove('correct');
                 }
 
-                const qNum = `q${index + 1}`;
-                const expDiv = document.createElement('div');
-                expDiv.className = 'explanation';
-                expDiv.innerHTML = `
-                    <h4>第 ${index + 1} 题解析</h4>
-                    <p><strong>正确答案:</strong>${correct.join(', ')}</p>
-                    <p>${explanations[qNum]}</p>
-                `;
-                explanationsDiv.appendChild(expDiv);
+                // 遍历每个选项，给出反馈
+                options.forEach((opt, optIdx) => {
+                    const input = opt.querySelector('input');
+                    const val = input.value;
+                    const feedback = opt.querySelector('.option-feedback');
+                    const badge = opt.querySelector('.option-badge');
+
+                    // 禁用交互
+                    input.disabled = true;
+                    opt.classList.add('no-click');
+
+                    const isCorrectOption = correct.includes(val);
+                    const isUserSelected = input.checked;
+
+                    // 清除旧状态
+                    opt.classList.remove('correct-answer', 'wrong-answer', 'user-wrong');
+                    feedback.classList.remove('show', 'correct-fb', 'wrong-fb', 'user-wrong-fb');
+
+                    if (isCorrectOption && isUserSelected) {
+                        // 选对了
+                        opt.classList.add('correct-answer');
+                        badge.textContent = '✅ 正确';
+                        feedback.textContent = '✅ 回答正确';
+                        feedback.classList.add('show', 'correct-fb');
+                    } else if (isCorrectOption && !isUserSelected) {
+                        // 是正确答案但用户没选
+                        opt.classList.add('correct-answer');
+                        badge.textContent = '✅ 正确答案';
+                        feedback.textContent = '✅ 这是正确答案';
+                        feedback.classList.add('show', 'correct-fb');
+                    } else if (!isCorrectOption && isUserSelected) {
+                        // 用户选错了
+                        opt.classList.add('user-wrong');
+                        badge.textContent = '❌ 你的选择';
+                        feedback.textContent = '❌ 你选了这个，但不是正确答案';
+                        feedback.classList.add('show', 'user-wrong-fb');
+                    } else {
+                        // 不是正确答案，用户也没选
+                        opt.classList.add('wrong-answer');
+                        badge.textContent = '❌';
+                        feedback.textContent = '❌ 不是正确答案';
+                        feedback.classList.add('show', 'wrong-fb');
+                    }
+                });
+
+                // 题目级解析（移到题目区域内）
+                let qExp = q.querySelector('.question-explanation');
+                if (!qExp) {
+                    qExp = document.createElement('div');
+                    qExp.className = 'question-explanation';
+                    q.appendChild(qExp);
+                }
+                qExp.innerHTML = '<strong>📖 解析：</strong>' + (explanations[qKey] || '');
+                qExp.classList.add('show');
             });
 
-            document.getElementById('score').textContent = `得分:${score} / ${questions.length}`;
-            document.getElementById('result').classList.add('show');
+            // 显示总分
+            scoreDiv.textContent = '得分：' + score + ' / ' + questions.length;
+            resultDiv.classList.add('show');
+
+            // 禁用提交按钮
+            document.querySelector('.submit-btn').disabled = true;
+            document.querySelector('.submit-btn').style.opacity = '0.5';
+            document.querySelector('.submit-btn').textContent = '已提交';
+        }
+
+        // 重新答题功能
+        function resetQuiz() {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(q => {
+                q.classList.remove('correct', 'wrong');
+                const inputs = q.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                inputs.forEach(input => {
+                    input.disabled = false;
+                    input.checked = false;
+                });
+                const options = q.querySelectorAll('.option');
+                options.forEach(opt => {
+                    opt.classList.remove('correct-answer', 'wrong-answer', 'user-wrong', 'no-click');
+                    const fb = opt.querySelector('.option-feedback');
+                    if (fb) { fb.classList.remove('show', 'correct-fb', 'wrong-fb', 'user-wrong-fb'); }
+                    const badge = opt.querySelector('.option-badge');
+                    if (badge) { badge.textContent = ''; }
+                });
+                const qExp = q.querySelector('.question-explanation');
+                if (qExp) { qExp.classList.remove('show'); }
+            });
+            document.getElementById('result').classList.remove('show');
+            const btn = document.querySelector('.submit-btn');
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.textContent = '提交答案';
         }
     </script>
     <script>
