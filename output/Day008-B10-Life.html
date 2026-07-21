@@ -254,16 +254,19 @@
         }
         .option-feedback.show { display: block; }
         .option-feedback.correct-fb { 
-            background: #d4edda; 
-            color: #155724;
+            background: transparent; 
+            color: #28a745; 
+            font-weight: 600;
         }
         .option-feedback.wrong-fb { 
-            background: #f8d7da; 
-            color: #721c24;
+            background: transparent; 
+            color: #dc3545; 
+            font-weight: 600;
         }
         .option-feedback.user-wrong-fb { 
-            background: #fff3cd; 
-            color: #856404;
+            background: transparent; 
+            color: #fd7e14; 
+            font-weight: 600;
         }
         .question-explanation {
             display: none;
@@ -580,25 +583,25 @@
                         // 选对了
                         opt.classList.add('correct-answer');
                         badge.textContent = '✅ 正确';
-                        feedback.textContent = '✓ 正确';
+                        feedback.textContent = '✓';
                         feedback.classList.add('show', 'correct-fb');
                     } else if (isCorrectOption && !isUserSelected) {
                         // 是正确答案但用户没选
                         opt.classList.add('correct-answer');
                         badge.textContent = '✅ 正确答案';
-                        feedback.textContent = '✓ 这是正确答案';
+                        feedback.textContent = '✓';
                         feedback.classList.add('show', 'correct-fb');
                     } else if (!isCorrectOption && isUserSelected) {
                         // 用户选错了
                         opt.classList.add('user-wrong');
                         badge.textContent = '❌ 你的选择';
-                        feedback.textContent = ' 你选了这个，但不是正确答案';
+                        feedback.textContent = '✗';
                         feedback.classList.add('show', 'user-wrong-fb');
                     } else {
                         // 不是正确答案，用户也没选
                         opt.classList.add('wrong-answer');
                         badge.textContent = '❌';
-                        feedback.textContent = '✗ 不是正确答案';
+                        feedback.textContent = '✗';
                         feedback.classList.add('show', 'wrong-fb');
                     }
                 });
