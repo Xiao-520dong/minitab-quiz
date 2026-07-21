@@ -226,45 +226,45 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v4 === */
+        /* === 选项级反馈样式 v5 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
-            border-left: 4px solid transparent;
             display: flex;
             align-items: center;
             padding: 12px 16px;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
         .option.correct-answer { 
-            border-left-color: #28a745 !important;
+            border-color: #28a745 !important;
+            background: #e8f5e9 !important;
         }
         .option.wrong-answer { 
-            border-left-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            background: #ffebee !important;
         }
         .option.user-wrong { 
-            border-left-color: #fd7e14 !important;
+            border-color: #fd7e14 !important;
+            background: #fff8e1 !important;
         }
         .option .option-badge {
             display: none !important;
         }
         .option-feedback {
             display: none;
-            font-size: 28px;
-            font-weight: 600;
-            margin-right: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-left: auto;
+            padding-left: 12px;
             line-height: 1;
             flex-shrink: 0;
         }
         .option-feedback.show { display: inline-block; }
-        .option-feedback.correct-fb { 
-            color: #28a745;
-        }
-        .option-feedback.wrong-fb { 
-            color: #dc3545;
-        }
-        .option-feedback.user-wrong-fb { 
-            color: #fd7e14;
-        }
+        .option-feedback.correct-fb { color: #28a745; }
+        .option-feedback.wrong-fb { color: #dc3545; }
+        .option-feedback.user-wrong-fb { color: #fd7e14; }
         .option label {
             flex: 1;
         }
@@ -409,24 +409,20 @@
                     <div class="question-text">Cpk=1.33 对应什么不合格率？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. 0.27%</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 0.27%</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 63 PPM</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 63 PPM</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 0.6 PPM</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 0.6 PPM</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. 0%</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 0%</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -437,24 +433,20 @@
                     <div class="question-text">Cpk=1.0 意味着什么？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. 3σ 范围</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 3σ 范围</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. 4σ 范围</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 4σ 范围</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. 5σ 范围</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 5σ 范围</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 6σ 范围</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 6σ 范围</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -465,24 +457,20 @@
                     <div class="question-text">USB 插入力 Cpk 计算需要哪些参数？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 均值</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 均值</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 标准差</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 标准差</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. USL</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. USL</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. LSL</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. LSL</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -493,24 +481,20 @@
                     <div class="question-text">Cpk&lt;1.0 说明什么？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 过程能力足够</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 过程能力足够</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 过程波动太大需要改进</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 过程波动太大需要改进</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 规格限设置错误</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 规格限设置错误</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 数据不够</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 数据不够</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -521,24 +505,20 @@
                     <div class="question-text">Cpk 的计算特点包括？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. 取两端较小值</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 取两端较小值</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. 考虑过程均值偏移</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 考虑过程均值偏移</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. 只考虑单侧规格</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 只考虑单侧规格</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 反映过程波动</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 反映过程波动</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>

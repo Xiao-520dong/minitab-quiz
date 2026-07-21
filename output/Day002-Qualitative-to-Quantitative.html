@@ -261,45 +261,45 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v4 === */
+        /* === 选项级反馈样式 v5 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
-            border-left: 4px solid transparent;
             display: flex;
             align-items: center;
             padding: 12px 16px;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
         .option.correct-answer { 
-            border-left-color: #28a745 !important;
+            border-color: #28a745 !important;
+            background: #e8f5e9 !important;
         }
         .option.wrong-answer { 
-            border-left-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            background: #ffebee !important;
         }
         .option.user-wrong { 
-            border-left-color: #fd7e14 !important;
+            border-color: #fd7e14 !important;
+            background: #fff8e1 !important;
         }
         .option .option-badge {
             display: none !important;
         }
         .option-feedback {
             display: none;
-            font-size: 28px;
-            font-weight: 600;
-            margin-right: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-left: auto;
+            padding-left: 12px;
             line-height: 1;
             flex-shrink: 0;
         }
         .option-feedback.show { display: inline-block; }
-        .option-feedback.correct-fb { 
-            color: #28a745;
-        }
-        .option-feedback.wrong-fb { 
-            color: #dc3545;
-        }
-        .option-feedback.user-wrong-fb { 
-            color: #fd7e14;
-        }
+        .option-feedback.correct-fb { color: #28a745; }
+        .option-feedback.wrong-fb { color: #dc3545; }
+        .option-feedback.user-wrong-fb { color: #fd7e14; }
         .option label {
             flex: 1;
         }
@@ -392,24 +392,20 @@
                     <div class="question-text">"这批样品的通过率是 95%，置信区间 92%-98%"属于哪个层次的分析？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1a" value="A">
-                            <label for="q1a">A. 第一层（定性）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 第一层（定性）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1b" value="B">
-                            <label for="q1b">B. 第三层（预测）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 第三层（预测）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1c" value="C">
-                            <label for="q1c">C. 第二层（统计）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 第二层（统计）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q1" id="q1d" value="D">
-                            <label for="q1d">D. 不属于任何层次</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 不属于任何层次</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -420,24 +416,20 @@
                     <div class="question-text">以下哪些属于"定性到定量"思维升级的体现？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q2" id="q2a" value="A">
-                            <label for="q2a">A. 从"这台手机跌落测试通过"到"这批手机通过率 95%"</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 从"这台手机跌落测试通过"到"这批手机通过率 95%"</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q2" id="q2b" value="B">
-                            <label for="q2b">B. 从"测试失败"到"B10 寿命预计 18 个月"</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 从"测试失败"到"B10 寿命预计 18 个月"</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q2" id="q2c" value="C">
-                            <label for="q2c">C. 从"有问题"到"置信区间 92%-98%，低于目标"</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 从"有问题"到"置信区间 92%-98%，低于目标"</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q2" id="q2d" value="D">
-                            <label for="q2d">D. 从"数据不通过"到"数据丢失"</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 从"数据不通过"到"数据丢失"</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -448,24 +440,20 @@
                     <div class="question-text">传音实验室当前大多处于哪个层次？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q3" id="q3a" value="A">
-                            <label for="q3a">A. 第二层（统计）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 第二层（统计）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q3" id="q3b" value="B">
-                            <label for="q3b">B. 第一层（定性）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 第一层（定性）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q3" id="q3c" value="C">
-                            <label for="q3c">C. 第三层（预测）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 第三层（预测）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q3" id="q3d" value="D">
-                            <label for="q3d">D. 已经全面实现定量分析</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 已经全面实现定量分析</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -476,24 +464,20 @@
                     <div class="question-text">Minitab 在"定性到定量"升级中的价值体现在？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q4" id="q4a" value="A">
-                            <label for="q4a">A. 帮助从第一层穿越到第二层</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 帮助从第一层穿越到第二层</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q4" id="q4b" value="B">
-                            <label for="q4b">B. 替代所有人工判断</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 替代所有人工判断</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q4" id="q4c" value="C">
-                            <label for="q4c">C. 帮助从第二层穿越到第三层</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 帮助从第二层穿越到第三层</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="checkbox" name="q4" id="q4d" value="D">
-                            <label for="q4d">D. 自动生成所有测试报告</label><span class="option-badge"></span>
+                                                        <input type="checkbox" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 自动生成所有测试报告</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
@@ -504,24 +488,20 @@
                     <div class="question-text">"在这个条件下，B10 寿命是多少？下一个批次预计会怎样？"这属于哪个层次？</div>
                     <div class="options">
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q5" id="q5a" value="A">
-                            <label for="q5a">A. 第一层（定性）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 第一层（定性）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q5" id="q5b" value="B">
-                            <label for="q5b">B. 第二层（统计）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 第二层（统计）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q5" id="q5c" value="C">
-                            <label for="q5c">C. 第三层（预测）</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 第三层（预测）</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                         <div class="option">
-                            <div class="option-feedback"></div>
-                            <input type="radio" name="q5" id="q5d" value="D">
-                            <label for="q5d">D. 不属于任何层次</label><span class="option-badge"></span>
+                                                        <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 不属于任何层次</label><span class="option-badge"></span><div class="option-feedback"></div>
                                             </div>
                     </div>
                 </div>
