@@ -711,9 +711,10 @@
         const rows = table.querySelectorAll("tr");
         rows.forEach((row, i) => {
             const cells = row.querySelectorAll("th, td");
-            const rowData = [];
-            cells.forEach(cell => rowData.push(cell.textContent.trim()));
-            text += rowData.join("\t") + "\n";
+            // 只复制第二列（数据列），跳过第一列（序号）
+            if (cells.length >= 2) {
+                text += cells[1].textContent.trim() + "\n";
+            }
         });
         navigator.clipboard.writeText(text).then(() => {
             const btn = event.target;
