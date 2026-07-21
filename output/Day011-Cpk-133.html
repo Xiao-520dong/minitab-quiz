@@ -369,6 +369,17 @@
                     • 结论：1.56 &gt; 1.33 → 过程能力足够 ✓
                 </div>
 
+                <div class="highlight">
+                    <strong>📐 规格限是怎么定义的？</strong><br>
+                    LSL/USL 的具体数字<strong>不是统计出来的</strong>，是<strong>产品设计或客户要求决定的硬边界</strong>。<br><br>
+                    USB 插入力 0.5~2.0 Kgf 的来源：<br>
+                    • <strong>LSL = 0.5 Kgf</strong>（下限）：插太松会接触不良<br>
+                    • <strong>USL = 2.0 Kgf</strong>（上限）：插太紧会损坏接口<br><br>
+                    这两个值来自：① 结构设计规范（结构工程师根据 USB 接口的物理特性定义）② 客户 Spec（如果客户有特殊要求）③ 企业标准（传音的 QM-ST-STP-R-002 V2.8 第 5.3.24 条款）<br><br>
+                    <strong>关键原则：</strong>规格限是固定的，工程师不能随意改动。Cpk 不够 → 说明制程有问题，需要改进制程，而不是改规格。<br>
+                    简单说：<strong>规格限是"产品能不能用"的物理边界，Cpk 是"制程稳不稳"的统计指标</strong>。两者不能混为一谈。
+                </div>
+
                 <div class="table-header">
                     <span class="table-title"> USB 插入力数据（30 点，复制到 C1 列）</span>
                     <button class="copy-btn" onclick="copyTable('usb-data')">📋 复制数据</button>
