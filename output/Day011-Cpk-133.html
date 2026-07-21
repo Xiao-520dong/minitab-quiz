@@ -374,37 +374,37 @@
                     <button class="copy-btn" onclick="copyTable('usb-data')">📋 复制数据</button>
                 </div>
                 <table class="data-table" id="usb-data">
-                    <tr><th>序号</th><th>C1 (Kgf)</th></tr>
-                    <tr><td>1</td><td>1.18</td></tr>
-                    <tr><td>2</td><td>1.17</td></tr>
-                    <tr><td>3</td><td>1.18</td></tr>
-                    <tr><td>4</td><td>1.21</td></tr>
-                    <tr><td>5</td><td>1.19</td></tr>
-                    <tr><td>6</td><td>0.98</td></tr>
-                    <tr><td>7</td><td>1.25</td></tr>
-                    <tr><td>8</td><td>1.16</td></tr>
-                    <tr><td>9</td><td>1.17</td></tr>
-                    <tr><td>10</td><td>1.22</td></tr>
-                    <tr><td>11</td><td>1.22</td></tr>
-                    <tr><td>12</td><td>1.22</td></tr>
-                    <tr><td>13</td><td>1.27</td></tr>
-                    <tr><td>14</td><td>1.20</td></tr>
-                    <tr><td>15</td><td>1.22</td></tr>
-                    <tr><td>16</td><td>1.09</td></tr>
-                    <tr><td>17</td><td>1.08</td></tr>
-                    <tr><td>18</td><td>1.24</td></tr>
-                    <tr><td>19</td><td>1.40</td></tr>
-                    <tr><td>20</td><td>1.18</td></tr>
-                    <tr><td>21</td><td>1.21</td></tr>
-                    <tr><td>22</td><td>1.19</td></tr>
-                    <tr><td>23</td><td>1.28</td></tr>
-                    <tr><td>24</td><td>0.99</td></tr>
-                    <tr><td>25</td><td>1.15</td></tr>
-                    <tr><td>26</td><td>1.27</td></tr>
-                    <tr><td>27</td><td>1.22</td></tr>
-                    <tr><td>28</td><td>1.16</td></tr>
-                    <tr><td>29</td><td>1.26</td></tr>
-                    <tr><td>30</td><td>1.24</td></tr>
+                    <tr><th>C1 (Kgf)</th></tr>
+                    <tr><td>1.18</td></tr>
+                    <tr><td>1.17</td></tr>
+                    <tr><td>1.18</td></tr>
+                    <tr><td>1.21</td></tr>
+                    <tr><td>1.19</td></tr>
+                    <tr><td>0.98</td></tr>
+                    <tr><td>1.25</td></tr>
+                    <tr><td>1.16</td></tr>
+                    <tr><td>1.17</td></tr>
+                    <tr><td>1.22</td></tr>
+                    <tr><td>1.22</td></tr>
+                    <tr><td>1.22</td></tr>
+                    <tr><td>1.27</td></tr>
+                    <tr><td>1.20</td></tr>
+                    <tr><td>1.22</td></tr>
+                    <tr><td>1.09</td></tr>
+                    <tr><td>1.08</td></tr>
+                    <tr><td>1.24</td></tr>
+                    <tr><td>1.40</td></tr>
+                    <tr><td>1.18</td></tr>
+                    <tr><td>1.21</td></tr>
+                    <tr><td>1.19</td></tr>
+                    <tr><td>1.28</td></tr>
+                    <tr><td>0.99</td></tr>
+                    <tr><td>1.15</td></tr>
+                    <tr><td>1.27</td></tr>
+                    <tr><td>1.22</td></tr>
+                    <tr><td>1.16</td></tr>
+                    <tr><td>1.26</td></tr>
+                    <tr><td>1.24</td></tr>
                 </table>
 
                 <div class="highlight">
@@ -711,10 +711,9 @@
         const rows = table.querySelectorAll("tr");
         rows.forEach((row, i) => {
             const cells = row.querySelectorAll("th, td");
-            // 只复制第二列（数据列），跳过第一列（序号）
-            if (cells.length >= 2) {
-                text += cells[1].textContent.trim() + "\n";
-            }
+            const rowData = [];
+            cells.forEach(cell => rowData.push(cell.textContent.trim()));
+            text += rowData.join("\t") + "\n";
         });
         navigator.clipboard.writeText(text).then(() => {
             const btn = event.target;
