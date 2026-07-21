@@ -341,7 +341,7 @@
                 <p><strong>🔧 Minitab 操作步骤：</strong></p>
                 <div class="highlight-green">
                     <strong>能力分析路径：</strong><br>
-                    统计 → 质量工具 → 能力分析 → 正态 → 单列选 C1 → 规格下限填<strong>具体数值</strong>（如 0.5）、规格上限填<strong>具体数值</strong>（如 2.0）→ 确定
+                    统计 → 质量工具 → 能力分析 → 正态 → 选<strong>单列</strong> → 变量填 C1 → 子组大小填<strong> 1</strong> → 规格下限填<strong>具体数值</strong>（如 0.5）、规格上限填<strong>具体数值</strong>（如 2.0）→ 确定
                 </div>
 
                 <p><strong> 结果判读（三层检查）：</strong></p>
@@ -364,9 +364,9 @@
                 <div class="highlight-green">
                     <strong>案例数据：</strong><br>
                     • 规格：0.5~2.0 Kgf（LSL=0.5, USL=2.0）<br>
-                    • 实测：均值 1.2，标准差 0.15<br>
-                    • 计算：Cpk = min((2.0-1.2)/(3×0.15), (1.2-0.5)/(3×0.15)) = min(1.78, 1.56) = <strong>1.56</strong><br>
-                    • 结论：1.56 &gt; 1.33 → 过程能力足够 ✓
+                    • 实测：均值 1.1933，标准差（组内）0.0752<br>
+                    • 计算：Cpk = min((2.0-1.1933)/(3×0.0752), (1.1933-0.5)/(3×0.0752)) = min(3.57, 3.07) = <strong>2.07</strong><br>
+                    • 结论：2.07 &gt; 1.33 → 过程能力充足 ✓
                 </div>
 
                 <div class="highlight">
@@ -378,6 +378,11 @@
                     这两个值来自：① 结构设计规范（结构工程师根据 USB 接口的物理特性定义）② 客户 Spec（如果客户有特殊要求）③ 企业标准（传音的 QM-ST-STP-R-002 V2.8 第 5.3.24 条款）<br><br>
                     <strong>关键原则：</strong>规格限是固定的，工程师不能随意改动。Cpk 不够 → 说明制程有问题，需要改进制程，而不是改规格。<br>
                     简单说：<strong>规格限是"产品能不能用"的物理边界，Cpk 是"制程稳不稳"的统计指标</strong>。两者不能混为一谈。
+                </div>
+
+                <div class="screenshot">
+                    <img src="../assets/cpk-usb-result.jpg" alt="USB 插入力能力分析结果">
+                    <div class="caption">图：USB 插入力能力分析结果（Cpk=2.07，过程能力充足）</div>
                 </div>
 
                 <div class="table-header">
