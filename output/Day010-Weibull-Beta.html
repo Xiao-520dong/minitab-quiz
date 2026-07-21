@@ -226,11 +226,14 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v2 === */
+        /* === 选项级反馈样式 v4 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
             border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
         }
         .option.correct-answer { 
             border-left-color: #28a745 !important;
@@ -246,27 +249,24 @@
         }
         .option-feedback {
             display: none;
-            margin-top: 8px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .option-feedback.show { display: block; }
-        .option-feedback.correct-fb { 
-            background: transparent; 
-            color: #28a745; 
+            font-size: 28px;
             font-weight: 600;
+            margin-right: 12px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .option-feedback.show { display: inline-block; }
+        .option-feedback.correct-fb { 
+            color: #28a745;
         }
         .option-feedback.wrong-fb { 
-            background: transparent; 
-            color: #dc3545; 
-            font-weight: 600;
+            color: #dc3545;
         }
         .option-feedback.user-wrong-fb { 
-            background: transparent; 
-            color: #fd7e14; 
-            font-weight: 600;
+            color: #fd7e14;
+        }
+        .option label {
+            flex: 1;
         }
         .question-explanation {
             display: none;
@@ -473,25 +473,25 @@
                     <div class="question-text">β = 1.98 说明什么类型的失效?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1a" value="A">
                             <label for="q1a">A. 早期失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1b" value="B">
                             <label for="q1b">B. 随机失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1c" value="C">
                             <label for="q1c">C. 磨损失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1d" value="D">
                             <label for="q1d">D. 无法判断</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -501,25 +501,25 @@
                     <div class="question-text">β &lt; 1 应该查什么?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2a" value="A">
                             <label for="q2a">A. 设计问题</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2b" value="B">
                             <label for="q2b">B. 来料质量 / 制造缺陷</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2c" value="C">
                             <label for="q2c">C. 使用环境</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2d" value="D">
                             <label for="q2d">D. 操作员</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -529,25 +529,25 @@
                     <div class="question-text">β 参数的判断规则包括?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3a" value="A">
                             <label for="q3a">A. β &lt; 1 早期失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3b" value="B">
                             <label for="q3b">B. β = 1 随机失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3c" value="C">
                             <label for="q3c">C. β &gt; 1 磨损失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3d" value="D">
                             <label for="q3d">D. β = 0 无失效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -557,25 +557,25 @@
                     <div class="question-text">W-795 跌落 β = 1.98,失效根因在于?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4a" value="A">
                             <label for="q4a">A. 来料</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4b" value="B">
                             <label for="q4b">B. 设计 / 工艺</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4c" value="C">
                             <label for="q4c">C. 使用环境</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4d" value="D">
                             <label for="q4d">D. 操作员</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -585,25 +585,25 @@
                     <div class="question-text">关于 MLE 估计,正确的有?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5a" value="A">
                             <label for="q5a">A. 数据集中在 2~3 个值时应使用 MLE</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5b" value="B">
                             <label for="q5b">B. LSXY 可能使 β 算崩到 9+</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5c" value="C">
                             <label for="q5c">C. MLE 结果更可靠</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5d" value="D">
                             <label for="q5d">D. MLE 是默认方法</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 

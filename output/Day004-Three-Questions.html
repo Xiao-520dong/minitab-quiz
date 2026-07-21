@@ -251,11 +251,14 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v2 === */
+        /* === 选项级反馈样式 v4 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
             border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
         }
         .option.correct-answer { 
             border-left-color: #28a745 !important;
@@ -271,27 +274,24 @@
         }
         .option-feedback {
             display: none;
-            margin-top: 8px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .option-feedback.show { display: block; }
-        .option-feedback.correct-fb { 
-            background: transparent; 
-            color: #28a745; 
+            font-size: 28px;
             font-weight: 600;
+            margin-right: 12px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .option-feedback.show { display: inline-block; }
+        .option-feedback.correct-fb { 
+            color: #28a745;
         }
         .option-feedback.wrong-fb { 
-            background: transparent; 
-            color: #dc3545; 
-            font-weight: 600;
+            color: #dc3545;
         }
         .option-feedback.user-wrong-fb { 
-            background: transparent; 
-            color: #fd7e14; 
-            font-weight: 600;
+            color: #fd7e14;
+        }
+        .option label {
+            flex: 1;
         }
         .question-explanation {
             display: none;
@@ -378,25 +378,25 @@
                     <div class="question-text">三层提问法的正确顺序是？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1a" value="A">
                             <label for="q1a">A. 作用→目的→价值产出</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1b" value="B">
                             <label for="q1b">B. 目的→作用→价值产出</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1c" value="C">
                             <label for="q1c">C. 价值产出→目的→作用</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1d" value="D">
                             <label for="q1d">D. 没有固定顺序</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -406,25 +406,25 @@
                     <div class="question-text">以下哪些属于"目的"层面需要回答的问题？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2a" value="A">
                             <label for="q2a">A. 为什么要做这个分析？</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2b" value="B">
                             <label for="q2b">B. Minitab 输入什么、输出什么？</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2c" value="C">
                             <label for="q2c">C. 要回答什么业务问题？</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2d" value="D">
                             <label for="q2d">D. 做完后谁能用？</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -434,25 +434,25 @@
                     <div class="question-text">如果三层提问法中"价值产出"答不上来，说明什么？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3a" value="A">
                             <label for="q3a">A. 分析太复杂，不适合做</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3b" value="B">
                             <label for="q3b">B. 还没准备好做这个分析</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3c" value="C">
                             <label for="q3c">C. 需要换一种工具</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3d" value="D">
                             <label for="q3d">D. 可以直接做，不需要价值产出</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -462,25 +462,25 @@
                     <div class="question-text">在做 Weibull B10 寿命分析前，三层提问法的正确应用是？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4a" value="A">
                             <label for="q4a">A. 目的：量化回答"B10 寿命是多少次"</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4b" value="B">
                             <label for="q4b">B. 作用：把"通过了"变成"B10 寿命 X 次，置信区间 Y~Z"</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4c" value="C">
                             <label for="q4c">C. 价值产出：测试负责人有量化指标作为放行依据</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4d" value="D">
                             <label for="q4d">D. 不需要价值产出，直接跑数据就行</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -490,25 +490,25 @@
                     <div class="question-text">三层提问法的核心价值是什么？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5a" value="A">
                             <label for="q5a">A. 让分析更快</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5b" value="B">
                             <label for="q5b">B. 确保每次分析都有明确的业务目标和价值</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5c" value="C">
                             <label for="q5c">C. 减少 Minitab 操作步骤</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5d" value="D">
                             <label for="q5d">D. 让报告更好看</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 

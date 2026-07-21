@@ -226,11 +226,14 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v2 === */
+        /* === 选项级反馈样式 v4 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
             border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
         }
         .option.correct-answer { 
             border-left-color: #28a745 !important;
@@ -246,27 +249,24 @@
         }
         .option-feedback {
             display: none;
-            margin-top: 8px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .option-feedback.show { display: block; }
-        .option-feedback.correct-fb { 
-            background: transparent; 
-            color: #28a745; 
+            font-size: 28px;
             font-weight: 600;
+            margin-right: 12px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .option-feedback.show { display: inline-block; }
+        .option-feedback.correct-fb { 
+            color: #28a745;
         }
         .option-feedback.wrong-fb { 
-            background: transparent; 
-            color: #dc3545; 
-            font-weight: 600;
+            color: #dc3545;
         }
         .option-feedback.user-wrong-fb { 
-            background: transparent; 
-            color: #fd7e14; 
-            font-weight: 600;
+            color: #fd7e14;
+        }
+        .option label {
+            flex: 1;
         }
         .question-explanation {
             display: none;
@@ -440,25 +440,25 @@
                     <div class="question-text">Log-Rank 检验的用途是?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1a" value="A">
                             <label for="q1a">A. 计算 Cpk</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1b" value="B">
                             <label for="q1b">B. 比较两条生存曲线是否有显著差异</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1c" value="C">
                             <label for="q1c">C. 画 Pareto 图</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1d" value="D">
                             <label for="q1d">D. 检验正态性</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -468,25 +468,25 @@
                     <div class="question-text">Log-Rank p=0.003 的结论是?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2a" value="A">
                             <label for="q2a">A. 整改无效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2b" value="B">
                             <label for="q2b">B. 整改有统计显著改善</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2c" value="C">
                             <label for="q2c">C. 需要更多数据</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2d" value="D">
                             <label for="q2d">D. 无法判断</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -496,25 +496,25 @@
                     <div class="question-text">Log-Rank 和 Wilcoxon 的区别包括?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3a" value="A">
                             <label for="q3a">A. Log-Rank 对整体差异敏感</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3b" value="B">
                             <label for="q3b">B. Wilcoxon 对早期差异敏感</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3c" value="C">
                             <label for="q3c">C. 可靠性场景优先看 Log-Rank</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3d" value="D">
                             <label for="q3d">D. 两者完全一样</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -524,25 +524,25 @@
                     <div class="question-text">两个检验 p 值不一致时应该?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4a" value="A">
                             <label for="q4a">A. 随便选一个</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4b" value="B">
                             <label for="q4b">B. 看差异主要发生在哪个阶段</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4c" value="C">
                             <label for="q4c">C. 放弃分析</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4d" value="D">
                             <label for="q4d">D. 重新做实验</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -552,25 +552,25 @@
                     <div class="question-text">Log-Rank 检验的正确判断包括?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5a" value="A">
                             <label for="q5a">A. p &lt; 0.05 整改有效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5b" value="B">
                             <label for="q5b">B. p ≥ 0.05 数据不足以证明改善</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5c" value="C">
                             <label for="q5c">C. p &lt; 0.05 可以放行</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5d" value="D">
                             <label for="q5d">D. p=0.5 整改有效</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 

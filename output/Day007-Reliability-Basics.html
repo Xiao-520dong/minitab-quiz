@@ -226,11 +226,14 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v2 === */
+        /* === 选项级反馈样式 v4 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
             border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
         }
         .option.correct-answer { 
             border-left-color: #28a745 !important;
@@ -246,27 +249,24 @@
         }
         .option-feedback {
             display: none;
-            margin-top: 8px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .option-feedback.show { display: block; }
-        .option-feedback.correct-fb { 
-            background: transparent; 
-            color: #28a745; 
+            font-size: 28px;
             font-weight: 600;
+            margin-right: 12px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .option-feedback.show { display: inline-block; }
+        .option-feedback.correct-fb { 
+            color: #28a745;
         }
         .option-feedback.wrong-fb { 
-            background: transparent; 
-            color: #dc3545; 
-            font-weight: 600;
+            color: #dc3545;
         }
         .option-feedback.user-wrong-fb { 
-            background: transparent; 
-            color: #fd7e14; 
-            font-weight: 600;
+            color: #fd7e14;
+        }
+        .option label {
+            flex: 1;
         }
         .question-explanation {
             display: none;
@@ -359,25 +359,25 @@
                     <div class="question-text">可靠性的三个"规定"不包括以下哪个？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1a" value="A">
                             <label for="q1a">A. 规定条件</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1b" value="B">
                             <label for="q1b">B. 规定时间</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1c" value="C">
                             <label for="q1c">C. 规定功能</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1d" value="D">
                             <label for="q1d">D. 规定价格</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -387,25 +387,25 @@
                     <div class="question-text">W-795 受控跌落测试的三个"规定"是什么？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2a" value="A">
                             <label for="q2a">A. 1m 大理石</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2b" value="B">
                             <label for="q2b">B. 10 次</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2c" value="C">
                             <label for="q2c">C. 屏幕不碎</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q2" id="q2d" value="D">
                             <label for="q2d">D. 手机品牌</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -415,25 +415,25 @@
                     <div class="question-text">恒温恒湿测试属于可靠性测试的哪个维度？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3a" value="A">
                             <label for="q3a">A. 规定条件</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3b" value="B">
                             <label for="q3b">B. 规定时间</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3c" value="C">
                             <label for="q3c">C. 规定功能</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q3" id="q3d" value="D">
                             <label for="q3d">D. 以上都是</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -443,25 +443,25 @@
                     <div class="question-text">为什么可靠性需要三个"规定"？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4a" value="A">
                             <label for="q4a">A. 缺少任何一个都无法标准化</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4b" value="B">
                             <label for="q4b">B. 无法复现测试</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4c" value="C">
                             <label for="q4c">C. 无法对比结果</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q4" id="q4d" value="D">
                             <label for="q4d">D. 只是形式要求</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -471,25 +471,25 @@
                     <div class="question-text">可靠性测试的核心目的是什么？</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5a" value="A">
                             <label for="q5a">A. 让产品看起来好</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5b" value="B">
                             <label for="q5b">B. 验证产品在规定条件下的功能能力</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5c" value="C">
                             <label for="q5c">C. 降低成本</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q5" id="q5d" value="D">
                             <label for="q5d">D. 提高产量</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 

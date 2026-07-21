@@ -226,11 +226,14 @@
         .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .table-title { font-weight: 600; color: #333; font-size: 15px; }
     
-        /* === 选项级反馈样式 v2 === */
+        /* === 选项级反馈样式 v4 === */
         .option { 
             position: relative; 
             transition: all 0.3s;
             border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
         }
         .option.correct-answer { 
             border-left-color: #28a745 !important;
@@ -246,27 +249,24 @@
         }
         .option-feedback {
             display: none;
-            margin-top: 8px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .option-feedback.show { display: block; }
-        .option-feedback.correct-fb { 
-            background: transparent; 
-            color: #28a745; 
+            font-size: 28px;
             font-weight: 600;
+            margin-right: 12px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .option-feedback.show { display: inline-block; }
+        .option-feedback.correct-fb { 
+            color: #28a745;
         }
         .option-feedback.wrong-fb { 
-            background: transparent; 
-            color: #dc3545; 
-            font-weight: 600;
+            color: #dc3545;
         }
         .option-feedback.user-wrong-fb { 
-            background: transparent; 
-            color: #fd7e14; 
-            font-weight: 600;
+            color: #fd7e14;
+        }
+        .option label {
+            flex: 1;
         }
         .question-explanation {
             display: none;
@@ -379,25 +379,25 @@
                     <div class="question-text">Pareto 法则的核心是?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1a" value="A">
                             <label for="q1a">A. 50/50</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1b" value="B">
                             <label for="q1b">B. 80/20</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1c" value="C">
                             <label for="q1c">C. 90/10</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q1" id="q1d" value="D">
                             <label for="q1d">D. 70/30</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -407,25 +407,25 @@
                     <div class="question-text">Pareto 图中累积百分比线的作用是?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2a" value="A">
                             <label for="q2a">A. 好看</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2b" value="B">
                             <label for="q2b">B. 找到累积 80% 的临界点</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2c" value="C">
                             <label for="q2c">C. 计算平均值</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q2" id="q2d" value="D">
                             <label for="q2d">D. 判断正态性</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -435,25 +435,25 @@
                     <div class="question-text">W-795 跌落失效方向中,优先整改的方向包括?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3a" value="A">
                             <label for="q3a">A. 左上角</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3b" value="B">
                             <label for="q3b">B. 右侧</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3c" value="C">
                             <label for="q3c">C. 右上角</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q3" id="q3d" value="D">
                             <label for="q3d">D. 其他</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -463,25 +463,25 @@
                     <div class="question-text">Minitab 做 Pareto 图应该选哪个选项?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4a" value="A">
                             <label for="q4a">A. 原始缺陷数据(C)</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4b" value="B">
                             <label for="q4b">B. 已整理成表格的缺陷数据(X)</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4c" value="C">
                             <label for="q4c">C. 两者都可以</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="radio" name="q4" id="q4d" value="D">
                             <label for="q4d">D. 以上都不对</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
@@ -491,25 +491,25 @@
                     <div class="question-text">Pareto 图的应用场景包括?</div>
                     <div class="options">
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5a" value="A">
                             <label for="q5a">A. 失效方向分析</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5b" value="B">
                             <label for="q5b">B. 失效模式分类</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5c" value="C">
                             <label for="q5c">C. 找到主要矛盾</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                         <div class="option">
+                            <div class="option-feedback"></div>
                             <input type="checkbox" name="q5" id="q5d" value="D">
                             <label for="q5d">D. 计算 Cpk</label><span class="option-badge"></span>
-                        <div class="option-feedback"></div>
-                    </div>
+                                            </div>
                     </div>
                 </div>
 
