@@ -338,6 +338,30 @@
                     C2 = 次数(3 / 2 / 2 / 1)
                 </div>
 
+                <div class="data-section">
+                    <span class="table-title">📊 数据表（复制到 Minitab C1/C2 列）</span>
+                    <button class="copy-btn" onclick="copyTable('table013')">📋 复制数据</button>
+                </div>
+                <table class="data-table" id="table013">
+                    <thead>
+                        <tr><th>C1 方向</th><th>C2 次数</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>左上角</td><td>3</td></tr>
+                        <tr><td>右侧</td><td>2</td></tr>
+                        <tr><td>右上角</td><td>2</td></tr>
+                        <tr><td>其他</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                    说明：W-795 跌落失效方向统计，共 8 台失效手机
+                </div>
+
+                <div class="screenshot">
+                    <img src="../assets/pareto-chart.png" alt="Pareto 图 - W-795 跌落失效方向分析">
+                    <div class="caption">图：Pareto 图（左上角 + 右侧 + 右上角 = 87.5%，优先整改这三个方向）</div>
+                </div>
+
                 <p><strong>🔍 结果判读(三层解读):</strong></p>
                 <div class="highlight-blue">
                     <strong>第一层:</strong>看累积百分比线--找到第一个超过 80% 的柱,从它往左的都是"优先整改方向"<br>

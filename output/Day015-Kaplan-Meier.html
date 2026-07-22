@@ -346,6 +346,50 @@
                     • 删失值 = <strong>1</strong>(标记为 1 的是删失数据)
                 </div>
 
+                <div class="data-section">
+                    <span class="table-title">📊 数据表（复制到 Minitab C1/C2/C3 列）</span>
+                    <button class="copy-btn" onclick="copyTable('table015')">📋 复制数据</button>
+                </div>
+                <table class="data-table" id="table015">
+                    <thead>
+                        <tr><th>C1 失效次数</th><th>C2 删失标记</th><th>C3 组别</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>4</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>4</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>4</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>5</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>5</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>5</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>5</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>5</td><td>0</td><td>整改前</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改前</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改前</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改前</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改前</td></tr>
+                        <tr><td>8</td><td>0</td><td>整改后</td></tr>
+                        <tr><td>9</td><td>0</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                        <tr><td>10</td><td>1</td><td>整改后</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                    说明：0 = 失效，1 = 删失/全过；整改前 12 台（8 失效 + 4 删失），整改后 12 台（2 失效 + 10 删失）
+                </div>
+
+                <div class="screenshot">
+                    <img src="../assets/km-curve.png" alt="Kaplan-Meier 生存曲线 - 整改前后对比">
+                    <div class="caption">图：Kaplan-Meier 生存曲线（整改后曲线更平缓，初步说明整改有效）</div>
+                </div>
+
                 <div class="highlight">
                     <strong>⚠️ 注意事项</strong><br>
                     • 整改前和整改后数据放在同一列(C1),用 C3 列区分组别<br>
