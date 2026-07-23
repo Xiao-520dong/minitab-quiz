@@ -326,6 +326,20 @@
                     • 这是制造业通用的"最低合格门槛"
                 </div>
 
+                <div class="highlight">
+                    <strong> σ 是什么？</strong><br>
+                    σ（读作"sigma"，希腊字母）= <strong>标准差</strong>，衡量数据波动大小。<br>
+                    • σ 越小 → 数据越集中 → 过程越稳定<br>
+                    • σ 越大 → 数据越分散 → 过程波动大<br>
+                    <br>
+                    在 Cpk 公式中：<br>
+                    • <strong>3σ</strong> = 过程的实际波动范围（单侧）<br>
+                    • <strong>6σ</strong> = 过程的总波动范围（双侧）<br>
+                    • Cpk = 规格带宽 ÷ 6σ = (USL-LSL) ÷ 6σ<br>
+                    <br>
+                    所以 Cpk=1.33 意味着：规格带宽 = 4σ × 3 = 12σ ÷ 6σ × 2 = 4σ（单侧）
+                </div>
+
                 <div class="screenshot">
                     <img src="../assets/image7.png" alt="正态概率图 - USB 插入力">
                     <div class="caption">图：USB 插入力正态概率图（p=0.125 &gt; 0.05，数据服从正态分布）</div>
@@ -365,8 +379,8 @@
                     <strong>案例数据：</strong><br>
                     • 规格：0.5~2.0 Kgf（LSL=0.5, USL=2.0）<br>
                     • 实测：均值 1.1933，标准差（组内）0.0752<br>
-                    • 计算：Cpk = min((2.0-1.1933)/(3×0.0752), (1.1933-0.5)/(3×0.0752)) = min(3.57, 3.07) = <strong>2.07</strong><br>
-                    • 结论：2.07 &gt; 1.33 → 过程能力充足 ✓
+                    • 计算：Cpk = min((2.0-1.1933)/(3×0.0752), (1.1933-0.5)/(3×0.0752)) = min(3.57, 3.07) = <strong>3.07</strong><br>
+                    • 结论：3.07 &gt; 1.33 → 过程能力充足 ✓
                 </div>
 
                 <div class="highlight">
