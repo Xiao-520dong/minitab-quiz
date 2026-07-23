@@ -319,22 +319,35 @@
                 <p>它衡量两个东西：① 过程均值偏离规格中心多远 ② 过程波动有多大</p>
 
                 <div class="highlight-blue">
-                    <strong>📐 为什么是 1.33？</strong><br>
+                    <strong> 为什么是 1.33？</strong><br>
                     <br>
-                    <strong>第一步：理解 Cpk 公式</strong><br>
-                    • Cpk = (USL - LSL) ÷ (6σ)（当过程中心与规格中心重合时）<br>
-                    • 6σ = 过程的总波动范围（双侧）<br>
+                    <strong>核心问题：为什么选 1.33，而不是 1.0 或 1.5？</strong><br>
                     <br>
-                    <strong>第二步：反推规格带宽</strong><br>
-                    • 如果 Cpk = 1.33，那么：<br>
-                    • 规格带宽 = 1.33 × 6σ = <strong>8σ</strong>（即 ±4σ）<br>
+                    <strong>答案：1.33 = 4/3 = 8σ  6σ</strong><br>
                     <br>
-                    <strong>第三步：考虑均值偏移</strong><br>
-                    • 实际生产中，过程均值可能偏移 ±1.5σ<br>
-                    • 偏移后单侧余量 = 4σ - 1.5σ = <strong>2.5σ</strong><br>
-                    • 查正态分布表：P(Z > 2.5) ≈ <strong>0.0062% ≈ 63 PPM</strong><br>
+                    <strong>推导过程：</strong><br>
+                    ① 确定目标质量水平<br>
+                    &nbsp;&nbsp;&nbsp;• 我们希望不合格品率 &lt; 100 PPM（百万分之 100）<br>
+                    &nbsp;&nbsp;&nbsp;• 查正态分布表：±4σ 覆盖 99.994%，不合格率约 63 PPM ✓<br>
                     <br>
-                    <strong>结论：</strong>Cpk=1.33 保证即使均值偏移 1.5σ，不合格品率仍控制在 63 PPM 以内，这是制造业通用的"最低合格门槛"。
+                    ② 计算规格带宽<br>
+                    &nbsp;&nbsp;&nbsp;• 规格带宽 = ±4σ × 2 = <strong>8σ</strong><br>
+                    <br>
+                    ③ 计算 Cpk<br>
+                    &nbsp;&nbsp;&nbsp;• Cpk = 规格带宽 ÷ 6σ = 8σ ÷ 6σ = 4/3 ≈ <strong>1.33</strong><br>
+                    <br>
+                    <strong>为什么不是 1.0？</strong><br>
+                    • Cpk=1.0 → 规格带宽 = 6σ（±3σ）<br>
+                    • 如果均值偏移 1.5σ，只剩 1.5σ 余量<br>
+                    • 不合格率 ≈ 6.7%（67000 PPM）❌ 太高了<br>
+                    <br>
+                    <strong>为什么不是 1.5？</strong><br>
+                    • Cpk=1.5 → 规格带宽 = 9σ（±4.5σ）<br>
+                    • 质量更好，但成本更高<br>
+                    • 对于一般制造业，1.33 是性价比最好的选择<br>
+                    <br>
+                    <strong>一句话总结：</strong><br>
+                    1.33 = 4/3，来自"规格带宽 8σ ÷ 过程波动 6σ"，保证即使均值偏移 1.5σ，不合格率仍控制在 63 PPM 以内。这是制造业通用的"最低合格门槛"。
                 </div>
 
                 <div class="highlight">
