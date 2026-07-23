@@ -346,10 +346,40 @@
 
                 <p><strong>📱 传音场景：USB 插入力多批次分析</strong></p>
                 <div class="highlight-green">
-                    <strong>场景：</strong>同一供应商 USB 连接器，跨 3 个批次采集 100 个数据点<br>
+                    <strong>场景：</strong>同一供应商 USB 连接器，跨 3 个批次采集 15 个数据点<br>
                     <strong>结果：</strong>Cpk=1.8（子组内波动小），Ppk=1.2（批次间有偏移）<br>
                     <strong>解读：</strong>Cpk &gt; Ppk 差距较大 → 批次间变异显著<br>
                     <strong>行动：</strong>检查不同批次的来料尺寸差异，反馈供应商控制批次一致性
+                </div>
+
+                <div class="table-header">
+                    <span class="table-title">📊 数据表（复制到 Minitab C1/C2 列）</span>
+                    <button class="copy-btn" onclick="copyTable('cpk-ppk-data')">📋 复制数据</button>
+                </div>
+                <table class="data-table" id="cpk-ppk-data">
+                    <thead>
+                        <tr><th>C1 USB插入力 (Kgf)</th><th>C2 批次</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1.18</td><td>1</td></tr>
+                        <tr><td>1.22</td><td>1</td></tr>
+                        <tr><td>1.20</td><td>1</td></tr>
+                        <tr><td>1.19</td><td>1</td></tr>
+                        <tr><td>1.21</td><td>1</td></tr>
+                        <tr><td>1.35</td><td>2</td></tr>
+                        <tr><td>1.38</td><td>2</td></tr>
+                        <tr><td>1.36</td><td>2</td></tr>
+                        <tr><td>1.37</td><td>2</td></tr>
+                        <tr><td>1.39</td><td>2</td></tr>
+                        <tr><td>1.05</td><td>3</td></tr>
+                        <tr><td>1.08</td><td>3</td></tr>
+                        <tr><td>1.06</td><td>3</td></tr>
+                        <tr><td>1.07</td><td>3</td></tr>
+                        <tr><td>1.09</td><td>3</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 12px; color: #666; margin-top: 4px;">
+                    说明：3个批次，批次内波动小但批次间差异大。操作：统计 → 质量工具 → 能力分析 → 正态 → 单列=C1，子组大小=5 → 查看 Cpk 和 Ppk 差异
                 </div>
 
                 <div class="highlight">
