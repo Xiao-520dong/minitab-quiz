@@ -385,7 +385,7 @@
                 <div class="highlight">
                     <strong>📱 传音场景示例</strong><br>
                     模拟数据:整改前 30 台(18 台失效),整改后 30 台(5 台失效,25 台全过)<br>
-                    Log-Rank 检验输出 p=0.003 &lt; 0.05 → 整改前后有显著差异 → 整改有效,可放行量产
+                    Log-Rank 检验输出 p=0.019 &lt; 0.05 → 整改前后有显著差异 → 整改有效,可放行量产
                 </div>
 
                 <div class="screenshot">
@@ -411,7 +411,7 @@
 
                 <div class="highlight-green">
                     <strong>📄 报告写法</strong><br>
-                    “整改前后各测 30 台，Kaplan-Meier 分析：Log-Rank p=0.003，整改有统计显著改善，可放行量产。”<br><br>
+                    “整改前后各测 30 台，Kaplan-Meier 分析：Log-Rank p=0.019，整改有统计显著改善，可放行量产。”<br><br>
                     如果 p≥0.05：<br>
                     “整改前后各测 30 台，Kaplan-Meier 分析：Log-Rank p=0.21，数据不足以证明整改有显著改善，建议增加样本量或继续优化。”
                 </div>
@@ -454,7 +454,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 2 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Log-Rank p=0.003 的结论是?</div>
+                    <div class="question-text">Log-Rank p=0.019 的结论是?</div>
                     <div class="options">
                         <div class="option">
                                                         <input type="radio" name="q2" id="q2a" value="A">
@@ -561,7 +561,7 @@
     <script>
         const explanations = {
             'q1': 'Log-Rank 检验用于比较两条生存曲线是否有显著差异,是整改验证的关键统计工具。',
-            'q2': 'p=0.003 < 0.05,说明整改前后有统计显著差异,整改有统计显著改善。',
+            'q2': 'p=0.019 < 0.05,说明整改前后有统计显著差异,整改有统计显著改善。',
             'q3': 'Log-Rank 对整体差异敏感,Wilcoxon 对早期差异更敏感,可靠性场景优先看 Log-Rank。两者不完全一样。',
             'q4': '两个检验 p 值不一致时,应看差异主要发生在哪个阶段:早期差异大参考 Wilcoxon,整体差异大参考 Log-Rank。',
             'q5': 'p < 0.05 说明整改有效,可以放行;p ≥ 0.05 说明数据不足以证明改善。p=0.5 远大于 0.05,不能认为整改有效。'

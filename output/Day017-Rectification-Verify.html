@@ -339,7 +339,7 @@
                 <div class="highlight-blue">
                     <strong>📱 传音场景示例</strong><br>
                     <strong>模拟数据：</strong>整改前 30 台（18 台失效），整改后 30 台（5 台失效，25 台全过）<br>
-                    <strong>报告写法：</strong>"整改前后各测 30 台，Kaplan-Meier 分析：Log-Rank p=0.003&lt;0.05，整改有统计显著改善，可放行量产。"
+                    <strong>报告写法：</strong>"整改前后各测 30 台，Kaplan-Meier 分析：Log-Rank p=0.019&lt;0.05，整改有统计显著改善，可放行量产。"
                 </div>
 
                 <div class="highlight">
@@ -412,7 +412,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 3 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">Log-Rank 检验 p=0.003，结论是？</div>
+                    <div class="question-text">Log-Rank 检验 p=0.019，结论是？</div>
                     <div class="options">
                         <div class="option">
                                                         <input type="radio" name="q3" id="q3a" value="A">
@@ -496,7 +496,7 @@
         const explanations = {
             'q1': '整改后 30 台全过不能直接判有效，可能只是样本量小或运气好，必须做 KM+Log-Rank 检验。',
             'q2': '整改验证需要：收集整改前数据 → 收集整改后数据 → Kaplan-Meier 画曲线 → Log-Rank 检验，四步缺一不可。',
-            'q3': 'p=0.003<0.05，说明整改前后生存曲线有显著差异，整改有统计显著改善。',
+            'q3': 'p=0.019<0.05，说明整改前后生存曲线有显著差异，整改有统计显著改善。',
             'q4': '全过可能只是运气好，凭感觉不可靠，统计检验能证明整改是否真的有效。D 选项\'增加工作量\'不是原因。',
             'q5': '标准报告应包含：样本量、分析方法（KM）、p 值、结论（是否放行）。'
         };
