@@ -338,7 +338,7 @@
                 <p><strong>🔧 Minitab 操作路径：</strong></p>
                 <div class="highlight-blue">
                     <code>统计 → 质量工具 → 能力分析 → 正态</code><br>
-                    • 单列=C1，规格下限=<strong>0.8</strong>，规格上限=<strong>1.5</strong><br>
+                    • 单列=C1，规格下限=<strong>0.5</strong>，规格上限=<strong>2.0</strong><br>
                     • 子组大小：根据实际情况填写（如每批 5 个则填 5）<br>
                     • 输出结果中同时包含 Cpk 和 Ppk<br>
                     • 注意：Minitab 输出中 Cpk 标记为"Cpk"，Ppk 标记为"Ppk"
@@ -346,19 +346,26 @@
 
                 <div class="highlight">
                     <strong>📋 规格限怎么来的？</strong><br>
-                    规格限不是随便填的，通常来自：<br>
-                     <strong>作业指导书</strong>（如 USB 连接器插入力规格：0.8~1.5 Kgf）<br>
-                     <strong>客户规格</strong>（客户要求的公差范围）<br>
-                    ③ <strong>设计图纸</strong>（研发给出的公差要求）<br>
+                    规格限不是随便填的，必须来自正式文件：<br>
+                     <strong>内部标准</strong>（如 QM-ST-STP-R-002 V2.8《可靠性测试标准》）<br>
+                     <strong>作业指导书</strong>（如 W-USB-001《USB 连接器测试作业指导书》）<br>
+                    ③ <strong>客户规格</strong>（客户要求的公差范围）<br>
                     <br>
-                    <strong>本例示例：</strong>USB 连接器插入力规格限 0.8~1.5 Kgf，来自《USB 连接器测试作业指导书》W-USB-001。插入力太小（&lt;0.8）→ 接触不良；插入力太大（&gt;1.5）→ 用户拔插困难。<br>
+                    <strong>本例示例（Type-C 插入力）：</strong><br>
+                    根据 QM-ST-STP-R-002 V2.8：<br>
+                    • Type-C 插拔寿命前：插入力 <strong>0.5~2.0 Kgf</strong>，拔出力 0.8~2.5 Kgf<br>
+                    • Type-C 插拔寿命后：插入力 0.5~2.0 Kgf，拔出力 0.6~2.5 Kgf<br>
+                    • Micro-USB 插拔寿命前：插入力 0.5~1.5 Kgf，拔出力 1.0~2.5 Kgf<br>
+                    <br>
+                    插入力太小（&lt;0.5）→ 接触不良，容易掉线；插入力太大（&gt;2.0）→ 用户拔插困难，体验差。<br>
                     <br>
                     <strong>⚠️ 注意：</strong>规格限必须填<strong>具体数值</strong>，不要填 LSL/USL 等缩写。Minitab 对话框里需要输入数字，不是文字。
                 </div>
 
-                <p><strong>📱 传音场景：USB 插入力多批次分析</strong></p>
+                <p><strong>📱 传音场景：Type-C 插入力多批次分析</strong></p>
                 <div class="highlight-green">
-                    <strong>场景：</strong>同一供应商 USB 连接器，跨 3 个批次采集 15 个数据点<br>
+                    <strong>场景：</strong>同一供应商 Type-C 连接器，跨 3 个批次采集 15 个数据点<br>
+                    <strong>规格限：</strong>0.5~2.0 Kgf（来源：QM-ST-STP-R-002 V2.8，Type-C 插拔寿命前）<br>
                     <strong>结果：</strong>Cpk=1.8（子组内波动小），Ppk=1.2（批次间有偏移）<br>
                     <strong>解读：</strong>Cpk &gt; Ppk 差距较大 → 批次间变异显著<br>
                     <strong>行动：</strong>检查不同批次的来料尺寸差异，反馈供应商控制批次一致性
