@@ -325,13 +325,13 @@
                 <div class="highlight">
                     <strong>📱 传音场景：W-795 跌落数据 Weibull 分析</strong><br>
                     • 使用 MLE（最大似然估计）进行 Weibull 参数估计<br>
-                    • B10 = 2.72 次 → 预计 10% 手机在 2.72 次跌落后失效<br>
+                    • B10 = 2.56098 次 → 预计 10% 手机在 2.72 次跌落后失效<br>
                     • 这意味着 90% 的手机能撑过 2.72 次跌落
                 </div>
 
                 <div class="highlight-blue">
                     <strong>📊 三种寿命指标对比</strong><br>
-                    • <strong>B10 = 2.72 次</strong>：10% 失效点（保守，适合保修期）<br>
+                    • <strong>B10 = 2.56098 次</strong>：10% 失效点（保守，适合保修期）<br>
                     • <strong>B50 = 7.06 次</strong>：中位寿命（50% 失效点）<br>
                     • <strong>MTTF ≈ 7.55 次</strong>：Mean Time To Failure（平均失效时间），即所有样品寿命的算术平均值（容易被极端值拉高）<br><br>
                     <strong>⚠️ 关键陷阱：</strong>Weibull 分布下，<strong>同样 MTTF 的两批产品失效模式可能完全不同</strong>。<br>
@@ -372,7 +372,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 1 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">B10 = 2.72 次意味着什么?</div>
+                    <div class="question-text">B10 = 2.56098 次意味着什么?</div>
                     <div class="options">
                         <div class="option">
                                                         <input type="radio" name="q1" id="q1a" value="A">
@@ -444,7 +444,7 @@
                 <div class="question" data-correct="B">
                     <span class="question-num">第 4 题</span>
                     <span class="question-type">单选</span>
-                    <div class="question-text">B50 = 7.06 和 B10 = 2.72 哪个更大?</div>
+                    <div class="question-text">B50 = 7.06 和 B10 = 2.56098 哪个更大?</div>
                     <div class="options">
                         <div class="option">
                                                         <input type="radio" name="q4" id="q4a" value="A">
@@ -502,7 +502,7 @@
 
     <script>
         const explanations = {
-            'q1': 'B10 = 2.72 次表示总体中有 10% 的产品在 2.72 次跌落前失效,即 90% 的产品能撑过 2.72 次。',
+            'q1': 'B10 = 2.56098 次表示总体中有 10% 的产品在 2.72 次跌落前失效,即 90% 的产品能撑过 2.72 次。',
             'q2': 'B10 比 MTTF 更适合做保修期设定,因为 B10 更保守,反映大多数用户体验,不会被少数超长寿命样本拉高。',
             'q3': 'B10 的优势:反映大多数用户体验、比 MTTF 更保守、适合质量决策。B10 的计算并不比 MTTF 更简单。',
             'q4': 'B50(中位寿命,50% 失效点)= 7.06 > B10(10% 失效点)= 2.72。失效比例越高,对应次数越大。',
